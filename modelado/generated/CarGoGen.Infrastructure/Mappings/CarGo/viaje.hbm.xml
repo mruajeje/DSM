@@ -63,24 +63,27 @@
     <many-to-one name="Conductor" class="Usuario">
       <column name="FK_Usuario_conductor" not-null="true"/>
     </many-to-one>
-
-    <many-to-one name="Vehiculo" class="CarGoGen.Domain.Entities.Vehiculo, CarGoGen.Domain" column="idVehiculo" not-null="true" />
-
-    <bag name="Reservas">
+    <bag name="Pasajero">
       <key>
-        <column name="FK_Viaje_reservas"/>
+        <column name="FK_Viaje_pasajero"/>
+      </key>
+      <one-to-many class="Usuario"/>
+    </bag>
+    <bag name="Reservas" inverse="true">
+      <key>
+        <column name="FK_Viaje_viaje"/>
       </key>
       <one-to-many class="Reserva"/>
     </bag>
-    <bag name="Mensajes">
+    <bag name="Mensajes" inverse="true">
       <key>
-        <column name="FK_Viaje_mensajes"/>
+        <column name="FK_Viaje_viaje"/>
       </key>
       <one-to-many class="Mensaje"/>
     </bag>
-    <bag name="Resenas">
+    <bag name="Resenas" inverse="true">
       <key>
-        <column name="FK_Viaje_resenas"/>
+        <column name="FK_Viaje_viaje"/>
       </key>
       <one-to-many class="Resena"/>
     </bag>

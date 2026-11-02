@@ -3,7 +3,8 @@ using NHibernate;
 using NHibernate.Linq;
 using CarGoGen.Application.Abstractions;
 using CarGoGen.Domain.Entities;
-
+using CarGoGen.Domain.Enums;
+using CarGoGen.Domain.ValueObjects;
 using CarGoGen.Infrastructure.Exceptions;
 
 namespace CarGoGen.Infrastructure.Repositories;
@@ -68,13 +69,6 @@ public sealed class ReservaRepository : RepositoryBase<Reserva>, IReservaReposit
             session => session.DeleteAsync(entity),
             $"Error deleting {EntityName} entity.");
     }
-
-    public IList<Reserva> ObtenerReservasPorViaje(int idViaje)
-{
-    return _session.CreateQuery("from Reserva r where r.Viaje.Id = :idViaje")
-                   .SetParameter("idViaje", idViaje)
-                   .List<Reserva>();
-}
 
 
 }

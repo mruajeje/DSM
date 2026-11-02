@@ -19,15 +19,4 @@ public sealed partial class ViajeService
         throw new ModelException("Application service generation for Viaje.gestionarPlazas is pending.", new NotImplementedException("Method GestionarPlazasAsync() not yet implemented."));
         /*PROTECTED REGION END*/
     }
-
-    public IList<Reserva> ObtenerListaPasajerosParaConductor(int idViaje)
-{
-    IList<Reserva> reservasViaje = _reservaRepository.ObtenerReservasPorViaje(idViaje);
-    
-    var pasajerosPermitidos = reservasViaje
-        .Where(r => r.Estado == EstadoReserva.Pagada)
-        .ToList();
-
-    return pasajerosPermitidos;
-}
 }

@@ -11,7 +11,7 @@ namespace CarGoGen.Application.Services;
 
 public sealed partial class ViajeService
 {
-    public async Task Reserva_aceptarPasajeroAsync(int p_oid, bool p_aceptado)
+    public async Task Reserva_aceptarPasajeroAsync(int p_oid)
     {
         /*PROTECTED REGION ID(CarGoGen.Application.Services_Viaje_Reserva_aceptarPasajero) ENABLED START*/
         // Write here your custom code...

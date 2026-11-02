@@ -1,4 +1,3 @@
-//hola
 ConceptualModel CarGo {
 
     Enumeration EnumMoneda {
@@ -56,7 +55,7 @@ ConceptualModel CarGo {
             public readOID::ReadOID (p_oid : OID -> Usuario) : Object->Usuario;
             public readAll::ReadAll () : List<Object->Usuario>;
             public login::Login (p_email : String, p_password : Password) : String;
-            public verificarDni (p_oid : OID -> Usuario, p_dni : String) : Void;
+            public verificarDni::Custom (p_oid : OID -> Usuario, p_dni : String) : Void;
         }
     };
 
@@ -97,8 +96,8 @@ ConceptualModel CarGo {
             public modify::Modifier (p_oid : OID -> Viaje, p_origen : Ubicacion, p_destino : Ubicacion, p_fechaHoraSalida : TimeStamp, p_numPlazasDisponibles : Integer, p_precio : Dinero, p_permiteMascotas : Boolean, p_permiteEquipaje : Boolean, p_estado : EstadoViaje) : Void;
             public readOID::ReadOID (p_oid : OID -> Viaje) : Object->Viaje;
             public readAll::ReadAll () : List<Object->Viaje>;
-            public gestionarPlazas (p_oid : OID -> Viaje, p_nuevasPlazas : Integer) : Void;
-            public geolocalizarTrayecto (p_oid : OID -> Viaje) : Void;
+            public gestionarPlazas::Custom (p_oid : OID -> Viaje, p_nuevasPlazas : Integer) : Void;
+            public geolocalizarTrayecto::Custom (p_oid : OID -> Viaje) : Void;
             public addPasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
             public removePasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
         }
@@ -118,7 +117,7 @@ ConceptualModel CarGo {
             public modify::Modifier (p_oid : OID -> Reserva, p_numPlazasReservadas : Integer, p_estado : EstadoReserva, p_fechaSolicitud : TimeStamp) : Void;
             public readOID::ReadOID (p_oid : OID -> Reserva) : Object->Reserva;
             public readAll::ReadAll () : List<Object->Reserva>;
-            public aceptarPasajero::CustomTransaction (p_oid : OID -> Reserva) : Void;
+            public aceptarPasajero::Custom (p_oid : OID -> Reserva) : Void;
         }
     };
 
@@ -136,7 +135,8 @@ ConceptualModel CarGo {
             public modify::Modifier (p_oid : OID -> Pago, p_monto : Dinero, p_fechaPago : TimeStamp, p_estado : EstadoPago) : Void;
             public readOID::ReadOID (p_oid : OID -> Pago) : Object->Pago;
             public readAll::ReadAll () : List<Object->Pago>;
-            public realizarPago (p_oid : OID -> Pago) : Void;
+            public realizarPago::CustomTransaction (p_oid : OID -> Pago) : Void;
+            public reembolsarPago::CustomTransaction (p_oid : OID -> Pago) : Void;
         }
     };
 
@@ -170,7 +170,7 @@ ConceptualModel CarGo {
             public modify::Modifier (p_oid : OID -> Resena, p_puntuacion : Integer, p_fechaCreacion : TimeStamp) : Void;
             public readOID::ReadOID (p_oid : OID -> Resena) : Object->Resena;
             public readAll::ReadAll () : List<Object->Resena>;
-            public moderarContenido (p_oid : OID -> Resena) : Void;
+            public moderarContenido::Custom (p_oid : OID -> Resena) : Void;
         }
     };
 

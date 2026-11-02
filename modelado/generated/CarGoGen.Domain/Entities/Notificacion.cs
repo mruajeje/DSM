@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using CarGoGen.Domain.Enums;
 
 namespace CarGoGen.Domain.Entities;
 
@@ -11,9 +10,6 @@ public partial class Notificacion
     public virtual string Texto { get; set; } = string.Empty;
     public virtual DateTime FechaHora { get; set; }
     public virtual Usuario UsuarioNotificado { get; set; } = null!;
-
-    public virtual TipoNotificacion Tipo { get; set; }
-    public virtual int IdObjetoOrigen { get; set; }
 
     private bool HasDefaultIdentity() => EqualityComparer<int>.Default.Equals(Id, default);
 

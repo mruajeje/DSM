@@ -80,7 +80,7 @@ public sealed class ModelGeneratedTests
             var sampleUsuarioReadAll = await usuarioService.ReadAllAsync();
             Ensure(sampleUsuarioReadAll.Count > 0, "Usuario read all returns generated data.");
             await usuarioService.ModifyAsync(sampleUsuario.Id, "Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
-            Ensure(await usuarioService.ReadOIDUsuarioDefaultAsync(sampleUsuario.Id) is not null, "Usuario modify keeps the entity readable.");
+            Ensure(await usuarioService.ReadOIDAsync(sampleUsuario.Id) is not null, "Usuario modify keeps the entity readable.");
 
             var vehiculoService = new VehiculoService(unitOfWorkFactory);
             var sampleVehiculo = await vehiculoService.NewAsync("Sample Vehiculo MarcaModelo", "Sample Vehiculo Matricula", "Sample Vehiculo InformacionAdicional", sampleUsuario.Id);
@@ -90,7 +90,7 @@ public sealed class ModelGeneratedTests
             var sampleVehiculoReadAll = await vehiculoService.ReadAllAsync();
             Ensure(sampleVehiculoReadAll.Count > 0, "Vehiculo read all returns generated data.");
             await vehiculoService.ModifyAsync(sampleVehiculo.Id, "Sample Vehiculo MarcaModelo", "Sample Vehiculo Matricula");
-            Ensure(await vehiculoService.ReadOIDVehiculoDefaultAsync(sampleVehiculo.Id) is not null, "Vehiculo modify keeps the entity readable.");
+            Ensure(await vehiculoService.ReadOIDAsync(sampleVehiculo.Id) is not null, "Vehiculo modify keeps the entity readable.");
 
             var viajeService = new ViajeService(unitOfWorkFactory);
             var sampleViaje = await viajeService.NewAsync(new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new DateTime(2026, 1, 5, 9, 0, 0), 5, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 5.5 }, true, true, EstadoViaje.Publicado, sampleUsuario.Id);
@@ -100,7 +100,27 @@ public sealed class ModelGeneratedTests
             var sampleViajeReadAll = await viajeService.ReadAllAsync();
             Ensure(sampleViajeReadAll.Count > 0, "Viaje read all returns generated data.");
             await viajeService.ModifyAsync(sampleViaje.Id, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new DateTime(2026, 1, 5, 9, 0, 0), 5, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 5.5 }, true, true, EstadoViaje.Publicado);
-            Ensure(await viajeService.ReadOIDViajeDefaultAsync(sampleViaje.Id) is not null, "Viaje modify keeps the entity readable.");
+            Ensure(await viajeService.ReadOIDAsync(sampleViaje.Id) is not null, "Viaje modify keeps the entity readable.");
+
+            var sampleReserva = await viajeService.Reserva_newAsync(6, EstadoReserva.Pendiente, new DateTime(2026, 1, 6, 9, 0, 0), sampleViaje.Id, sampleUsuario.Id);
+            Ensure(sampleReserva.Viaje?.Equals(sampleViaje) == true, "Reserva.new relates sampleReserva and sampleViaje.");
+            Ensure(sampleReserva.Pasajero?.Equals(sampleUsuario) == true, "Reserva.new relates sampleReserva and sampleUsuario.");
+            var sampleReservaReadBack = await viajeService.Reserva_readOIDAsync(sampleReserva.Id);
+            Ensure(sampleReservaReadBack is not null, "Reserva read by OID returns the generated entity.");
+            var sampleReservaReadAll = await viajeService.Reserva_readAllAsync();
+            Ensure(sampleReservaReadAll.Count > 0, "Reserva read all returns generated data.");
+            await viajeService.Reserva_modifyAsync(sampleReserva.Id, 6, EstadoReserva.Pendiente, new DateTime(2026, 1, 6, 9, 0, 0));
+            Ensure(await viajeService.Reserva_readOIDAsync(sampleReserva.Id) is not null, "Reserva modify keeps the entity readable.");
+
+            var pagoService = new PagoService(unitOfWorkFactory);
+            var samplePago = await pagoService.NewAsync(new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 7.5 }, new DateTime(2026, 1, 7, 9, 0, 0), EstadoPago.Pendiente, sampleReserva.Id);
+            Ensure(samplePago.Reserva?.Equals(sampleReserva) == true, "Pago.new relates samplePago and sampleReserva.");
+            var samplePagoReadBack = await pagoService.ReadOIDAsync(samplePago.Id);
+            Ensure(samplePagoReadBack is not null, "Pago read by OID returns the generated entity.");
+            var samplePagoReadAll = await pagoService.ReadAllAsync();
+            Ensure(samplePagoReadAll.Count > 0, "Pago read all returns generated data.");
+            await pagoService.ModifyAsync(samplePago.Id, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 7.5 }, new DateTime(2026, 1, 7, 9, 0, 0), EstadoPago.Pendiente);
+            Ensure(await pagoService.ReadOIDAsync(samplePago.Id) is not null, "Pago modify keeps the entity readable.");
 
             var mensajeService = new MensajeService(unitOfWorkFactory);
             var sampleMensaje = await mensajeService.NewAsync("Sample Mensaje Contenido", new DateTime(2026, 1, 8, 9, 0, 0), sampleViaje.Id, sampleUsuario.Id);
@@ -111,7 +131,7 @@ public sealed class ModelGeneratedTests
             var sampleMensajeReadAll = await mensajeService.ReadAllAsync();
             Ensure(sampleMensajeReadAll.Count > 0, "Mensaje read all returns generated data.");
             await mensajeService.ModifyAsync(sampleMensaje.Id, "Sample Mensaje Contenido", new DateTime(2026, 1, 8, 9, 0, 0));
-            Ensure(await mensajeService.ReadOIDMensajeDefaultAsync(sampleMensaje.Id) is not null, "Mensaje modify keeps the entity readable.");
+            Ensure(await mensajeService.ReadOIDAsync(sampleMensaje.Id) is not null, "Mensaje modify keeps the entity readable.");
 
             var resenaService = new ResenaService(unitOfWorkFactory);
             var sampleResena = await resenaService.NewAsync(9, "Sample Resena Comentario", new DateTime(2026, 1, 9, 9, 0, 0), sampleViaje.Id, sampleUsuario.Id);
@@ -122,7 +142,7 @@ public sealed class ModelGeneratedTests
             var sampleResenaReadAll = await resenaService.ReadAllAsync();
             Ensure(sampleResenaReadAll.Count > 0, "Resena read all returns generated data.");
             await resenaService.ModifyAsync(sampleResena.Id, 9, new DateTime(2026, 1, 9, 9, 0, 0));
-            Ensure(await resenaService.ReadOIDResenaDefaultAsync(sampleResena.Id) is not null, "Resena modify keeps the entity readable.");
+            Ensure(await resenaService.ReadOIDAsync(sampleResena.Id) is not null, "Resena modify keeps the entity readable.");
 
             var notificacionService = new NotificacionService(unitOfWorkFactory);
             var sampleNotificacion = await notificacionService.NewAsync("Sample Notificacion Titulo", "Sample Notificacion Texto", new DateTime(2026, 1, 10, 9, 0, 0), sampleUsuario.Id);
@@ -132,24 +152,30 @@ public sealed class ModelGeneratedTests
             var sampleNotificacionReadAll = await notificacionService.ReadAllAsync();
             Ensure(sampleNotificacionReadAll.Count > 0, "Notificacion read all returns generated data.");
             await notificacionService.ModifyAsync(sampleNotificacion.Id, "Sample Notificacion Titulo", "Sample Notificacion Texto", new DateTime(2026, 1, 10, 9, 0, 0));
-            Ensure(await notificacionService.ReadOIDNotificacionDefaultAsync(sampleNotificacion.Id) is not null, "Notificacion modify keeps the entity readable.");
+            Ensure(await notificacionService.ReadOIDAsync(sampleNotificacion.Id) is not null, "Notificacion modify keeps the entity readable.");
 
-            // TODO: Set required relationship Pago.Reserva manually; it could not be ordered automatically.
-            // TODO: No seed generated for Pago; one or more New arguments reference classes that were not seeded yet.
+            await viajeService.AddPasajeroAsync(sampleViaje.Id, new[] { sampleUsuario.Id });
+            Ensure(sampleViaje.Pasajero.Contains(sampleUsuario), "Viaje.addPasajero relates Viaje and Usuario.");
+            await viajeService.RemovePasajeroAsync(sampleViaje.Id, new[] { sampleUsuario.Id });
+            Ensure(sampleViaje.Pasajero.Contains(sampleUsuario), "Viaje.removePasajero relates Viaje and Usuario.");
 
             await vehiculoService.DestroyAsync(sampleVehiculo.Id);
+            await pagoService.DestroyAsync(samplePago.Id);
+            await viajeService.Reserva_destroyAsync(sampleReserva.Id);
             await mensajeService.DestroyAsync(sampleMensaje.Id);
             await resenaService.DestroyAsync(sampleResena.Id);
             await viajeService.DestroyAsync(sampleViaje.Id);
             await notificacionService.DestroyAsync(sampleNotificacion.Id);
             await usuarioService.DestroyAsync(sampleUsuario.Id);
 
-            Ensure((await usuarioService.ReadAllUsuarioDefaultAsync()).Count == 0, "Usuario seed cleanup completed.");
-            Ensure((await vehiculoService.ReadAllVehiculoDefaultAsync()).Count == 0, "Vehiculo seed cleanup completed.");
-            Ensure((await viajeService.ReadAllViajeDefaultAsync()).Count == 0, "Viaje seed cleanup completed.");
-            Ensure((await mensajeService.ReadAllMensajeDefaultAsync()).Count == 0, "Mensaje seed cleanup completed.");
-            Ensure((await resenaService.ReadAllResenaDefaultAsync()).Count == 0, "Resena seed cleanup completed.");
-            Ensure((await notificacionService.ReadAllNotificacionDefaultAsync()).Count == 0, "Notificacion seed cleanup completed.");
+            Ensure((await usuarioService.ReadAllAsync()).Count == 0, "Usuario seed cleanup completed.");
+            Ensure((await vehiculoService.ReadAllAsync()).Count == 0, "Vehiculo seed cleanup completed.");
+            Ensure((await viajeService.ReadAllAsync()).Count == 0, "Viaje seed cleanup completed.");
+            Ensure((await viajeService.Reserva_readAllAsync()).Count == 0, "Reserva seed cleanup completed.");
+            Ensure((await pagoService.ReadAllAsync()).Count == 0, "Pago seed cleanup completed.");
+            Ensure((await mensajeService.ReadAllAsync()).Count == 0, "Mensaje seed cleanup completed.");
+            Ensure((await resenaService.ReadAllAsync()).Count == 0, "Resena seed cleanup completed.");
+            Ensure((await notificacionService.ReadAllAsync()).Count == 0, "Notificacion seed cleanup completed.");
     }
 
     private static Configuration CreateNHibernateConfiguration()

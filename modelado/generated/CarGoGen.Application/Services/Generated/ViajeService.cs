@@ -96,6 +96,52 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
         return await _repository.ReadAllAsync();
     }
 
+    public async Task AddPasajeroAsync(int p_oid, IReadOnlyList<int> p_usuario_oids)
+    {
+        Viaje entity = await _repository.ReadAsync(p_oid)
+            ?? throw new ModelException("Viaje not found.");
+        entity.Pasajero ??= new List<Usuario>();
+        foreach (var relatedId in p_usuario_oids)
+        {
+            Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
+                ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
+            if (!entity.Pasajero.Contains(relatedEntity))
+            {
+                entity.Pasajero.Add(relatedEntity);
+            }
+            relatedEntity.Viajespasajero ??= new List<Viaje>();
+            if (!relatedEntity.Viajespasajero.Contains(entity))
+            {
+                relatedEntity.Viajespasajero.Add(entity);
+            }
+            await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
+        }
+        await _repository.SaveAsync(entity);
+    }
+
+    public async Task RemovePasajeroAsync(int p_oid, IReadOnlyList<int> p_usuario_oids)
+    {
+        Viaje entity = await _repository.ReadAsync(p_oid)
+            ?? throw new ModelException("Viaje not found.");
+        entity.Pasajero ??= new List<Usuario>();
+        foreach (var relatedId in p_usuario_oids)
+        {
+            Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
+                ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
+            if (!entity.Pasajero.Contains(relatedEntity))
+            {
+                entity.Pasajero.Add(relatedEntity);
+            }
+            relatedEntity.Viajespasajero ??= new List<Viaje>();
+            if (!relatedEntity.Viajespasajero.Contains(entity))
+            {
+                relatedEntity.Viajespasajero.Add(entity);
+            }
+            await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
+        }
+        await _repository.SaveAsync(entity);
+    }
+
     public async Task<Reserva> Reserva_newAsync(int p_numPlazasReservadas, EstadoReserva p_estado, DateTime p_fechaSolicitud, int p_viaje_oid, int p_pasajero_oid)
     {
         Viaje viajeEntity = await _unitOfWork.ViajeRepository.ReadAsync(p_viaje_oid)

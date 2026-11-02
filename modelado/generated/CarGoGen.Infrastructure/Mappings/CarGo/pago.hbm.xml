@@ -6,18 +6,22 @@
     <id name="Id" column="id" type="Int32">
       <generator class="hilo"/>
     </id>
-    <property name="Importe" type="Single">
-      <column name="importe" not-null="true"/>
-    </property>
     <property name="FechaPago" type="DateTime">
       <column name="fechaPago" not-null="true"/>
     </property>
-    <property name="Completado" type="Boolean">
-      <column name="completado" not-null="true"/>
+    <property name="Estado" type="CarGoGen.Domain.Enums.EstadoPago, CarGoGen.Domain">
+      <column name="estado" not-null="true"/>
     </property>
-    
-    <many-to-one name="Reserva" class="Reserva" unique="true">
-      <column name="FK_Reserva_pago" not-null="true"/>
+    <component name="Monto" class="CarGoGen.Domain.ValueObjects.Dinero, CarGoGen.Domain">
+      <property name="Moneda" type="CarGoGen.Domain.Enums.EnumMoneda, CarGoGen.Domain">
+        <column name="monto_moneda" not-null="true"/>
+      </property>
+      <property name="Cantidad" type="Double">
+        <column name="monto_cantidad" not-null="true"/>
+      </property>
+    </component>
+    <many-to-one name="Reserva" class="Reserva">
+      <column name="FK_Reserva_reserva" not-null="true"/>
     </many-to-one>
   </class>
   <query name="PagoReadAllHQL">from Pago</query>

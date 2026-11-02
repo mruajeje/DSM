@@ -3,7 +3,8 @@ using NHibernate;
 using NHibernate.Linq;
 using CarGoGen.Application.Abstractions;
 using CarGoGen.Domain.Entities;
-
+using CarGoGen.Domain.Enums;
+using CarGoGen.Domain.ValueObjects;
 using CarGoGen.Infrastructure.Exceptions;
 
 namespace CarGoGen.Infrastructure.Repositories;
@@ -52,6 +53,24 @@ public sealed class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioReposit
             throw new DataException($"Error reading {EntityName} entity.", ex);
         }
     }
+
+    
+    public async Task<Usuario?> ReadByEmailAsync(string email)
+    {
+        try
+        {
+            using var context = OpenSession();
+
+            return await context.Session.Query<Usuario>()
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error reading {Entity} entity by email.", EntityName);
+            throw new DataException($"Error reading {EntityName} entity by email.", ex);
+        }
+    }
+
 
     public async Task SaveAsync(Usuario entity)
     {

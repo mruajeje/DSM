@@ -16,6 +16,7 @@ public partial class Usuario
     public virtual EstadoVerificacion EstadoVerificacion { get; set; }
     public virtual IList<Vehiculo> Vehiculos { get; set; } = new List<Vehiculo>();
     public virtual IList<Viaje> Viajes { get; set; } = new List<Viaje>();
+    public virtual IList<Viaje> Viajespasajero { get; set; } = new List<Viaje>();
     public virtual IList<Reserva> Reservas { get; set; } = new List<Reserva>();
     public virtual IList<Mensaje> MensajesEnviados { get; set; } = new List<Mensaje>();
     public virtual IList<Resena> ResenasEscritas { get; set; } = new List<Resena>();

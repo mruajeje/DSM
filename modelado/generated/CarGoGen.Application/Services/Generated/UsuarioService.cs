@@ -103,11 +103,13 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
         return await _repository.ReadAllAsync();
     }
 
-    public async Task<string?> LoginAsync(int p_oid, string p_password)
+    
+    public async Task<string?> LoginAsync(string p_email, string p_password)
     {
         try
         {
-            Usuario? entity = await _repository.ReadAsync(p_oid);
+            Usuario? entity = await _repository.ReadByEmailAsync(p_email);
+
             if (entity is null)
             {
                 return null;
@@ -118,11 +120,19 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
                 return null;
             }
 
-            var tokenSubject = Convert.ToString(entity.Id, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty;
+            var tokenSubject = Convert.ToString(
+                entity.Id,
+                System.Globalization.CultureInfo.InvariantCulture
+            ) ?? string.Empty;
+
             var tokenClaims = new Dictionary<string, string?>(StringComparer.Ordinal)
             {
-                ["id"] = Convert.ToString(entity.Id, System.Globalization.CultureInfo.InvariantCulture),
+                ["id"] = Convert.ToString(
+                    entity.Id,
+                    System.Globalization.CultureInfo.InvariantCulture
+                ),
             };
+
             return _tokenGenerator.CreateToken(tokenSubject, tokenClaims);
         }
         catch (Exception)
@@ -130,5 +140,6 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
             return null;
         }
     }
+
 
 }

@@ -3,7 +3,8 @@ using NHibernate;
 using NHibernate.Linq;
 using CarGoGen.Application.Abstractions;
 using CarGoGen.Domain.Entities;
-
+using CarGoGen.Domain.Enums;
+using CarGoGen.Domain.ValueObjects;
 using CarGoGen.Infrastructure.Exceptions;
 
 namespace CarGoGen.Infrastructure.Repositories;

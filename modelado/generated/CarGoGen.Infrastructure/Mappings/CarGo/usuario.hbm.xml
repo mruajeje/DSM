@@ -27,39 +27,45 @@
     <property name="EstadoVerificacion" type="CarGoGen.Domain.Enums.EstadoVerificacion, CarGoGen.Domain">
       <column name="estadoVerificacion" not-null="true"/>
     </property>
-    <bag name="Vehiculos">
+    <bag name="Vehiculos" inverse="true">
       <key>
-        <column name="FK_Usuario_vehiculos"/>
+        <column name="FK_Usuario_propietario"/>
       </key>
       <one-to-many class="Vehiculo"/>
     </bag>
-    <bag name="Viajes">
+    <bag name="Viajes" inverse="true">
       <key>
-        <column name="FK_Usuario_viajes"/>
+        <column name="FK_Usuario_conductor"/>
       </key>
       <one-to-many class="Viaje"/>
     </bag>
-    <bag name="Reservas">
+    <bag name="Viajespasajero">
       <key>
-        <column name="FK_Usuario_reservas"/>
+        <column name="FK_Usuario_viajespasajero"/>
+      </key>
+      <one-to-many class="Viaje"/>
+    </bag>
+    <bag name="Reservas" inverse="true">
+      <key>
+        <column name="FK_Usuario_pasajero"/>
       </key>
       <one-to-many class="Reserva"/>
     </bag>
-    <bag name="MensajesEnviados">
+    <bag name="MensajesEnviados" inverse="true">
       <key>
-        <column name="FK_Usuario_mensajesEnviados"/>
+        <column name="FK_Usuario_remitente"/>
       </key>
       <one-to-many class="Mensaje"/>
     </bag>
-    <bag name="ResenasEscritas">
+    <bag name="ResenasEscritas" inverse="true">
       <key>
-        <column name="FK_Usuario_resenasEscritas"/>
+        <column name="FK_Usuario_autor"/>
       </key>
       <one-to-many class="Resena"/>
     </bag>
-    <bag name="Notificaciones">
+    <bag name="Notificaciones" inverse="true">
       <key>
-        <column name="FK_Usuario_notificaciones"/>
+        <column name="FK_Usuario_usuarioNotificado"/>
       </key>
       <one-to-many class="Notificacion"/>
     </bag>

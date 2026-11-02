@@ -18,8 +18,9 @@ public partial class Viaje
     public virtual string? Observaciones { get; set; }
     public virtual EstadoViaje Estado { get; set; }
     public virtual Usuario Conductor { get; set; } = null!;
-    public virtual Vehiculo Vehiculo { get; set; } = null!;
-    public virtual IList<Reserva> Reservas { get; set; } = new List<Reserva>();    public virtual IList<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
+    public virtual IList<Usuario> Pasajero { get; set; } = new List<Usuario>();
+    public virtual IList<Reserva> Reservas { get; set; } = new List<Reserva>();
+    public virtual IList<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
     public virtual IList<Resena> Resenas { get; set; } = new List<Resena>();
 
     private bool HasDefaultIdentity() => EqualityComparer<int>.Default.Equals(Id, default);
