@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="CarGoGen.Domain"
+                   namespace="CarGoGen.Domain.Entities">
+  <class name="Resena" table="Resena">
+    <id name="Id" column="id" type="Int32">
+      <generator class="hilo"/>
+    </id>
+    <property name="Puntuacion" type="Int32">
+      <column name="puntuacion" not-null="true"/>
+    </property>
+    <property name="Comentario" type="String">
+      <column name="comentario"/>
+    </property>
+    <property name="FechaCreacion" type="DateTime">
+      <column name="fechaCreacion" not-null="true"/>
+    </property>
+    <many-to-one name="Viaje" class="Viaje">
+      <column name="FK_Viaje_viaje" not-null="true"/>
+    </many-to-one>
+    <many-to-one name="Autor" class="Usuario">
+      <column name="FK_Usuario_autor" not-null="true"/>
+    </many-to-one>
+  </class>
+  <query name="ResenaReadAllHQL">from Resena</query>
+</hibernate-mapping>

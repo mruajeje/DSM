@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="CarGoGen.Domain"
+                   namespace="CarGoGen.Domain.Entities">
+  <class name="Vehiculo" table="Vehiculo">
+    <id name="Id" column="id" type="Int32">
+      <generator class="hilo"/>
+    </id>
+    <property name="MarcaModelo" type="String">
+      <column name="marcaModelo" not-null="true"/>
+    </property>
+    <property name="Matricula" type="String">
+      <column name="matricula" not-null="true"/>
+    </property>
+    <property name="InformacionAdicional" type="String">
+      <column name="informacionAdicional"/>
+    </property>
+    <many-to-one name="Propietario" class="Usuario">
+      <column name="FK_Usuario_propietario" not-null="true"/>
+    </many-to-one>
+  </class>
+  <query name="VehiculoReadAllHQL">from Vehiculo</query>
+</hibernate-mapping>

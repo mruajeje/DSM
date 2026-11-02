@@ -1,0 +1,195 @@
+@startuml CarGo
+skinparam packageStyle rectangle
+title CarGo Domain
+
+package "CarGo" {
+  enum EnumMoneda {
+    EUR
+    USD
+  }
+
+  enum EstadoViaje {
+    Publicado
+    EnCurso
+    Finalizado
+    Cancelado
+  }
+
+  enum EstadoReserva {
+    Pendiente
+    Aceptada
+    Pagada
+    Rechazada
+    Cancelada
+  }
+
+  enum EstadoPago {
+    Pendiente
+    Completado
+    Reembolsado
+  }
+
+  enum EstadoVerificacion {
+    Pendiente
+    Verificado
+    Rechazado
+  }
+
+  enum TipoNotificacion {
+    Usuario
+    Resena
+    Viaje
+    Reserva
+  }
+
+  class Dinero <<ValueObject>> {
+    -moneda: EnumMoneda
+    -cantidad: double
+  }
+
+  class Ubicacion <<ValueObject>> {
+    -ciudad: string
+    -direccion: string
+    -latitud: double
+    -longitud: double
+  }
+
+  class Usuario <<User>> {
+    -id: long <<oid>> <<isToken>>
+    -password: string <<password>>
+    -nombreCompleto: string
+    -email: string
+    -telefono: string?
+    -dni: string?
+    -esAdmin: bool
+    -estadoVerificacion: EstadoVerificacion
+    --
+    +new(p_nombreCompleto: string, p_email: string, p_password: string <<password>>, p_esAdmin: bool, p_estadoVerificacion: EstadoVerificacion): Usuario <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_nombreCompleto: string, p_email: string, p_password: string <<password>>, p_esAdmin: bool, p_estadoVerificacion: EstadoVerificacion): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Usuario <<ReadOID>>
+    +readAll(): Usuario[*] <<ReadAll>>
+    +login(p_email: string, p_password: string <<password>>): string <<Login>>
+    +verificarDni(p_oid: long <<oid>>, p_dni: string): void <<Custom>>
+  }
+
+  class Vehiculo {
+    -id: long <<oid>>
+    -marcaModelo: string
+    -matricula: string
+    -informacionAdicional: string?
+    --
+    +new(p_marcaModelo: string, p_matricula: string, p_informacionAdicional: string, p_propietario_oid: long <<oid>>): Vehiculo <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_marcaModelo: string, p_matricula: string): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Vehiculo <<ReadOID>>
+    +readAll(): Vehiculo[*] <<ReadAll>>
+  }
+
+  class Viaje <<AggregateRoot>> {
+    -id: long <<oid>>
+    -origen: Ubicacion
+    -destino: Ubicacion
+    -fechaHoraSalida: DateTime
+    -numPlazasDisponibles: int
+    -precio: Dinero
+    -permiteMascotas: bool
+    -permiteEquipaje: bool
+    -observaciones: string?
+    -estado: EstadoViaje
+    --
+    +new(p_origen: Ubicacion, p_destino: Ubicacion, p_fechaHoraSalida: DateTime, p_numPlazasDisponibles: int, p_precio: Dinero, p_permiteMascotas: bool, p_permiteEquipaje: bool, p_estado: EstadoViaje, p_conductor_oid: long <<oid>>, p_vehiculo_oid: long <<oid>>): Viaje <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_origen: Ubicacion, p_destino: Ubicacion, p_fechaHoraSalida: DateTime, p_numPlazasDisponibles: int, p_precio: Dinero, p_permiteMascotas: bool, p_permiteEquipaje: bool, p_estado: EstadoViaje): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Viaje <<ReadOID>>
+    +readAll(): Viaje[*] <<ReadAll>>
+    +gestionarPlazas(p_oid: long <<oid>>, p_nuevasPlazas: int): void <<Custom>>
+    +geolocalizarTrayecto(p_oid: long <<oid>>): void <<Custom>>
+    +obtenerPasajerosValidos(p_oid: long <<oid>>): Reserva[*] <<Custom>>
+    +addPasajero(p_oid: long <<oid>>, p_usuario_oids: long[*] <<oid>>): void <<Relationer>>
+    +removePasajero(p_oid: long <<oid>>, p_usuario_oids: long[*] <<oid>>): void <<Relationer>>
+  }
+
+  class Reserva <<AggregateMember:Viaje>> {
+    -id: long <<oid>>
+    -numPlazasReservadas: int
+    -estado: EstadoReserva
+    -fechaSolicitud: DateTime
+    --
+    +new(p_numPlazasReservadas: int, p_estado: EstadoReserva, p_fechaSolicitud: DateTime, p_viaje_oid: long <<oid>>, p_pasajero_oid: long <<oid>>): Reserva <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_numPlazasReservadas: int, p_estado: EstadoReserva, p_fechaSolicitud: DateTime): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Reserva <<ReadOID>>
+    +readAll(): Reserva[*] <<ReadAll>>
+    +aceptarPasajero(p_oid: long <<oid>>): void <<CustomTransaction>>
+  }
+
+  class Pago {
+    -id: long <<oid>>
+    -monto: Dinero
+    -fechaPago: DateTime
+    -estado: EstadoPago
+    --
+    +new(p_monto: Dinero, p_fechaPago: DateTime, p_estado: EstadoPago, p_reserva_oid: long <<oid>>): Pago <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_monto: Dinero, p_fechaPago: DateTime, p_estado: EstadoPago): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Pago <<ReadOID>>
+    +readAll(): Pago[*] <<ReadAll>>
+    +realizarPago(p_oid: long <<oid>>): void <<Custom>>
+  }
+
+  class Mensaje {
+    -id: long <<oid>>
+    -contenido: string
+    -fechaHora: DateTime
+    --
+    +new(p_contenido: string, p_fechaHora: DateTime, p_viaje_oid: long <<oid>>, p_remitente_oid: long <<oid>>): Mensaje <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_contenido: string, p_fechaHora: DateTime): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Mensaje <<ReadOID>>
+    +readAll(): Mensaje[*] <<ReadAll>>
+  }
+
+  class Resena {
+    -id: long <<oid>>
+    -puntuacion: int
+    -comentario: string?
+    -fechaCreacion: DateTime
+    --
+    +new(p_puntuacion: int, p_comentario: string, p_fechaCreacion: DateTime, p_viaje_oid: long <<oid>>, p_autor_oid: long <<oid>>): Resena <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_puntuacion: int, p_fechaCreacion: DateTime): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Resena <<ReadOID>>
+    +readAll(): Resena[*] <<ReadAll>>
+    +moderarContenido(p_oid: long <<oid>>): void <<Custom>>
+  }
+
+  class Notificacion {
+    -id: long <<oid>>
+    -titulo: string
+    -texto: string
+    -fechaHora: DateTime
+    -tipo: TipoNotificacion
+    -idObjetoOrigen: long
+    --
+    +new(p_titulo: string, p_texto: string, p_fechaHora: DateTime, p_tipo: TipoNotificacion, p_idObjetoOrigen: long, p_usuarioNotificado_oid: long <<oid>>): Notificacion <<New>>
+    +destroy(p_oid: long <<oid>>): void <<Destroy>>
+    +modify(p_oid: long <<oid>>, p_titulo: string, p_texto: string, p_fechaHora: DateTime, p_tipo: TipoNotificacion, p_idObjetoOrigen: long): void <<Modifier>>
+    +readOID(p_oid: long <<oid>>): Notificacion <<ReadOID>>
+    +readAll(): Notificacion[*] <<ReadAll>>
+  }
+
+  Usuario "propietario\n1" -- "vehiculos\n0..*" Vehiculo
+  Usuario "conductor\n1" -- "viajes\n0..*" Viaje
+  Usuario "pasajero\n0..*" -- "viajespasajero\n0..*" Viaje
+  Vehiculo "vehiculo\n1" -- "viajes\n0..*" Viaje
+  Viaje "viaje\n1" -- "reservas\n0..*" Reserva
+  Usuario "pasajero\n1" -- "reservas\n0..*" Reserva
+  Reserva "reserva\n1" -- "pago\n0..1" Pago
+  Viaje "viaje\n1" -- "mensajes\n0..*" Mensaje
+  Usuario "remitente\n1" -- "mensajesEnviados\n0..*" Mensaje
+  Viaje "viaje\n1" -- "resenas\n0..*" Resena
+  Usuario "autor\n1" -- "resenasEscritas\n0..*" Resena
+  Usuario "usuarioNotificado\n1" -- "notificaciones\n0..*" Notificacion
+}
+@enduml

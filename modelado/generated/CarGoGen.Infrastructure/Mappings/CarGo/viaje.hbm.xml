@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="CarGoGen.Domain"
+                   namespace="CarGoGen.Domain.Entities">
+  <class name="Viaje" table="Viaje">
+    <id name="Id" column="id" type="Int32">
+      <generator class="hilo"/>
+    </id>
+    <property name="FechaHoraSalida" type="DateTime">
+      <column name="fechaHoraSalida" not-null="true"/>
+    </property>
+    <property name="NumPlazasDisponibles" type="Int32">
+      <column name="numPlazasDisponibles" not-null="true"/>
+    </property>
+    <property name="PermiteMascotas" type="Boolean">
+      <column name="permiteMascotas" not-null="true"/>
+    </property>
+    <property name="PermiteEquipaje" type="Boolean">
+      <column name="permiteEquipaje" not-null="true"/>
+    </property>
+    <property name="Observaciones" type="String">
+      <column name="observaciones"/>
+    </property>
+    <property name="Estado" type="CarGoGen.Domain.Enums.EstadoViaje, CarGoGen.Domain">
+      <column name="estado" not-null="true"/>
+    </property>
+    <component name="Origen" class="CarGoGen.Domain.ValueObjects.Ubicacion, CarGoGen.Domain">
+      <property name="Ciudad" type="String">
+        <column name="origen_ciudad" not-null="true"/>
+      </property>
+      <property name="Direccion" type="String">
+        <column name="origen_direccion" not-null="true"/>
+      </property>
+      <property name="Latitud" type="Double">
+        <column name="origen_latitud" not-null="true"/>
+      </property>
+      <property name="Longitud" type="Double">
+        <column name="origen_longitud" not-null="true"/>
+      </property>
+    </component>
+    <component name="Destino" class="CarGoGen.Domain.ValueObjects.Ubicacion, CarGoGen.Domain">
+      <property name="Ciudad" type="String">
+        <column name="destino_ciudad" not-null="true"/>
+      </property>
+      <property name="Direccion" type="String">
+        <column name="destino_direccion" not-null="true"/>
+      </property>
+      <property name="Latitud" type="Double">
+        <column name="destino_latitud" not-null="true"/>
+      </property>
+      <property name="Longitud" type="Double">
+        <column name="destino_longitud" not-null="true"/>
+      </property>
+    </component>
+    <component name="Precio" class="CarGoGen.Domain.ValueObjects.Dinero, CarGoGen.Domain">
+      <property name="Moneda" type="CarGoGen.Domain.Enums.EnumMoneda, CarGoGen.Domain">
+        <column name="precio_moneda" not-null="true"/>
+      </property>
+      <property name="Cantidad" type="Double">
+        <column name="precio_cantidad" not-null="true"/>
+      </property>
+    </component>
+    <many-to-one name="Conductor" class="Usuario">
+      <column name="FK_Usuario_conductor" not-null="true"/>
+    </many-to-one>
+
+    <many-to-one name="Vehiculo" class="CarGoGen.Domain.Entities.Vehiculo, CarGoGen.Domain" column="idVehiculo" not-null="true" />
+
+    <bag name="Reservas">
+      <key>
+        <column name="FK_Viaje_reservas"/>
+      </key>
+      <one-to-many class="Reserva"/>
+    </bag>
+    <bag name="Mensajes">
+      <key>
+        <column name="FK_Viaje_mensajes"/>
+      </key>
+      <one-to-many class="Mensaje"/>
+    </bag>
+    <bag name="Resenas">
+      <key>
+        <column name="FK_Viaje_resenas"/>
+      </key>
+      <one-to-many class="Resena"/>
+    </bag>
+  </class>
+  <query name="ViajeReadAllHQL">from Viaje</query>
+</hibernate-mapping>
