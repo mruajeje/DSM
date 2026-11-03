@@ -12,6 +12,7 @@ public partial class Pago
     public virtual DateTime FechaPago { get; set; }
     public virtual EstadoPago Estado { get; set; }
     public virtual Reserva Reserva { get; set; } = null!;
+    public virtual string? IdTransaccionPasarela { get; set; }
 
     private bool HasDefaultIdentity() => EqualityComparer<int>.Default.Equals(Id, default);
 

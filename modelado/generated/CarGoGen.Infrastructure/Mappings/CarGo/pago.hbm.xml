@@ -19,6 +19,9 @@
       <property name="Cantidad" type="Double">
         <column name="monto_cantidad" not-null="true"/>
       </property>
+      <property name="IdTransaccionPasarela" type="String">
+        <column name="idTransaccionPasarela" not-null="false" />
+      </property>
     </component>
     <many-to-one name="Reserva" class="Reserva">
       <column name="FK_Reserva_reserva" not-null="true"/>
