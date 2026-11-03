@@ -4,4 +4,5 @@ namespace CarGoGen.Application.Abstractions;
 
 public interface IUsuarioRepository : IRepository<Usuario>
 {
+    Task<Usuario?> ReadByEmailAsync(string email);
 }

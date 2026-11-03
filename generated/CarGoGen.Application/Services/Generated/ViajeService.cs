@@ -111,19 +111,30 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
             throw new ModelException("Not enough available seats.");
         }
 
-        foreach (var relatedId in p_usuario_oids)
+        var usuarios = new List<Usuario>();
+
+        foreach (var relatedId in p_usuario_oids.Distinct())
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
                 ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
-            if (!entity.Pasajero.Contains(relatedEntity))
+
+            usuarios.Add(relatedEntity);
+        }
+
+        foreach (var relatedEntity in usuarios)
+        {
+            if (!entity.Pasajero.Any(p => p.Id == relatedEntity.Id))
             {
                 entity.Pasajero.Add(relatedEntity);
             }
+
             relatedEntity.Viajespasajero ??= new List<Viaje>();
-            if (!relatedEntity.Viajespasajero.Contains(entity))
+
+            if (!relatedEntity.Viajespasajero.Any(v => v.Id == entity.Id))
             {
                 relatedEntity.Viajespasajero.Add(entity);
             }
+
             await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
         }
         entity.NumPlazasDisponibles -= nuevosPasajeros;
@@ -134,16 +145,29 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
     {
         Viaje entity = await _repository.ReadAsync(p_oid)
             ?? throw new ModelException("Viaje not found.");
+
         entity.Pasajero ??= new List<Usuario>();
-        foreach (var relatedId in p_usuario_oids)
+        var plazasLiberadas = 0;
+
+        foreach (var relatedId in p_usuario_oids.Distinct())
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
                 ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
-            entity.Pasajero.Remove(relatedEntity);
+
+            bool eliminado = entity.Pasajero.RemoveAll(p => p.Id == relatedEntity.Id) > 0;
+
             relatedEntity.Viajespasajero ??= new List<Viaje>();
-            relatedEntity.Viajespasajero.Remove(entity);
+
+            if (eliminado)
+            {
+                plazasLiberadas++;
+                relatedEntity.Viajespasajero.RemoveAll(v => v.Id == entity.Id);
+            }
+
             await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
         }
+
+        entity.NumPlazasDisponibles += plazasLiberadas;
         await _repository.SaveAsync(entity);
     }
 
