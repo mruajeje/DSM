@@ -54,7 +54,8 @@ ConceptualModel CarGo {
             public modify::Modifier (p_oid : OID -> Usuario, p_nombreCompleto : String, p_email : String, p_password : Password, p_esAdmin : Boolean, p_estadoVerificacion : EstadoVerificacion) : Void;
             public readOID::ReadOID (p_oid : OID -> Usuario) : Object->Usuario;
             public readAll::ReadAll () : List<Object->Usuario>;
-            public login::Login (p_email : String, p_password : Password) : String;
+            public login::Login (p_oid : OID -> Usuario, p_password : Password) : String;
+     //public loginEmail::Login customized (p_email : String, p_password : Password) : String;
             public verificarDni::Custom (p_oid : OID -> Usuario, p_dni : String) : Void;
         }
     };

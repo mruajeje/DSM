@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="CarGoGen.Domain"
+                   namespace="CarGoGen.Domain.Entities">
+  <class name="Notificacion" table="Notificacion">
+    <id name="Id" column="id" type="Int32">
+      <generator class="hilo"/>
+    </id>
+    <property name="Titulo" type="String">
+      <column name="titulo" not-null="true"/>
+    </property>
+    <property name="Texto" type="String">
+      <column name="texto" not-null="true"/>
+    </property>
+    <property name="FechaHora" type="DateTime">
+      <column name="fechaHora" not-null="true"/>
+    </property>
+    <many-to-one name="UsuarioNotificado" class="Usuario">
+      <column name="FK_Usuario_usuarioNotificado" not-null="true"/>
+    </many-to-one>
+  </class>
+  <query name="NotificacionReadAllHQL">from Notificacion</query>
+</hibernate-mapping>

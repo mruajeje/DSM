@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="CarGoGen.Domain"
+                   namespace="CarGoGen.Domain.Entities">
+  <class name="Usuario" table="Usuario">
+    <id name="Id" column="id" type="Int32">
+      <generator class="hilo"/>
+    </id>
+    <property name="Password" type="String">
+      <column name="password" not-null="true"/>
+    </property>
+    <property name="NombreCompleto" type="String">
+      <column name="nombreCompleto" not-null="true"/>
+    </property>
+    <property name="Email" type="String">
+      <column name="email" not-null="true"/>
+    </property>
+    <property name="Telefono" type="String">
+      <column name="telefono"/>
+    </property>
+    <property name="Dni" type="String">
+      <column name="dni"/>
+    </property>
+    <property name="EsAdmin" type="Boolean">
+      <column name="esAdmin" not-null="true"/>
+    </property>
+    <property name="EstadoVerificacion" type="CarGoGen.Domain.Enums.EstadoVerificacion, CarGoGen.Domain">
+      <column name="estadoVerificacion" not-null="true"/>
+    </property>
+    <bag name="Vehiculos" inverse="true">
+      <key>
+        <column name="FK_Usuario_propietario"/>
+      </key>
+      <one-to-many class="Vehiculo"/>
+    </bag>
+    <bag name="Viajes" inverse="true">
+      <key>
+        <column name="FK_Usuario_conductor"/>
+      </key>
+      <one-to-many class="Viaje"/>
+    </bag>
+    <bag name="Viajespasajero">
+      <key>
+        <column name="FK_Usuario_viajespasajero"/>
+      </key>
+      <one-to-many class="Viaje"/>
+    </bag>
+    <bag name="Reservas" inverse="true">
+      <key>
+        <column name="FK_Usuario_pasajero"/>
+      </key>
+      <one-to-many class="Reserva"/>
+    </bag>
+    <bag name="MensajesEnviados" inverse="true">
+      <key>
+        <column name="FK_Usuario_remitente"/>
+      </key>
+      <one-to-many class="Mensaje"/>
+    </bag>
+    <bag name="ResenasEscritas" inverse="true">
+      <key>
+        <column name="FK_Usuario_autor"/>
+      </key>
+      <one-to-many class="Resena"/>
+    </bag>
+    <bag name="Notificaciones" inverse="true">
+      <key>
+        <column name="FK_Usuario_usuarioNotificado"/>
+      </key>
+      <one-to-many class="Notificacion"/>
+    </bag>
+  </class>
+  <query name="UsuarioReadAllHQL">from Usuario</query>
+</hibernate-mapping>
