@@ -101,6 +101,16 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
         Viaje entity = await _repository.ReadAsync(p_oid)
             ?? throw new ModelException("Viaje not found.");
         entity.Pasajero ??= new List<Usuario>();
+
+        var nuevosPasajeros = p_usuario_oids
+        .Distinct()
+        .Count(id => !entity.Pasajero.Any(p => p.Id == id));
+
+        if (nuevosPasajeros > entity.NumPlazasDisponibles)
+        {
+            throw new ModelException("Not enough available seats.");
+        }
+
         foreach (var relatedId in p_usuario_oids)
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
@@ -116,6 +126,7 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
             }
             await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
         }
+        entity.NumPlazasDisponibles -= nuevosPasajeros;
         await _repository.SaveAsync(entity);
     }
 
@@ -128,15 +139,9 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
                 ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
-            if (!entity.Pasajero.Contains(relatedEntity))
-            {
-                entity.Pasajero.Add(relatedEntity);
-            }
+            entity.Pasajero.Remove(relatedEntity);
             relatedEntity.Viajespasajero ??= new List<Viaje>();
-            if (!relatedEntity.Viajespasajero.Contains(entity))
-            {
-                relatedEntity.Viajespasajero.Add(entity);
-            }
+            relatedEntity.Viajespasajero.Remove(entity);
             await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
         }
         await _repository.SaveAsync(entity);
