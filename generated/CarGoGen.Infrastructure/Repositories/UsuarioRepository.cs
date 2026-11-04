@@ -54,22 +54,6 @@ public sealed class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioReposit
         }
     }
 
-    public async Task<Usuario?> ReadByEmailAsync(string email)
-    {
-        try
-        {
-            using var context = OpenSession();
-
-            return await context.Session.Query<Usuario>()
-                .FirstOrDefaultAsync(u => u.Email == email);
-        }
-        catch (Exception ex)
-        {
-            Logger?.LogError(ex, "Error reading {Entity} entity by email.", EntityName);
-            throw new DataException($"Error reading {EntityName} entity by email.", ex);
-        }
-    }
-
     public async Task SaveAsync(Usuario entity)
     {
         await ExecuteRepositoryOperationInTransactionAsync(

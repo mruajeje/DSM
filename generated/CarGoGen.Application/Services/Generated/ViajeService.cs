@@ -101,43 +101,21 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
         Viaje entity = await _repository.ReadAsync(p_oid)
             ?? throw new ModelException("Viaje not found.");
         entity.Pasajero ??= new List<Usuario>();
-
-        var nuevosPasajeros = p_usuario_oids
-        .Distinct()
-        .Count(id => !entity.Pasajero.Any(p => p.Id == id));
-
-        if (nuevosPasajeros > entity.NumPlazasDisponibles)
-        {
-            throw new ModelException("Not enough available seats.");
-        }
-
-        var usuarios = new List<Usuario>();
-
-        foreach (var relatedId in p_usuario_oids.Distinct())
+        foreach (var relatedId in p_usuario_oids)
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
                 ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
-
-            usuarios.Add(relatedEntity);
-        }
-
-        foreach (var relatedEntity in usuarios)
-        {
-            if (!entity.Pasajero.Any(p => p.Id == relatedEntity.Id))
+            if (!entity.Pasajero.Contains(relatedEntity))
             {
                 entity.Pasajero.Add(relatedEntity);
             }
-
             relatedEntity.Viajespasajero ??= new List<Viaje>();
-
-            if (!relatedEntity.Viajespasajero.Any(v => v.Id == entity.Id))
+            if (!relatedEntity.Viajespasajero.Contains(entity))
             {
                 relatedEntity.Viajespasajero.Add(entity);
             }
-
             await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
         }
-        entity.NumPlazasDisponibles -= nuevosPasajeros;
         await _repository.SaveAsync(entity);
     }
 
@@ -145,29 +123,22 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
     {
         Viaje entity = await _repository.ReadAsync(p_oid)
             ?? throw new ModelException("Viaje not found.");
-
         entity.Pasajero ??= new List<Usuario>();
-        var plazasLiberadas = 0;
-
-        foreach (var relatedId in p_usuario_oids.Distinct())
+        foreach (var relatedId in p_usuario_oids)
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
                 ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
-
-            bool eliminado = entity.Pasajero.RemoveAll(p => p.Id == relatedEntity.Id) > 0;
-
-            relatedEntity.Viajespasajero ??= new List<Viaje>();
-
-            if (eliminado)
+            if (!entity.Pasajero.Contains(relatedEntity))
             {
-                plazasLiberadas++;
-                relatedEntity.Viajespasajero.RemoveAll(v => v.Id == entity.Id);
+                entity.Pasajero.Add(relatedEntity);
             }
-
+            relatedEntity.Viajespasajero ??= new List<Viaje>();
+            if (!relatedEntity.Viajespasajero.Contains(entity))
+            {
+                relatedEntity.Viajespasajero.Add(entity);
+            }
             await _unitOfWork.UsuarioRepository.SaveAsync(relatedEntity);
         }
-
-        entity.NumPlazasDisponibles += plazasLiberadas;
         await _repository.SaveAsync(entity);
     }
 

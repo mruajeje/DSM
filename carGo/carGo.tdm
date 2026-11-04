@@ -128,6 +128,7 @@ ConceptualModel CarGo {
             private monto : Dinero (1, 1);
             private fechaPago : TimeStamp (1, 1);
             private estado : EstadoPago (1, 1);
+            private idTransaccionPasarela : String (0, 1);
         }
         
         operations {

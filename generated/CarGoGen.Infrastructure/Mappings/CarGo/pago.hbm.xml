@@ -12,6 +12,9 @@
     <property name="Estado" type="CarGoGen.Domain.Enums.EstadoPago, CarGoGen.Domain">
       <column name="estado" not-null="true"/>
     </property>
+    <property name="IdTransaccionPasarela" type="String">
+      <column name="idTransaccionPasarela"/>
+    </property>
     <component name="Monto" class="CarGoGen.Domain.ValueObjects.Dinero, CarGoGen.Domain">
       <property name="Moneda" type="CarGoGen.Domain.Enums.EnumMoneda, CarGoGen.Domain">
         <column name="monto_moneda" not-null="true"/>

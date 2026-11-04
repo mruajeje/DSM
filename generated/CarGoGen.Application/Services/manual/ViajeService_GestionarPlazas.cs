@@ -13,14 +13,10 @@ public sealed partial class ViajeService
 {
     public async Task GestionarPlazasAsync(int p_oid, int p_nuevasPlazas)
     {
-        Viaje entity = await _repository.ReadAsync(p_oid)
-            ?? throw new ModelException("Viaje not found.");
+        /*PROTECTED REGION ID(CarGoGen.Application.Services_Viaje_gestionarPlazas) ENABLED START*/
+        // Write here your custom code...
 
-        if (p_nuevasPlazas < 0)
-        {
-            throw new ModelException("The number of available seats cannot be negative.");
-        }
-        entity.NumPlazasDisponibles = p_nuevasPlazas;
-        await _repository.SaveAsync(entity);
+        throw new ModelException("Application service generation for Viaje.gestionarPlazas is pending.", new NotImplementedException("Method GestionarPlazasAsync() not yet implemented."));
+        /*PROTECTED REGION END*/
     }
 }

@@ -103,11 +103,11 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
         return await _repository.ReadAllAsync();
     }
 
-    public async Task<string?> LoginAsync(string p_email, string p_password)
+    public async Task<string?> LoginAsync(int p_oid, string p_password)
     {
         try
         {
-            Usuario? entity = await _repository.ReadByEmailAsync(p_email);
+            Usuario? entity = await _repository.ReadAsync(p_oid);
             if (entity is null)
             {
                 return null;
