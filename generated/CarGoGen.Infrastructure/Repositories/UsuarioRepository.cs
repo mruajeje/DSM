@@ -39,7 +39,6 @@ public sealed class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioReposit
             throw new DataException($"Error reading all {EntityName} entities.", ex);
         }
     }
-
     public async Task<Usuario?> ReadAsync(object id)
     {
         try

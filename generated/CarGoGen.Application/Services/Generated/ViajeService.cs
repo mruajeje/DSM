@@ -124,11 +124,18 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
         Viaje entity = await _repository.ReadAsync(p_oid)
             ?? throw new ModelException("Viaje not found.");
         entity.Pasajero ??= new List<Usuario>();
-        foreach (var relatedId in p_usuario_oids)
+        var usuarios = new List<Usuario>();
+
+        foreach (var relatedId in p_usuario_oids.Distinct())
         {
             Usuario relatedEntity = await _unitOfWork.UsuarioRepository.ReadAsync(relatedId)
                 ?? throw new ModelException("Usuario not found for Viaje.Pasajero.");
-            if (!entity.Pasajero.Contains(relatedEntity))
+            usuarios.Add(relatedEntity);
+        }
+
+            foreach (var relatedEntity in usuarios)
+            {
+            if (!entity.Pasajero.Any(p => p.Id == relatedEntity.Id))
             {
                 entity.Pasajero.Add(relatedEntity);
             }
