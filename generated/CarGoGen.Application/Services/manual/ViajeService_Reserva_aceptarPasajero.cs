@@ -14,7 +14,8 @@ public sealed partial class ViajeService
     public async Task Reserva_aceptarPasajeroAsync(int p_oid)
     {
         /*PROTECTED REGION ID(CarGoGen.Application.Services_Viaje_Reserva_aceptarPasajero) ENABLED START*/
-        // Write here your custom code...
+
+        
 
         throw new ModelException("Application service generation for Reserva.Reserva_aceptarPasajero is pending.", new NotImplementedException("Method Reserva_aceptarPasajeroAsync() not yet implemented."));
         /*PROTECTED REGION END*/
