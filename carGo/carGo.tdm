@@ -118,7 +118,7 @@ ConceptualModel CarGo {
             public modify::Modifier (p_oid : OID -> Reserva, p_numPlazasReservadas : Integer, p_estado : EstadoReserva, p_fechaSolicitud : TimeStamp) : Void;
             public readOID::ReadOID (p_oid : OID -> Reserva) : Object->Reserva;
             public readAll::ReadAll () : List<Object->Reserva>;
-            public aceptarPasajero::Custom (p_oid : OID -> Reserva) : Void;
+            public aceptarPasajero::Custom (p_oid : OID -> Reserva, p_conductor_oid : OID -> Usuario) : Void;
         }
     };
 
