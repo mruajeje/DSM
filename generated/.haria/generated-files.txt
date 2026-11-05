@@ -41,6 +41,7 @@ CarGoGen.Domain\Entities\Vehiculo.cs
 CarGoGen.Domain\Entities\Viaje.cs
 CarGoGen.Domain\Enums\EnumMoneda.cs
 CarGoGen.Domain\Enums\EstadoPago.cs
+CarGoGen.Domain\Enums\EstadoResena.cs
 CarGoGen.Domain\Enums\EstadoReserva.cs
 CarGoGen.Domain\Enums\EstadoVerificacion.cs
 CarGoGen.Domain\Enums\EstadoViaje.cs

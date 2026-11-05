@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using CarGoGen.Domain.Enums;
 
 namespace CarGoGen.Domain.Entities;
 
@@ -9,6 +10,8 @@ public partial class Resena
     public virtual int Puntuacion { get; set; }
     public virtual string? Comentario { get; set; }
     public virtual DateTime FechaCreacion { get; set; }
+    public virtual EstadoResena Estado { get; set; }
+    public virtual string? MotivoModeracion { get; set; }
     public virtual Viaje Viaje { get; set; } = null!;
     public virtual Usuario Autor { get; set; } = null!;
 

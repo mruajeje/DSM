@@ -41,7 +41,7 @@ public sealed partial class ResenaService : ServiceEntity<Resena>
     public Task<Resena> ModifierResenaDefaultAsync(Resena entity) =>
         ModifierDefaultAsync(entity);
 
-    public async Task<Resena> NewAsync(int p_puntuacion, string p_comentario, DateTime p_fechaCreacion, int p_viaje_oid, int p_autor_oid)
+    public async Task<Resena> NewAsync(int p_puntuacion, string p_comentario, DateTime p_fechaCreacion, EstadoResena p_estado, int p_viaje_oid, int p_autor_oid)
     {
         Viaje viajeEntity = await _unitOfWork.ViajeRepository.ReadAsync(p_viaje_oid)
             ?? throw new ModelException("Viaje not found for Resena.Viaje.");
@@ -54,6 +54,7 @@ public sealed partial class ResenaService : ServiceEntity<Resena>
             Puntuacion = p_puntuacion,
             Comentario = p_comentario,
             FechaCreacion = p_fechaCreacion,
+            Estado = p_estado,
             Viaje = viajeEntity,
             Autor = autorEntity,
         };
@@ -69,12 +70,13 @@ public sealed partial class ResenaService : ServiceEntity<Resena>
         await _repository.DeleteAsync(entity);
     }
 
-    public async Task ModifyAsync(int p_oid, int p_puntuacion, DateTime p_fechaCreacion)
+    public async Task ModifyAsync(int p_oid, int p_puntuacion, DateTime p_fechaCreacion, EstadoResena p_estado)
     {
         Resena entity = await _repository.ReadAsync(p_oid)
             ?? throw new ModelException("Resena not found.");
         entity.Puntuacion = p_puntuacion;
         entity.FechaCreacion = p_fechaCreacion;
+        entity.Estado = p_estado;
         await _repository.SaveAsync(entity);
     }
 

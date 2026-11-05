@@ -85,14 +85,14 @@ public static class SeedData
             Ensure(await mensajeService.ReadOIDAsync(sampleMensaje.Id) is not null, "Mensaje modify keeps the entity readable.");
 
             var resenaService = new ResenaService(unitOfWorkFactory);
-            var sampleResena = await resenaService.NewAsync(9, "Sample Resena Comentario", new DateTime(2026, 1, 9, 9, 0, 0), sampleViaje.Id, sampleUsuario.Id);
+            var sampleResena = await resenaService.NewAsync(9, "Sample Resena Comentario", new DateTime(2026, 1, 9, 9, 0, 0), EstadoResena.Pendiente, sampleViaje.Id, sampleUsuario.Id);
             Ensure(sampleResena.Viaje?.Equals(sampleViaje) == true, "Resena.new relates sampleResena and sampleViaje.");
             Ensure(sampleResena.Autor?.Equals(sampleUsuario) == true, "Resena.new relates sampleResena and sampleUsuario.");
             var sampleResenaReadBack = await resenaService.ReadOIDAsync(sampleResena.Id);
             Ensure(sampleResenaReadBack is not null, "Resena read by OID returns the generated entity.");
             var sampleResenaReadAll = await resenaService.ReadAllAsync();
             Ensure(sampleResenaReadAll.Count > 0, "Resena read all returns generated data.");
-            await resenaService.ModifyAsync(sampleResena.Id, 9, new DateTime(2026, 1, 9, 9, 0, 0));
+            await resenaService.ModifyAsync(sampleResena.Id, 9, new DateTime(2026, 1, 9, 9, 0, 0), EstadoResena.Pendiente);
             Ensure(await resenaService.ReadOIDAsync(sampleResena.Id) is not null, "Resena modify keeps the entity readable.");
 
             var notificacionService = new NotificacionService(unitOfWorkFactory);

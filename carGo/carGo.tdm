@@ -20,6 +20,10 @@ ConceptualModel CarGo {
         (Pendiente, 1), (Verificado, 2), (Rechazado, 3)
     };
 
+    Enumeration EstadoResena {
+        (Pendiente, 1), (Aceptada, 2), (Oculta, 3), (Rechazada, 4)
+    };
+
     Class Dinero <ValueObject> {
         attributes {
             private moneda : EnumMoneda (1, 1);
@@ -164,15 +168,17 @@ ConceptualModel CarGo {
             private puntuacion : Integer (1, 1);
             private comentario : String (0, 1);
             private fechaCreacion : TimeStamp (1, 1);
+            private estado : EstadoResena (1, 1);
+            private motivoModeracion : String (0, 1);
         }
         
         operations {
-            public new::New (p_puntuacion : Integer, p_comentario : String, p_fechaCreacion : TimeStamp, p_viaje_oid : OID -> Viaje, p_autor_oid : OID -> Usuario) : Object->Resena;
+            public new::New (p_puntuacion : Integer, p_comentario : String, p_fechaCreacion : TimeStamp, p_estado : EstadoResena, p_viaje_oid : OID -> Viaje, p_autor_oid : OID -> Usuario) : Object->Resena;
             public destroy::Destroy (p_oid : OID -> Resena) : Void;
-            public modify::Modifier (p_oid : OID -> Resena, p_puntuacion : Integer, p_fechaCreacion : TimeStamp) : Void;
+            public modify::Modifier (p_oid : OID -> Resena, p_puntuacion : Integer, p_fechaCreacion : TimeStamp, p_estado : EstadoResena) : Void;
             public readOID::ReadOID (p_oid : OID -> Resena) : Object->Resena;
             public readAll::ReadAll () : List<Object->Resena>;
-            public moderarContenido::Custom (p_oid : OID -> Resena) : Void;
+            public moderarContenido::Custom (p_oid : OID -> Resena, p_admin_oid : OID -> Usuario, p_decision : EstadoResena, p_motivo : String) : Void;
         }
     };
 

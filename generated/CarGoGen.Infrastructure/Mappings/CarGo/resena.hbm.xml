@@ -15,6 +15,12 @@
     <property name="FechaCreacion" type="DateTime">
       <column name="fechaCreacion" not-null="true"/>
     </property>
+    <property name="Estado" type="CarGoGen.Domain.Enums.EstadoResena, CarGoGen.Domain">
+      <column name="estado" not-null="true"/>
+    </property>
+    <property name="MotivoModeracion" type="String">
+      <column name="motivoModeracion"/>
+    </property>
     <many-to-one name="Viaje" class="Viaje">
       <column name="FK_Viaje_viaje" not-null="true"/>
     </many-to-one>
