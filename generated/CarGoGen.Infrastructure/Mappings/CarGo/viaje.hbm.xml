@@ -24,6 +24,15 @@
     <property name="Estado" type="CarGoGen.Domain.Enums.EstadoViaje, CarGoGen.Domain">
       <column name="estado" not-null="true"/>
     </property>
+    <property name="LatitudActual" type="Double">
+      <column name="latitudActual"/>
+    </property>
+    <property name="LongitudActual" type="Double">
+      <column name="longitudActual"/>
+    </property>
+    <property name="FechaUltimaPosicion" type="DateTime">
+      <column name="fechaUltimaPosicion"/>
+    </property>
     <component name="Origen" class="CarGoGen.Domain.ValueObjects.Ubicacion, CarGoGen.Domain">
       <property name="Ciudad" type="String">
         <column name="origen_ciudad" not-null="true"/>

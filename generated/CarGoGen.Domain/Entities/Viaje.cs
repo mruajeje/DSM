@@ -17,6 +17,9 @@ public partial class Viaje
     public virtual bool PermiteEquipaje { get; set; }
     public virtual string? Observaciones { get; set; }
     public virtual EstadoViaje Estado { get; set; }
+    public virtual double? LatitudActual { get; set; }
+    public virtual double? LongitudActual { get; set; }
+    public virtual DateTime? FechaUltimaPosicion { get; set; }
     public virtual Usuario Conductor { get; set; } = null!;
     public virtual IList<Usuario> Pasajero { get; set; } = new List<Usuario>();
     public virtual IList<Reserva> Reservas { get; set; } = new List<Reserva>();

@@ -18,7 +18,6 @@ package "CarGo" {
   enum EstadoReserva {
     Pendiente
     Aceptada
-    Pagada
     Rechazada
     Cancelada
   }
@@ -35,11 +34,11 @@ package "CarGo" {
     Rechazado
   }
 
-  enum TipoNotificacion {
-    Usuario
-    Resena
-    Viaje
-    Reserva
+  enum EstadoResena {
+    Pendiente
+    Aceptada
+    Oculta
+    Rechazada
   }
 
   class Dinero <<ValueObject>> {
@@ -69,7 +68,7 @@ package "CarGo" {
     +modify(p_oid: long <<oid>>, p_nombreCompleto: string, p_email: string, p_password: string <<password>>, p_esAdmin: bool, p_estadoVerificacion: EstadoVerificacion): void <<Modifier>>
     +readOID(p_oid: long <<oid>>): Usuario <<ReadOID>>
     +readAll(): Usuario[*] <<ReadAll>>
-    +login(p_email: string, p_password: string <<password>>): string <<Login>>
+    +login(p_oid: long <<oid>>, p_password: string <<password>>): string <<Login>>
     +verificarDni(p_oid: long <<oid>>, p_dni: string): void <<Custom>>
   }
 
@@ -97,15 +96,17 @@ package "CarGo" {
     -permiteEquipaje: bool
     -observaciones: string?
     -estado: EstadoViaje
+    -latitudActual: double?
+    -longitudActual: double?
+    -fechaUltimaPosicion: DateTime?
     --
-    +new(p_origen: Ubicacion, p_destino: Ubicacion, p_fechaHoraSalida: DateTime, p_numPlazasDisponibles: int, p_precio: Dinero, p_permiteMascotas: bool, p_permiteEquipaje: bool, p_estado: EstadoViaje, p_conductor_oid: long <<oid>>, p_vehiculo_oid: long <<oid>>): Viaje <<New>>
+    +new(p_origen: Ubicacion, p_destino: Ubicacion, p_fechaHoraSalida: DateTime, p_numPlazasDisponibles: int, p_precio: Dinero, p_permiteMascotas: bool, p_permiteEquipaje: bool, p_estado: EstadoViaje, p_conductor_oid: long <<oid>>): Viaje <<New>>
     +destroy(p_oid: long <<oid>>): void <<Destroy>>
     +modify(p_oid: long <<oid>>, p_origen: Ubicacion, p_destino: Ubicacion, p_fechaHoraSalida: DateTime, p_numPlazasDisponibles: int, p_precio: Dinero, p_permiteMascotas: bool, p_permiteEquipaje: bool, p_estado: EstadoViaje): void <<Modifier>>
     +readOID(p_oid: long <<oid>>): Viaje <<ReadOID>>
     +readAll(): Viaje[*] <<ReadAll>>
     +gestionarPlazas(p_oid: long <<oid>>, p_nuevasPlazas: int): void <<Custom>>
-    +geolocalizarTrayecto(p_oid: long <<oid>>): void <<Custom>>
-    +obtenerPasajerosValidos(p_oid: long <<oid>>): Reserva[*] <<Custom>>
+    +geolocalizarTrayecto(p_oid: long <<oid>>, p_usuario_oid: long <<oid>>, p_latitud: double, p_longitud: double, p_fecha: DateTime): void <<Custom>>
     +addPasajero(p_oid: long <<oid>>, p_usuario_oids: long[*] <<oid>>): void <<Relationer>>
     +removePasajero(p_oid: long <<oid>>, p_usuario_oids: long[*] <<oid>>): void <<Relationer>>
   }
@@ -121,7 +122,7 @@ package "CarGo" {
     +modify(p_oid: long <<oid>>, p_numPlazasReservadas: int, p_estado: EstadoReserva, p_fechaSolicitud: DateTime): void <<Modifier>>
     +readOID(p_oid: long <<oid>>): Reserva <<ReadOID>>
     +readAll(): Reserva[*] <<ReadAll>>
-    +aceptarPasajero(p_oid: long <<oid>>): void <<CustomTransaction>>
+    +aceptarPasajero(p_oid: long <<oid>>, p_conductor_oid: long <<oid>>): void <<Custom>>
   }
 
   class Pago {
@@ -129,13 +130,15 @@ package "CarGo" {
     -monto: Dinero
     -fechaPago: DateTime
     -estado: EstadoPago
+    -idTransaccionPasarela: string?
     --
     +new(p_monto: Dinero, p_fechaPago: DateTime, p_estado: EstadoPago, p_reserva_oid: long <<oid>>): Pago <<New>>
     +destroy(p_oid: long <<oid>>): void <<Destroy>>
     +modify(p_oid: long <<oid>>, p_monto: Dinero, p_fechaPago: DateTime, p_estado: EstadoPago): void <<Modifier>>
     +readOID(p_oid: long <<oid>>): Pago <<ReadOID>>
     +readAll(): Pago[*] <<ReadAll>>
-    +realizarPago(p_oid: long <<oid>>): void <<Custom>>
+    +realizarPago(p_oid: long <<oid>>): void <<CustomTransaction>>
+    +reembolsarPago(p_oid: long <<oid>>): void <<CustomTransaction>>
   }
 
   class Mensaje {
@@ -155,13 +158,15 @@ package "CarGo" {
     -puntuacion: int
     -comentario: string?
     -fechaCreacion: DateTime
+    -estado: EstadoResena
+    -motivoModeracion: string?
     --
-    +new(p_puntuacion: int, p_comentario: string, p_fechaCreacion: DateTime, p_viaje_oid: long <<oid>>, p_autor_oid: long <<oid>>): Resena <<New>>
+    +new(p_puntuacion: int, p_comentario: string, p_fechaCreacion: DateTime, p_estado: EstadoResena, p_viaje_oid: long <<oid>>, p_autor_oid: long <<oid>>): Resena <<New>>
     +destroy(p_oid: long <<oid>>): void <<Destroy>>
-    +modify(p_oid: long <<oid>>, p_puntuacion: int, p_fechaCreacion: DateTime): void <<Modifier>>
+    +modify(p_oid: long <<oid>>, p_puntuacion: int, p_fechaCreacion: DateTime, p_estado: EstadoResena): void <<Modifier>>
     +readOID(p_oid: long <<oid>>): Resena <<ReadOID>>
     +readAll(): Resena[*] <<ReadAll>>
-    +moderarContenido(p_oid: long <<oid>>): void <<Custom>>
+    +moderarContenido(p_oid: long <<oid>>, p_admin_oid: long <<oid>>, p_decision: EstadoResena, p_motivo: string): void <<Custom>>
   }
 
   class Notificacion {
@@ -169,20 +174,18 @@ package "CarGo" {
     -titulo: string
     -texto: string
     -fechaHora: DateTime
-    -tipo: TipoNotificacion
-    -idObjetoOrigen: long
     --
-    +new(p_titulo: string, p_texto: string, p_fechaHora: DateTime, p_tipo: TipoNotificacion, p_idObjetoOrigen: long, p_usuarioNotificado_oid: long <<oid>>): Notificacion <<New>>
+    +new(p_titulo: string, p_texto: string, p_fechaHora: DateTime, p_usuarioNotificado_oid: long <<oid>>): Notificacion <<New>>
     +destroy(p_oid: long <<oid>>): void <<Destroy>>
-    +modify(p_oid: long <<oid>>, p_titulo: string, p_texto: string, p_fechaHora: DateTime, p_tipo: TipoNotificacion, p_idObjetoOrigen: long): void <<Modifier>>
+    +modify(p_oid: long <<oid>>, p_titulo: string, p_texto: string, p_fechaHora: DateTime): void <<Modifier>>
     +readOID(p_oid: long <<oid>>): Notificacion <<ReadOID>>
     +readAll(): Notificacion[*] <<ReadAll>>
   }
 
+  ' Relationships
   Usuario "propietario\n1" -- "vehiculos\n0..*" Vehiculo
   Usuario "conductor\n1" -- "viajes\n0..*" Viaje
   Usuario "pasajero\n0..*" -- "viajespasajero\n0..*" Viaje
-  Vehiculo "vehiculo\n1" -- "viajes\n0..*" Viaje
   Viaje "viaje\n1" -- "reservas\n0..*" Reserva
   Usuario "pasajero\n1" -- "reservas\n0..*" Reserva
   Reserva "reserva\n1" -- "pago\n0..1" Pago

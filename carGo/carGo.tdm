@@ -93,6 +93,9 @@ ConceptualModel CarGo {
             private permiteEquipaje : Boolean (1, 1);
             private observaciones : String (0, 1);
             private estado : EstadoViaje (1, 1);
+            private latitudActual : Double (0, 1);
+            private longitudActual : Double (0, 1);
+            private fechaUltimaPosicion : TimeStamp (0, 1);
         }
         
         operations {
@@ -102,7 +105,7 @@ ConceptualModel CarGo {
             public readOID::ReadOID (p_oid : OID -> Viaje) : Object->Viaje;
             public readAll::ReadAll () : List<Object->Viaje>;
             public gestionarPlazas::Custom (p_oid : OID -> Viaje, p_nuevasPlazas : Integer) : Void;
-            public geolocalizarTrayecto::Custom (p_oid : OID -> Viaje) : Void;
+            public geolocalizarTrayecto::Custom (p_oid : OID -> Viaje, p_usuario_oid : OID -> Usuario, p_latitud : Double, p_longitud : Double, p_fecha : TimeStamp) : Void;
             public addPasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
             public removePasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
         }
