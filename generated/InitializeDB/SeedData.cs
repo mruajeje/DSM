@@ -24,7 +24,7 @@ public static class SeedData
 
             var usuarioService = new UsuarioService(unitOfWorkFactory);
             var sampleUsuario = await usuarioService.NewAsync("Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
-            var sampleUsuarioLoginToken = await usuarioService.LoginAsync(sampleUsuario.Email, "Password123!");
+            var sampleUsuarioLoginToken = await usuarioService.LoginAsync(sampleUsuario.Id, "Password123!");
             Ensure(!string.IsNullOrWhiteSpace(sampleUsuarioLoginToken), "Usuario.login returns a login token for sampleUsuario.");
             var sampleUsuarioReadBack = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
             Ensure(sampleUsuarioReadBack is not null, "Usuario read by OID returns the generated entity.");
