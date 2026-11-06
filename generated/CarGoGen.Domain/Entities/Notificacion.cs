@@ -9,6 +9,7 @@ public partial class Notificacion
     public virtual string Titulo { get; set; } = string.Empty;
     public virtual string Texto { get; set; } = string.Empty;
     public virtual DateTime FechaHora { get; set; }
+    public virtual bool Leida { get; set; }
     public virtual Usuario UsuarioNotificado { get; set; } = null!;
 
     private bool HasDefaultIdentity() => EqualityComparer<int>.Default.Equals(Id, default);

@@ -375,6 +375,19 @@ public sealed class ViajeServiceGeolocalizarTrayectoTests
             throw new NotImplementedException();
         public Task<IReadOnlyList<Viaje>> ReadFilterByPreferenciasYEstadoAsync(bool p_permiteMascotas, bool p_permiteEquipaje) =>
             throw new NotImplementedException();
+
+            public Task<IReadOnlyList<Viaje>> ReadFilterViajesDisponiblesAsync(
+                DateTime p_fechaMinima)
+            {
+                return Task.FromResult<IReadOnlyList<Viaje>>(
+                    Array.Empty<Viaje>());
+            }
+
+            public Task<IReadOnlyList<Viaje>> ReadFilterByConductorVerificadoAsync()
+            {
+                return Task.FromResult<IReadOnlyList<Viaje>>(
+                    Array.Empty<Viaje>());
+            }
     }
 
     private sealed class FakeUsuarioRepo : IUsuarioRepository

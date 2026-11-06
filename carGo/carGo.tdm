@@ -136,6 +136,16 @@ ConceptualModel CarGo {
             {
                 filterLinQ = "entity => (!p_permiteMascotas || entity.PermiteMascotas) && (!p_permiteEquipaje || entity.PermiteEquipaje) && (entity.Estado == EstadoViaje.Publicado || entity.Estado == EstadoViaje.EnCurso)"
             };
+
+            public readFilterViajesDisponibles :: ReadFilter (p_fechaMinima : TimeStamp) : List<Object -> Viaje>
+            {
+                filterLinQ = "entity =>entity.Estado == EstadoViaje.Publicado && entity.NumPlazasDisponibles > 0 && entity.FechaHoraSalida >= p_fechaMinima"
+            };
+
+            public readFilterByConductorVerificado :: ReadFilter () : List<Object -> Viaje>
+            {
+                filterLinQ = "entity => entity.Conductor.EstadoVerificacion == EstadoVerificacion.Verificado"
+            };
         }
     };
 
@@ -154,6 +164,13 @@ ConceptualModel CarGo {
             public readOID::ReadOID (p_oid : OID -> Reserva) : Object->Reserva;
             public readAll::ReadAll () : List<Object->Reserva>;
             public aceptarPasajero::Custom (p_oid : OID -> Reserva, p_conductor_oid : OID -> Usuario) : Void;
+            public rechazarPasajero::Custom (p_oid : OID -> Reserva, p_conductor_oid : OID -> Usuario) : Void;
+            public cancelarReserva::CustomTransaction (p_oid : OID -> Reserva, p_usuario_oid : OID -> Usuario) : Void;
+
+            public readFilterByEstadoYFecha :: ReadFilter (p_estado : EstadoReserva, p_desde : TimeStamp, p_hasta : TimeStamp) : List<Object -> Reserva>
+            {
+                filterLinQ = "entity => entity.Estado == p_estado && entity.FechaSolicitud >= p_desde && entity.FechaSolicitud < p_hasta"
+            };
         }
     };
 
@@ -219,14 +236,16 @@ ConceptualModel CarGo {
             private titulo : String (1, 1);
             private texto : String (1, 1);
             private fechaHora : TimeStamp (1, 1);
+            private leida : Boolean (1, 1);
         }
         
         operations {
-            public new::New (p_titulo : String, p_texto : String, p_fechaHora : TimeStamp, p_usuarioNotificado_oid : OID -> Usuario) : Object->Notificacion;
+            public new::New (p_titulo : String, p_texto : String, p_fechaHora : TimeStamp, p_leida : Boolean, p_usuarioNotificado_oid : OID -> Usuario) : Object->Notificacion;
             public destroy::Destroy (p_oid : OID -> Notificacion) : Void;
-            public modify::Modifier (p_oid : OID -> Notificacion, p_titulo : String, p_texto : String, p_fechaHora : TimeStamp) : Void;
+            public modify::Modifier (p_oid : OID -> Notificacion, p_titulo : String, p_texto : String, p_fechaHora : TimeStamp, p_leida : Boolean, p_usuarioNotificado_oid : OID -> Usuario) : Void;
             public readOID::ReadOID (p_oid : OID -> Notificacion) : Object->Notificacion;
             public readAll::ReadAll () : List<Object->Notificacion>;
+            public marcarComoLeida::Custom (p_oid : OID -> Notificacion, p_usuario_oid : OID -> Usuario) : Void;
         }
     };
 

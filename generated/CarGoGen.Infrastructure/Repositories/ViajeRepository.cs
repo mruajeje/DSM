@@ -133,4 +133,36 @@ public sealed class ViajeRepository : RepositoryBase<Viaje>, IViajeRepository
             throw new DataException("Error executing ReadFilter Viaje.readFilterByPreferenciasYEstado.", ex);
         }
     }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterViajesDisponiblesAsync(DateTime p_fechaMinima)
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Viaje>()
+                .Where(entity =>entity.Estado == EstadoViaje.Publicado && entity.NumPlazasDisponibles > 0 && entity.FechaHoraSalida >= p_fechaMinima)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Viaje.readFilterViajesDisponibles.");
+            throw new DataException("Error executing ReadFilter Viaje.readFilterViajesDisponibles.", ex);
+        }
+    }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByConductorVerificadoAsync()
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Viaje>()
+                .Where(entity => entity.Conductor.EstadoVerificacion == EstadoVerificacion.Verificado)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Viaje.readFilterByConductorVerificado.");
+            throw new DataException("Error executing ReadFilter Viaje.readFilterByConductorVerificado.", ex);
+        }
+    }
 }

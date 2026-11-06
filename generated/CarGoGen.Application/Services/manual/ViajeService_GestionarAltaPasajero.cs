@@ -57,6 +57,6 @@ public sealed partial class ViajeService
             // Guardar los cambios
             await _unitOfWork.UsuarioRepository.SaveAsync(usuario);
             await _repository.SaveAsync(viaje);
-                    /*PROTECTED REGION END*/
-                }
+        /*PROTECTED REGION END*/
+    }
 }

@@ -310,6 +310,10 @@ public sealed class ViajeServiceAceptarPasajeroTests
         public Task<Reserva?> ReadAsync(object id) => _inner.ReadAsync(id);
         public Task SaveAsync(Reserva entity) => _inner.SaveAsync(entity);
         public Task DeleteAsync(Reserva entity) => _inner.DeleteAsync(entity);
+        public Task<IReadOnlyList<Reserva>> ReadFilterByEstadoYFechaAsync(EstadoReserva p_estado, DateTime p_desde, DateTime p_hasta)
+        {
+            return Task.FromResult<IReadOnlyList<Reserva>>(Array.Empty<Reserva>());
+        }
     }
 
     private sealed class FakeViajeRepo : IViajeRepository
@@ -329,6 +333,15 @@ public sealed class ViajeServiceAceptarPasajeroTests
             throw new NotImplementedException();
         public Task<IReadOnlyList<Viaje>> ReadFilterByPreferenciasYEstadoAsync(bool p_permiteMascotas, bool p_permiteEquipaje) =>
             throw new NotImplementedException();
+        public Task<IReadOnlyList<Viaje>> ReadFilterViajesDisponiblesAsync(DateTime p_fechaMinima)
+        {
+            return Task.FromResult<IReadOnlyList<Viaje>>(Array.Empty<Viaje>());
+        }
+
+        public Task<IReadOnlyList<Viaje>> ReadFilterByConductorVerificadoAsync()
+        {
+            return Task.FromResult<IReadOnlyList<Viaje>>(Array.Empty<Viaje>());
+        }
     }
 
     private sealed class FakeUsuarioRepo : IUsuarioRepository

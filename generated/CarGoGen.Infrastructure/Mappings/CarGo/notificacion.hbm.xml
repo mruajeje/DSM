@@ -15,6 +15,9 @@
     <property name="FechaHora" type="DateTime">
       <column name="fechaHora" not-null="true"/>
     </property>
+    <property name="Leida" type="Boolean">
+      <column name="leida" not-null="true"/>
+    </property>
     <many-to-one name="UsuarioNotificado" class="Usuario">
       <column name="FK_Usuario_usuarioNotificado" not-null="true"/>
     </many-to-one>

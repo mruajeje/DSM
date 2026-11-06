@@ -6,7 +6,7 @@ using CarGoGen.Domain.Enums;
 using CarGoGen.Domain.ValueObjects;
 using CarGoGen.Infrastructure.Services;
 
-namespace CarGoGen.Tests.UseCases;
+namespace CarGoGen.Tests.Manual;
 
 public sealed class PagoUseCaseTests
 {

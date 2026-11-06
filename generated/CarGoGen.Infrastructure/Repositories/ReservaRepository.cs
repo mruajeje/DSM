@@ -70,5 +70,19 @@ public sealed class ReservaRepository : RepositoryBase<Reserva>, IReservaReposit
             $"Error deleting {EntityName} entity.");
     }
 
-
+    public async Task<IReadOnlyList<Reserva>> ReadFilterByEstadoYFechaAsync(EstadoReserva p_estado, DateTime p_desde, DateTime p_hasta)
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Reserva>()
+                .Where(entity => entity.Estado == p_estado && entity.FechaSolicitud >= p_desde && entity.FechaSolicitud < p_hasta)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Reserva.readFilterByEstadoYFecha.");
+            throw new DataException("Error executing ReadFilter Reserva.readFilterByEstadoYFecha.", ex);
+        }
+    }
 }

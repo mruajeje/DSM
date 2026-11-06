@@ -168,6 +168,38 @@ public sealed class ModelGeneratedTests
     }
 
     [Fact]
+    public void Viaje_ReadFilterViajesDisponibles_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Viaje:readFilterViajesDisponibles:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterViajesDisponibles";
+        var filterExpression = "entity =>entity.Estado == EstadoViaje.Publicado && entity.NumPlazasDisponibles > 0 && entity.FechaHoraSalida >= p_fechaMinima";
+
+        // <haria-protected id="test:filter:Viaje:readFilterViajesDisponibles:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Viaje.readFilterViajesDisponibles declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Viaje.readFilterViajesDisponibles declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
+    public void Viaje_ReadFilterByConductorVerificado_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Viaje:readFilterByConductorVerificado:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByConductorVerificado";
+        var filterExpression = "entity => entity.Conductor.EstadoVerificacion == EstadoVerificacion.Verificado";
+
+        // <haria-protected id="test:filter:Viaje:readFilterByConductorVerificado:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Viaje.readFilterByConductorVerificado declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Viaje.readFilterByConductorVerificado declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact(Skip = "Requiere base de datos SQL Server local")]
     [Trait("Category", "Database")]
     public async Task Generated_Crud_And_Associations_Should_Work_Against_Database()
     {
@@ -214,6 +246,10 @@ public sealed class ModelGeneratedTests
             Ensure(sampleViajeReadFilterByPrecioResult is not null, "Viaje.readFilterByPrecio filter executes.");
             var sampleViajeReadFilterByPreferenciasYEstadoResult = await viajeService.ReadFilterByPreferenciasYEstadoAsync(true, true);
             Ensure(sampleViajeReadFilterByPreferenciasYEstadoResult is not null, "Viaje.readFilterByPreferenciasYEstado filter executes.");
+            var sampleViajeReadFilterViajesDisponiblesResult = await viajeService.ReadFilterViajesDisponiblesAsync(new DateTime(2026, 1, 5, 9, 0, 0));
+            Ensure(sampleViajeReadFilterViajesDisponiblesResult is not null, "Viaje.readFilterViajesDisponibles filter executes.");
+            var sampleViajeReadFilterByConductorVerificadoResult = await viajeService.ReadFilterByConductorVerificadoAsync();
+            Ensure(sampleViajeReadFilterByConductorVerificadoResult is not null, "Viaje.readFilterByConductorVerificado filter executes.");
             await viajeService.ModifyAsync(sampleViaje.Id, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new DateTime(2026, 1, 5, 9, 0, 0), 5, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 5.5 }, true, true, EstadoViaje.Publicado);
             Ensure(await viajeService.ReadOIDAsync(sampleViaje.Id) is not null, "Viaje modify keeps the entity readable.");
 
@@ -224,6 +260,8 @@ public sealed class ModelGeneratedTests
             Ensure(sampleReservaReadBack is not null, "Reserva read by OID returns the generated entity.");
             var sampleReservaReadAll = await viajeService.Reserva_readAllAsync();
             Ensure(sampleReservaReadAll.Count > 0, "Reserva read all returns generated data.");
+            var sampleReservaReadFilterByEstadoYFechaResult = await viajeService.Reserva_readFilterByEstadoYFechaAsync(EstadoReserva.Pendiente, new DateTime(2026, 1, 6, 9, 0, 0), new DateTime(2026, 1, 6, 9, 0, 0));
+            Ensure(sampleReservaReadFilterByEstadoYFechaResult is not null, "Reserva.readFilterByEstadoYFecha filter executes.");
             await viajeService.Reserva_modifyAsync(sampleReserva.Id, 6, EstadoReserva.Pendiente, new DateTime(2026, 1, 6, 9, 0, 0));
             Ensure(await viajeService.Reserva_readOIDAsync(sampleReserva.Id) is not null, "Reserva modify keeps the entity readable.");
 
@@ -260,13 +298,13 @@ public sealed class ModelGeneratedTests
             Ensure(await resenaService.ReadOIDAsync(sampleResena.Id) is not null, "Resena modify keeps the entity readable.");
 
             var notificacionService = new NotificacionService(unitOfWorkFactory);
-            var sampleNotificacion = await notificacionService.NewAsync("Sample Notificacion Titulo", "Sample Notificacion Texto", new DateTime(2026, 1, 10, 9, 0, 0), sampleUsuario.Id);
+            var sampleNotificacion = await notificacionService.NewAsync("Sample Notificacion Titulo", "Sample Notificacion Texto", new DateTime(2026, 1, 10, 9, 0, 0), true, sampleUsuario.Id);
             Ensure(sampleNotificacion.UsuarioNotificado?.Equals(sampleUsuario) == true, "Notificacion.new relates sampleNotificacion and sampleUsuario.");
             var sampleNotificacionReadBack = await notificacionService.ReadOIDAsync(sampleNotificacion.Id);
             Ensure(sampleNotificacionReadBack is not null, "Notificacion read by OID returns the generated entity.");
             var sampleNotificacionReadAll = await notificacionService.ReadAllAsync();
             Ensure(sampleNotificacionReadAll.Count > 0, "Notificacion read all returns generated data.");
-            await notificacionService.ModifyAsync(sampleNotificacion.Id, "Sample Notificacion Titulo", "Sample Notificacion Texto", new DateTime(2026, 1, 10, 9, 0, 0));
+            await notificacionService.ModifyAsync(sampleNotificacion.Id, "Sample Notificacion Titulo", "Sample Notificacion Texto", new DateTime(2026, 1, 10, 9, 0, 0), true, sampleUsuario.Id);
             Ensure(await notificacionService.ReadOIDAsync(sampleNotificacion.Id) is not null, "Notificacion modify keeps the entity readable.");
 
             await viajeService.AddPasajeroAsync(sampleViaje.Id, new[] { sampleUsuario.Id });
