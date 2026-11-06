@@ -24,12 +24,14 @@ public static class SeedData
 
             var usuarioService = new UsuarioService(unitOfWorkFactory);
             var sampleUsuario = await usuarioService.NewAsync("Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
-            var sampleUsuarioLoginToken = await usuarioService.LoginAsync(sampleUsuario.Id, "Password123!");
-            Ensure(!string.IsNullOrWhiteSpace(sampleUsuarioLoginToken), "Usuario.login returns a login token for sampleUsuario.");
             var sampleUsuarioReadBack = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
             Ensure(sampleUsuarioReadBack is not null, "Usuario read by OID returns the generated entity.");
             var sampleUsuarioReadAll = await usuarioService.ReadAllAsync();
             Ensure(sampleUsuarioReadAll.Count > 0, "Usuario read all returns generated data.");
+            var sampleUsuarioReadFilterByEmailResult = await usuarioService.ReadFilterByEmailAsync("sample3@example.com");
+            Ensure(sampleUsuarioReadFilterByEmailResult is not null, "Usuario.readFilterByEmail filter executes.");
+            var sampleUsuarioReadFilterByDniResult = await usuarioService.ReadFilterByDniAsync("Sample Usuario Dni");
+            Ensure(sampleUsuarioReadFilterByDniResult is not null, "Usuario.readFilterByDni filter executes.");
             await usuarioService.ModifyAsync(sampleUsuario.Id, "Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
             Ensure(await usuarioService.ReadOIDAsync(sampleUsuario.Id) is not null, "Usuario modify keeps the entity readable.");
 

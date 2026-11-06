@@ -72,6 +72,38 @@ public sealed class ModelGeneratedTests
     }
 
     [Fact]
+    public void Usuario_ReadFilterByEmail_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Usuario:readFilterByEmail:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByEmail";
+        var filterExpression = "entity => entity.Email.ToLower() == p_email.Trim().ToLower()";
+
+        // <haria-protected id="test:filter:Usuario:readFilterByEmail:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Usuario.readFilterByEmail declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Usuario.readFilterByEmail declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
+    public void Usuario_ReadFilterByDni_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Usuario:readFilterByDni:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByDni";
+        var filterExpression = "entity => entity.Dni != null && entity.Dni.ToUpper() == p_dni.Trim().ToUpper()";
+
+        // <haria-protected id="test:filter:Usuario:readFilterByDni:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Usuario.readFilterByDni declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Usuario.readFilterByDni declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
     public void Viaje_ReadFilterByOrigenDestino_Filter_Contract()
     {
         // <haria-protected id="test:filter:Viaje:readFilterByOrigenDestino:arrange">
@@ -146,12 +178,14 @@ public sealed class ModelGeneratedTests
 
             var usuarioService = new UsuarioService(unitOfWorkFactory);
             var sampleUsuario = await usuarioService.NewAsync("Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
-            var sampleUsuarioLoginToken = await usuarioService.LoginAsync(sampleUsuario.Id, "Password123!");
-            Ensure(!string.IsNullOrWhiteSpace(sampleUsuarioLoginToken), "Usuario.login returns a login token for sampleUsuario.");
             var sampleUsuarioReadBack = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
             Ensure(sampleUsuarioReadBack is not null, "Usuario read by OID returns the generated entity.");
             var sampleUsuarioReadAll = await usuarioService.ReadAllAsync();
             Ensure(sampleUsuarioReadAll.Count > 0, "Usuario read all returns generated data.");
+            var sampleUsuarioReadFilterByEmailResult = await usuarioService.ReadFilterByEmailAsync("sample3@example.com");
+            Ensure(sampleUsuarioReadFilterByEmailResult is not null, "Usuario.readFilterByEmail filter executes.");
+            var sampleUsuarioReadFilterByDniResult = await usuarioService.ReadFilterByDniAsync("Sample Usuario Dni");
+            Ensure(sampleUsuarioReadFilterByDniResult is not null, "Usuario.readFilterByDni filter executes.");
             await usuarioService.ModifyAsync(sampleUsuario.Id, "Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
             Ensure(await usuarioService.ReadOIDAsync(sampleUsuario.Id) is not null, "Usuario modify keeps the entity readable.");
 

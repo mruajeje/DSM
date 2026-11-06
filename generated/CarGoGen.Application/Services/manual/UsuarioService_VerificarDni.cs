@@ -56,7 +56,8 @@ public sealed partial class UsuarioService
         }
 
         // Comprobar que ningun otro usuario tenga ese DNI
-        Usuario? usuarioConMismoDni = await _repository.ReadByDniAsync(dni);
+        var usuariosConMismoDni = await _repository.ReadFilterByDniAsync(dni);
+        Usuario? usuarioConMismoDni = usuariosConMismoDni.FirstOrDefault();
 
         if(usuarioConMismoDni is not null && usuarioConMismoDni.Id != entity.Id)
         {

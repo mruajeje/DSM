@@ -70,33 +70,35 @@ public sealed class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioReposit
             $"Error deleting {EntityName} entity.");
     }
 
-    public async Task<Usuario?> ReadByDniAsync(string p_dni)
+    public async Task<IReadOnlyList<Usuario>> ReadFilterByEmailAsync(string p_email)
     {
         try
         {
             using var context = OpenSession();
             return await context.Session.Query<Usuario>()
-                .FirstOrDefaultAsync(u => u.Dni == p_dni);
+                .Where(entity => entity.Email.ToLower() == p_email.Trim().ToLower())
+                .ToListAsync();
         }
         catch (Exception ex)
         {
-            Logger?.LogError(ex, "Error reading {Entity} entity with DNI {DNI}.", EntityName, p_dni);
-            throw new DataException($"Error reading {EntityName} entity by DNI.", ex);
+            Logger?.LogError(ex, "Error executing ReadFilter Usuario.readFilterByEmail.");
+            throw new DataException("Error executing ReadFilter Usuario.readFilterByEmail.", ex);
         }
     }
 
-    public async Task<Usuario?> ReadByEmailAsync(string p_email)
+    public async Task<IReadOnlyList<Usuario>> ReadFilterByDniAsync(string p_dni)
     {
         try
         {
             using var context = OpenSession();
             return await context.Session.Query<Usuario>()
-                .FirstOrDefaultAsync(u => u.Email == p_email);
+                .Where(entity => entity.Dni != null && entity.Dni.ToUpper() == p_dni.Trim().ToUpper())
+                .ToListAsync();
         }
         catch (Exception ex)
         {
-            Logger?.LogError(ex, "Error reading {Entity} entity with Email {Email}.", EntityName, p_email);
-            throw new DataException($"Error reading {EntityName} entity by Email.", ex);
+            Logger?.LogError(ex, "Error executing ReadFilter Usuario.readFilterByDni.");
+            throw new DataException("Error executing ReadFilter Usuario.readFilterByDni.", ex);
         }
     }
 }

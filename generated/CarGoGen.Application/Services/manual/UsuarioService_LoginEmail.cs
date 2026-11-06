@@ -11,20 +11,21 @@ namespace CarGoGen.Application.Services;
 
 public sealed partial class UsuarioService
 {
-    public async Task<string?> LoginEmailAsync(int p_oid, string p_password)
+    public async Task<string> LoginEmailAsync(string p_email, string p_password)
     {
         /*PROTECTED REGION ID(CarGoGen.Application.Services_Usuario_loginEmail) ENABLED START*/
         try
         {
-            Usuario? entity = await _repository.ReadAsync(p_oid);
+            var usuarios = await _repository.ReadFilterByEmailAsync(p_email);
+            Usuario? entity = usuarios.FirstOrDefault();
             if (entity is null)
             {
-                return null;
+                return string.Empty;
             }
 
             if (!_passwordHasher.VerifyPassword(entity.Password, p_password))
             {
-                return null;
+                return string.Empty;
             }
 
             var tokenSubject = Convert.ToString(entity.Id, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty;
@@ -32,11 +33,11 @@ public sealed partial class UsuarioService
             {
                 ["id"] = Convert.ToString(entity.Id, System.Globalization.CultureInfo.InvariantCulture),
             };
-            return _tokenGenerator.CreateToken(tokenSubject, tokenClaims);
+            return _unitOfWork.TokenGenerator.CreateToken(tokenSubject, tokenClaims);
         }
         catch (Exception)
         {
-            return null;
+            return string.Empty;
         }
         /*PROTECTED REGION END*/
     }

@@ -10,7 +10,6 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUsuarioRepository _repository;
     private readonly IHariaPasswordHasher _passwordHasher;
-    private readonly IHariaTokenGenerator _tokenGenerator;
 
     public UsuarioService(IUnitOfWork unitOfWork)
         : this(unitOfWork, ownsUnitOfWork: false)
@@ -27,7 +26,6 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
         _unitOfWork = unitOfWork;
         _repository = unitOfWork.UsuarioRepository;
         _passwordHasher = unitOfWork.PasswordHasher;
-        _tokenGenerator = unitOfWork.TokenGenerator;
     }
 
     public Task<Usuario> AddUsuarioDefaultAsync(Usuario entity)
@@ -103,32 +101,14 @@ public sealed partial class UsuarioService : ServiceEntity<Usuario>
         return await _repository.ReadAllAsync();
     }
 
-    public async Task<string?> LoginAsync(int p_oid, string p_password)
+    public async Task<IReadOnlyList<Usuario>> ReadFilterByEmailAsync(string p_email)
     {
-        try
-        {
-            Usuario? entity = await _repository.ReadAsync(p_oid);
-            if (entity is null)
-            {
-                return null;
-            }
+        return await _repository.ReadFilterByEmailAsync(p_email);
+    }
 
-            if (!_passwordHasher.VerifyPassword(entity.Password, p_password))
-            {
-                return null;
-            }
-
-            var tokenSubject = Convert.ToString(entity.Id, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty;
-            var tokenClaims = new Dictionary<string, string?>(StringComparer.Ordinal)
-            {
-                ["id"] = Convert.ToString(entity.Id, System.Globalization.CultureInfo.InvariantCulture),
-            };
-            return _tokenGenerator.CreateToken(tokenSubject, tokenClaims);
-        }
-        catch (Exception)
-        {
-            return null;
-        }
+    public async Task<IReadOnlyList<Usuario>> ReadFilterByDniAsync(string p_dni)
+    {
+        return await _repository.ReadFilterByDniAsync(p_dni);
     }
 
 }
