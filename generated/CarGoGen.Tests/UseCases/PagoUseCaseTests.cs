@@ -10,10 +10,7 @@ namespace CarGoGen.Tests.UseCases;
 
 public sealed class PagoUseCaseTests
 {
-    // ==========================================
     // TEST 1: Realizar un pago correctamente
-    // ==========================================
-
     [Fact]
     public async Task RealizarPago_PagoPendiente_CompletaElPago()
     {
@@ -31,10 +28,8 @@ public sealed class PagoUseCaseTests
         Assert.Equal(0, contexto.UnitOfWork.RollbackCount);
     }
 
-    // ==========================================
-    // TEST 2: No realizar un pago inexistente
-    // ==========================================
 
+    // TEST 2: No realizar un pago inexistente
     [Fact]
     public async Task RealizarPago_PagoInexistente_LanzaError()
     {
@@ -47,10 +42,7 @@ public sealed class PagoUseCaseTests
         Assert.Equal(1, contexto.UnitOfWork.RollbackCount);
     }
 
-    // ==========================================
     // TEST 3: No pagar un pago ya completado
-    // ==========================================
-
     [Fact]
     public async Task RealizarPago_PagoYaCompletado_LanzaError()
     {
@@ -66,10 +58,7 @@ public sealed class PagoUseCaseTests
         Assert.Equal(1, contexto.UnitOfWork.RollbackCount);
     }
 
-    // ==========================================
     // TEST 4: Reembolsar un pago correctamente
-    // ==========================================
-
     [Fact]
     public async Task ReembolsarPago_PagoCompletado_ReembolsaElPago()
     {
@@ -94,10 +83,7 @@ public sealed class PagoUseCaseTests
         Assert.Equal(0, contexto.UnitOfWork.RollbackCount);
     }
 
-    // ==========================================
     // TEST 5: No reembolsar un pago pendiente
-    // ==========================================
-
     [Fact]
     public async Task ReembolsarPago_PagoPendiente_LanzaError()
     {
@@ -113,10 +99,8 @@ public sealed class PagoUseCaseTests
         Assert.Equal(1, contexto.UnitOfWork.RollbackCount);
     }
 
-    // ==========================================
-    // TEST 6: No reembolsar sin transacción
-    // ==========================================
 
+    // TEST 6: No reembolsar sin transacción
     [Fact]
     public async Task ReembolsarPago_SinTransaccion_LanzaError()
     {
@@ -131,10 +115,8 @@ public sealed class PagoUseCaseTests
         Assert.Equal(1, contexto.UnitOfWork.RollbackCount);
     }
 
-    // ==========================================
-    // TEST 7: No reembolsar dos veces
-    // ==========================================
 
+    // TEST 7: No reembolsar dos veces
     [Fact]
     public async Task ReembolsarPago_DosVeces_LanzaError()
     {
@@ -163,10 +145,7 @@ public sealed class PagoUseCaseTests
     }
 
 
-    // ==========================================
     // TEST 8: Rollback cuando falla la pasarela
-    // ==========================================
-
     [Fact]
     public async Task RealizarPago_FallaLaPasarela_EjecutaRollback()
     {
@@ -192,10 +171,7 @@ public sealed class PagoUseCaseTests
     }
 
 
-    // ==========================================
     // TEST 9: Comprobar el importe enviado
-    // ==========================================
-
     [Fact]
     public async Task RealizarPago_EnviaElImporteCorrectoALaPasarela()
     {
@@ -219,10 +195,8 @@ public sealed class PagoUseCaseTests
         // Comprobar que se ha guardado la transacción devuelta.
         Assert.Equal("SIM-PRUEBA-123", pago.IdTransaccionPasarela);
     }
-    // ==========================================
-    // MÉTODOS AUXILIARES
-    // ==========================================
 
+    // MÉTODOS AUXILIARES
     private static Pago CrearPago(int id, EstadoPago estado)
     {
         return new Pago
@@ -277,10 +251,7 @@ public sealed class PagoUseCaseTests
         }
     }
 
-    // ==========================================
     // REPOSITORIO SIMULADO
-    // ==========================================
-
     private sealed class FakePagoRepository : IPagoRepository
     {
         private readonly Dictionary<int, Pago> _pagos = new();
@@ -324,10 +295,7 @@ public sealed class PagoUseCaseTests
         }
     }
 
-    // ==========================================
     // UNIT OF WORK SIMULADO
-    // ==========================================
-
     private sealed class FakeUnitOfWork : IUnitOfWork
     {
         public IPagoRepository PagoRepository { get; }
@@ -374,10 +342,7 @@ public sealed class PagoUseCaseTests
         }
     }
 
-    // ==========================================
     // UNIT OF WORK UTILS SIMULADO
-    // ==========================================
-
     private sealed class FakeUnitOfWorkUtils : IUnitOfWorkUtils
     {
         private readonly IPasarelaPago _pasarela;
@@ -423,10 +388,7 @@ public sealed class PagoUseCaseTests
     }
 
 
-    // ==========================================
     // PASARELA QUE SIMULA UN ERROR
-    // ==========================================
-
     private sealed class PasarelaQueFalla : IPasarelaPago
     {
         public Task<string> RealizarPagoAsync(int pagoId, double cantidad)
@@ -442,10 +404,8 @@ public sealed class PagoUseCaseTests
         }
     }
 
-    // ==========================================
-    // PASARELA QUE CAPTURA LOS DATOS RECIBIDOS
-    // ==========================================
 
+    // PASARELA QUE CAPTURA LOS DATOS RECIBIDOS
     private sealed class PasarelaCapturadora : IPasarelaPago
     {
         public int? PagoIdRecibido { get; private set; }

@@ -23,9 +23,39 @@ public sealed partial class PagoUseCase
             await _unitOfWork.BeginTransactionAsync("PagoUseCase.RealizarPagoAsync");
             pagoService = new PagoService(_unitOfWork);
 
-            // Write here your custom transaction code...
-            // Use pagoService, _unitOfWork.PagoRepository or _utils!.GetRequiredService<TService>() as the generated CP equivalent.
+            // Iniciar transacción
+            await _unitOfWork.BeginTransactionAsync("PagoUseCase.RealizarPagoAsync");
 
+            // Buscar el pago
+            var pago = await _unitOfWork.PagoRepository.ReadAsync(p_oid)
+                ?? throw new ModelException("Pago no encontrado.");
+
+            // Comprobar que el pago está pendiente
+            if (pago.Estado != EstadoPago.Pendiente)
+                throw new ModelException(
+                    "Solo se pueden realizar pagos pendientes.");
+
+            // Obtener la pasarela simulada
+            var pasarela = _utils?.GetRequiredService<IPasarelaPago>()
+                ?? throw new ModelException(
+                    "No se ha configurado la pasarela de pago.");
+
+            // Ejecutar el pago
+            string idTransaccion = await pasarela.RealizarPagoAsync(
+                pago.Id,
+                pago.Monto.Cantidad
+            );
+
+            // Guardar el identificador de la transacción
+            pago.IdTransaccionPasarela = idTransaccion;
+
+            // Cambiar el estado del pago
+            pago.Estado = EstadoPago.Completado;
+
+            // Guardar los cambios
+            await _unitOfWork.PagoRepository.SaveAsync(pago);
+
+            // Confirmar transacción
             await _unitOfWork.CommitAsync();
         }
         catch (Exception ex)
