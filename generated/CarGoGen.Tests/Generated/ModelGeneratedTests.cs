@@ -9,6 +9,7 @@ using CarGoGen.Infrastructure.Logging;
 using Xunit.Abstractions;
 using CarGoGen.Domain.ValueObjects;
 using CarGoGen.Domain.Enums;
+using CarGoGen.Application.Exceptions;
 
 namespace CarGoGen.Tests.Generated;
 
@@ -82,6 +83,27 @@ public sealed class ModelGeneratedTests
 
             var usuarioService = new UsuarioService(unitOfWorkFactory);
             var sampleUsuario = await usuarioService.NewAsync("Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
+
+            // Comprobar que un DNI con letra incorrecta provoca un error.
+            await Assert.ThrowsAsync<ModelException>(() =>
+                usuarioService.VerificarDniAsync(sampleUsuario.Id, "12345678A"));
+
+            // Registrar un DNI valido.
+            await usuarioService.VerificarDniAsync(sampleUsuario.Id, "12345678Z");
+
+            // Recuperar el usuario para comprobar los cambios.
+            var usuarioConDni = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
+
+            // Comprobar que el DNI se ha guardado correctamente.
+            Ensure(
+                usuarioConDni?.Dni == "12345678Z",
+                "Usuario.verificarDni saves a valid DNI.");
+
+            // Comprobar que queda pendiente de revision.
+            Ensure(
+                usuarioConDni?.EstadoVerificacion == EstadoVerificacion.Pendiente,
+                "Usuario.verificarDni sets the verification status to Pendiente.");
+
             var sampleUsuarioLoginToken = await usuarioService.LoginAsync(sampleUsuario.Id, "Password123!");
             Ensure(!string.IsNullOrWhiteSpace(sampleUsuarioLoginToken), "Usuario.login returns a login token for sampleUsuario.");
             var sampleUsuarioReadBack = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
