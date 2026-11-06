@@ -108,6 +108,25 @@ ConceptualModel CarGo {
             public geolocalizarTrayecto::Custom (p_oid : OID -> Viaje, p_usuario_oid : OID -> Usuario, p_latitud : Double, p_longitud : Double, p_fecha : TimeStamp) : Void;
             public addPasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
             public removePasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
+            public readFilterByOrigenDestino :: ReadFilter (p_origen : String, p_destino : String) : List<Object -> Viaje>
+            {
+                filterLinQ = "entity => (string.IsNullOrWhiteSpace(p_origen) || entity.Origen.Ciudad.ToLower() == p_origen.Trim().ToLower()) && (string.IsNullOrWhiteSpace(p_destino) || entity.Destino.Ciudad.ToLower() == p_destino.Trim().ToLower())"
+            };
+
+            public readFilterByFechaYPlazas :: ReadFilter (p_desde : TimeStamp, p_hasta : TimeStamp, p_plazasMinimas : Integer) : List<Object -> Viaje>
+            {
+                filterLinQ = "entity => entity.FechaHoraSalida >= p_desde && entity.FechaHoraSalida < p_hasta && entity.NumPlazasDisponibles >= p_plazasMinimas"
+            };
+
+            public readFilterByPrecio :: ReadFilter (p_precioMinimo : Double, p_precioMaximo : Double) : List<Object -> Viaje>
+            {
+                filterLinQ = "entity => entity.Precio.Cantidad >= p_precioMinimo && entity.Precio.Cantidad <= p_precioMaximo"
+            };
+
+            public readFilterByPreferenciasYEstado :: ReadFilter (p_permiteMascotas : Boolean, p_permiteEquipaje : Boolean) : List<Object -> Viaje>
+            {
+                filterLinQ = "entity => (!p_permiteMascotas || entity.PermiteMascotas) && (!p_permiteEquipaje || entity.PermiteEquipaje) && (entity.Estado == EstadoViaje.Publicado || entity.Estado == EstadoViaje.EnCurso)"
+            };
         }
     };
 

@@ -50,6 +50,14 @@ public static class SeedData
             Ensure(sampleViajeReadBack is not null, "Viaje read by OID returns the generated entity.");
             var sampleViajeReadAll = await viajeService.ReadAllAsync();
             Ensure(sampleViajeReadAll.Count > 0, "Viaje read all returns generated data.");
+            var sampleViajeReadFilterByOrigenDestinoResult = await viajeService.ReadFilterByOrigenDestinoAsync("Sample Viaje Origen", "Sample Viaje Destino");
+            Ensure(sampleViajeReadFilterByOrigenDestinoResult is not null, "Viaje.readFilterByOrigenDestino filter executes.");
+            var sampleViajeReadFilterByFechaYPlazasResult = await viajeService.ReadFilterByFechaYPlazasAsync(new DateTime(2026, 1, 5, 9, 0, 0), new DateTime(2026, 1, 5, 9, 0, 0), 5);
+            Ensure(sampleViajeReadFilterByFechaYPlazasResult is not null, "Viaje.readFilterByFechaYPlazas filter executes.");
+            var sampleViajeReadFilterByPrecioResult = await viajeService.ReadFilterByPrecioAsync(5.5, 5.5);
+            Ensure(sampleViajeReadFilterByPrecioResult is not null, "Viaje.readFilterByPrecio filter executes.");
+            var sampleViajeReadFilterByPreferenciasYEstadoResult = await viajeService.ReadFilterByPreferenciasYEstadoAsync(true, true);
+            Ensure(sampleViajeReadFilterByPreferenciasYEstadoResult is not null, "Viaje.readFilterByPreferenciasYEstado filter executes.");
             await viajeService.ModifyAsync(sampleViaje.Id, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new DateTime(2026, 1, 5, 9, 0, 0), 5, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 5.5 }, true, true, EstadoViaje.Publicado);
             Ensure(await viajeService.ReadOIDAsync(sampleViaje.Id) is not null, "Viaje modify keeps the entity readable.");
 

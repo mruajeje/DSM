@@ -109,6 +109,10 @@ package "CarGo" {
     +geolocalizarTrayecto(p_oid: long <<oid>>, p_usuario_oid: long <<oid>>, p_latitud: double, p_longitud: double, p_fecha: DateTime): void <<Custom>>
     +addPasajero(p_oid: long <<oid>>, p_usuario_oids: long[*] <<oid>>): void <<Relationer>>
     +removePasajero(p_oid: long <<oid>>, p_usuario_oids: long[*] <<oid>>): void <<Relationer>>
+    +readFilterByOrigenDestino(p_origen: string, p_destino: string): Viaje[*] <<ReadFilter>>
+    +readFilterByFechaYPlazas(p_desde: DateTime, p_hasta: DateTime, p_plazasMinimas: int): Viaje[*] <<ReadFilter>>
+    +readFilterByPrecio(p_precioMinimo: double, p_precioMaximo: double): Viaje[*] <<ReadFilter>>
+    +readFilterByPreferenciasYEstado(p_permiteMascotas: bool, p_permiteEquipaje: bool): Viaje[*] <<ReadFilter>>
   }
 
   class Reserva <<AggregateMember:Viaje>> {

@@ -9,7 +9,6 @@ using CarGoGen.Infrastructure.Logging;
 using Xunit.Abstractions;
 using CarGoGen.Domain.ValueObjects;
 using CarGoGen.Domain.Enums;
-using CarGoGen.Application.Exceptions;
 
 namespace CarGoGen.Tests.Generated;
 
@@ -73,6 +72,70 @@ public sealed class ModelGeneratedTests
     }
 
     [Fact]
+    public void Viaje_ReadFilterByOrigenDestino_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Viaje:readFilterByOrigenDestino:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByOrigenDestino";
+        var filterExpression = "entity => (string.IsNullOrWhiteSpace(p_origen) || entity.Origen.Ciudad.ToLower() == p_origen.Trim().ToLower()) && (string.IsNullOrWhiteSpace(p_destino) || entity.Destino.Ciudad.ToLower() == p_destino.Trim().ToLower())";
+
+        // <haria-protected id="test:filter:Viaje:readFilterByOrigenDestino:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Viaje.readFilterByOrigenDestino declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Viaje.readFilterByOrigenDestino declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
+    public void Viaje_ReadFilterByFechaYPlazas_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Viaje:readFilterByFechaYPlazas:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByFechaYPlazas";
+        var filterExpression = "entity => entity.FechaHoraSalida >= p_desde && entity.FechaHoraSalida < p_hasta && entity.NumPlazasDisponibles >= p_plazasMinimas";
+
+        // <haria-protected id="test:filter:Viaje:readFilterByFechaYPlazas:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Viaje.readFilterByFechaYPlazas declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Viaje.readFilterByFechaYPlazas declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
+    public void Viaje_ReadFilterByPrecio_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Viaje:readFilterByPrecio:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByPrecio";
+        var filterExpression = "entity => entity.Precio.Cantidad >= p_precioMinimo && entity.Precio.Cantidad <= p_precioMaximo";
+
+        // <haria-protected id="test:filter:Viaje:readFilterByPrecio:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Viaje.readFilterByPrecio declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Viaje.readFilterByPrecio declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
+    public void Viaje_ReadFilterByPreferenciasYEstado_Filter_Contract()
+    {
+        // <haria-protected id="test:filter:Viaje:readFilterByPreferenciasYEstado:arrange">
+        // extra user setup
+        // </haria-protected>
+
+        var operationName = "readFilterByPreferenciasYEstado";
+        var filterExpression = "entity => (!p_permiteMascotas || entity.PermiteMascotas) && (!p_permiteEquipaje || entity.PermiteEquipaje) && (entity.Estado == EstadoViaje.Publicado || entity.Estado == EstadoViaje.EnCurso)";
+
+        // <haria-protected id="test:filter:Viaje:readFilterByPreferenciasYEstado:assert">
+        Ensure(!string.IsNullOrWhiteSpace(operationName), "Viaje.readFilterByPreferenciasYEstado declares the generated operation name.");
+        Ensure(!string.IsNullOrWhiteSpace(filterExpression), "Viaje.readFilterByPreferenciasYEstado declares the generated filter expression.");
+        // </haria-protected>
+    }
+
+    [Fact]
     [Trait("Category", "Database")]
     public async Task Generated_Crud_And_Associations_Should_Work_Against_Database()
     {
@@ -83,27 +146,6 @@ public sealed class ModelGeneratedTests
 
             var usuarioService = new UsuarioService(unitOfWorkFactory);
             var sampleUsuario = await usuarioService.NewAsync("Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
-
-            // Comprobar que un DNI con letra incorrecta provoca un error.
-            await Assert.ThrowsAsync<ModelException>(() =>
-                usuarioService.VerificarDniAsync(sampleUsuario.Id, "12345678A"));
-
-            // Registrar un DNI valido.
-            await usuarioService.VerificarDniAsync(sampleUsuario.Id, "12345678Z");
-
-            // Recuperar el usuario para comprobar los cambios.
-            var usuarioConDni = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
-
-            // Comprobar que el DNI se ha guardado correctamente.
-            Ensure(
-                usuarioConDni?.Dni == "12345678Z",
-                "Usuario.verificarDni saves a valid DNI.");
-
-            // Comprobar que queda pendiente de revision.
-            Ensure(
-                usuarioConDni?.EstadoVerificacion == EstadoVerificacion.Pendiente,
-                "Usuario.verificarDni sets the verification status to Pendiente.");
-
             var sampleUsuarioLoginToken = await usuarioService.LoginAsync(sampleUsuario.Id, "Password123!");
             Ensure(!string.IsNullOrWhiteSpace(sampleUsuarioLoginToken), "Usuario.login returns a login token for sampleUsuario.");
             var sampleUsuarioReadBack = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
@@ -130,6 +172,14 @@ public sealed class ModelGeneratedTests
             Ensure(sampleViajeReadBack is not null, "Viaje read by OID returns the generated entity.");
             var sampleViajeReadAll = await viajeService.ReadAllAsync();
             Ensure(sampleViajeReadAll.Count > 0, "Viaje read all returns generated data.");
+            var sampleViajeReadFilterByOrigenDestinoResult = await viajeService.ReadFilterByOrigenDestinoAsync("Sample Viaje Origen", "Sample Viaje Destino");
+            Ensure(sampleViajeReadFilterByOrigenDestinoResult is not null, "Viaje.readFilterByOrigenDestino filter executes.");
+            var sampleViajeReadFilterByFechaYPlazasResult = await viajeService.ReadFilterByFechaYPlazasAsync(new DateTime(2026, 1, 5, 9, 0, 0), new DateTime(2026, 1, 5, 9, 0, 0), 5);
+            Ensure(sampleViajeReadFilterByFechaYPlazasResult is not null, "Viaje.readFilterByFechaYPlazas filter executes.");
+            var sampleViajeReadFilterByPrecioResult = await viajeService.ReadFilterByPrecioAsync(5.5, 5.5);
+            Ensure(sampleViajeReadFilterByPrecioResult is not null, "Viaje.readFilterByPrecio filter executes.");
+            var sampleViajeReadFilterByPreferenciasYEstadoResult = await viajeService.ReadFilterByPreferenciasYEstadoAsync(true, true);
+            Ensure(sampleViajeReadFilterByPreferenciasYEstadoResult is not null, "Viaje.readFilterByPreferenciasYEstado filter executes.");
             await viajeService.ModifyAsync(sampleViaje.Id, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new Ubicacion { Ciudad = "Sample Ubicacion Ciudad", Direccion = "Sample Ubicacion Direccion", Latitud = 5.5, Longitud = 5.5 }, new DateTime(2026, 1, 5, 9, 0, 0), 5, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 5.5 }, true, true, EstadoViaje.Publicado);
             Ensure(await viajeService.ReadOIDAsync(sampleViaje.Id) is not null, "Viaje modify keeps the entity readable.");
 

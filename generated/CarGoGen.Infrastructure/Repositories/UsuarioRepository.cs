@@ -70,31 +70,5 @@ public sealed class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioReposit
             $"Error deleting {EntityName} entity.");
     }
 
-    public async Task<Usuario?> ReadByDniAsync(string dni)
-    {
-        try
-        {
-            using var context = OpenSession();
-            return await context.Session.Query<Usuario>().FirstOrDefaultAsync(u => u.Dni == dni);
-        }
-        catch (Exception ex)
-        {
-            Logger?.LogError(ex, "Error reading {Entity} entity with DNI {DNI}.", EntityName, dni);
-            throw new DataException($"Error reading {EntityName} entity by DNI.", ex);
-        }
-    }
 
-    public async Task<Usuario?> ReadByEmailAsync(string email)
-    {
-        try
-        {
-            using var context = OpenSession();
-            return await context.Session.Query<Usuario>().FirstOrDefaultAsync(u => u.Email == email);
-        }
-        catch (Exception ex)
-        {
-            Logger?.LogError(ex, "Error reading {Entity} entity with Email {Email}.", EntityName, email);
-            throw new DataException($"Error reading {EntityName} entity by Email.", ex);
-        }
-    }
 }

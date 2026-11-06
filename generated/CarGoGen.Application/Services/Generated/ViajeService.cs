@@ -142,6 +142,26 @@ public sealed partial class ViajeService : ServiceEntity<Viaje>
         await _repository.SaveAsync(entity);
     }
 
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByOrigenDestinoAsync(string p_origen, string p_destino)
+    {
+        return await _repository.ReadFilterByOrigenDestinoAsync(p_origen, p_destino);
+    }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByFechaYPlazasAsync(DateTime p_desde, DateTime p_hasta, int p_plazasMinimas)
+    {
+        return await _repository.ReadFilterByFechaYPlazasAsync(p_desde, p_hasta, p_plazasMinimas);
+    }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByPrecioAsync(double p_precioMinimo, double p_precioMaximo)
+    {
+        return await _repository.ReadFilterByPrecioAsync(p_precioMinimo, p_precioMaximo);
+    }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByPreferenciasYEstadoAsync(bool p_permiteMascotas, bool p_permiteEquipaje)
+    {
+        return await _repository.ReadFilterByPreferenciasYEstadoAsync(p_permiteMascotas, p_permiteEquipaje);
+    }
+
     public async Task<Reserva> Reserva_newAsync(int p_numPlazasReservadas, EstadoReserva p_estado, DateTime p_fechaSolicitud, int p_viaje_oid, int p_pasajero_oid)
     {
         Viaje viajeEntity = await _unitOfWork.ViajeRepository.ReadAsync(p_viaje_oid)

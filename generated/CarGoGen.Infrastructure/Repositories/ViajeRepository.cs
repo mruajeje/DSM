@@ -70,5 +70,67 @@ public sealed class ViajeRepository : RepositoryBase<Viaje>, IViajeRepository
             $"Error deleting {EntityName} entity.");
     }
 
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByOrigenDestinoAsync(string p_origen, string p_destino)
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Viaje>()
+                .Where(entity => (string.IsNullOrWhiteSpace(p_origen) || entity.Origen.Ciudad.ToLower() == p_origen.Trim().ToLower()) && (string.IsNullOrWhiteSpace(p_destino) || entity.Destino.Ciudad.ToLower() == p_destino.Trim().ToLower()))
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Viaje.readFilterByOrigenDestino.");
+            throw new DataException("Error executing ReadFilter Viaje.readFilterByOrigenDestino.", ex);
+        }
+    }
 
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByFechaYPlazasAsync(DateTime p_desde, DateTime p_hasta, int p_plazasMinimas)
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Viaje>()
+                .Where(entity => entity.FechaHoraSalida >= p_desde && entity.FechaHoraSalida < p_hasta && entity.NumPlazasDisponibles >= p_plazasMinimas)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Viaje.readFilterByFechaYPlazas.");
+            throw new DataException("Error executing ReadFilter Viaje.readFilterByFechaYPlazas.", ex);
+        }
+    }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByPrecioAsync(double p_precioMinimo, double p_precioMaximo)
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Viaje>()
+                .Where(entity => entity.Precio.Cantidad >= p_precioMinimo && entity.Precio.Cantidad <= p_precioMaximo)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Viaje.readFilterByPrecio.");
+            throw new DataException("Error executing ReadFilter Viaje.readFilterByPrecio.", ex);
+        }
+    }
+
+    public async Task<IReadOnlyList<Viaje>> ReadFilterByPreferenciasYEstadoAsync(bool p_permiteMascotas, bool p_permiteEquipaje)
+    {
+        try
+        {
+            using var context = OpenSession();
+            return await context.Session.Query<Viaje>()
+                .Where(entity => (!p_permiteMascotas || entity.PermiteMascotas) && (!p_permiteEquipaje || entity.PermiteEquipaje) && (entity.Estado == EstadoViaje.Publicado || entity.Estado == EstadoViaje.EnCurso))
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Error executing ReadFilter Viaje.readFilterByPreferenciasYEstado.");
+            throw new DataException("Error executing ReadFilter Viaje.readFilterByPreferenciasYEstado.", ex);
+        }
+    }
 }
