@@ -112,7 +112,9 @@ ConceptualModel CarGo {
             public readOID::ReadOID (p_oid : OID -> Viaje) : Object->Viaje;
             public readAll::ReadAll () : List<Object->Viaje>;
             public gestionarPlazas::Custom (p_oid : OID -> Viaje, p_nuevasPlazas : Integer) : Void;
+            public gestionarAltaPasajero::Custom (p_oid : OID -> Viaje, p_usuario_oid : OID -> Usuario) : Void;
             public geolocalizarTrayecto::Custom (p_oid : OID -> Viaje, p_usuario_oid : OID -> Usuario, p_latitud : Double, p_longitud : Double, p_fecha : TimeStamp) : Void;
+            public gestionarBajaPasajero::Custom (p_oid : OID -> Viaje, p_usuario_oid : OID -> Usuario) : Void;
             public addPasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
             public removePasajero::Relationer -> UsuarioPasajero.pasajero (p_oid : OID -> Viaje, p_usuario_oids : List<OID -> Usuario>) : Void;
             public readFilterByOrigenDestino :: ReadFilter (p_origen : String, p_destino : String) : List<Object -> Viaje>

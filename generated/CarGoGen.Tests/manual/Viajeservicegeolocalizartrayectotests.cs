@@ -385,9 +385,18 @@ public sealed class ViajeServiceGeolocalizarTrayectoTests
         public Task<Usuario?> ReadAsync(object id) => _inner.ReadAsync(id);
         public Task SaveAsync(Usuario entity) => _inner.SaveAsync(entity);
         public Task DeleteAsync(Usuario entity) => _inner.DeleteAsync(entity);
-        public Task<Usuario?> ReadByEmailAsync(string email) =>
-            Task.FromResult(_inner.Items.FirstOrDefault(u => u.Email == email));
-        public Task<Usuario?> ReadByDniAsync(string dni) =>
-            Task.FromResult(_inner.Items.FirstOrDefault(u => u.Dni == dni));
+        public Task<IReadOnlyList<Usuario>> ReadFilterByEmailAsync(string p_email) =>
+            Task.FromResult<IReadOnlyList<Usuario>>(
+                _inner.Items
+                    .Where(u => u.Email != null &&
+                                u.Email.Trim().Equals(p_email.Trim(), StringComparison.OrdinalIgnoreCase))
+                    .ToList());
+
+        public Task<IReadOnlyList<Usuario>> ReadFilterByDniAsync(string p_dni) =>
+            Task.FromResult<IReadOnlyList<Usuario>>(
+                _inner.Items
+                    .Where(u => u.Dni != null &&
+                                u.Dni.Trim().Equals(p_dni.Trim(), StringComparison.OrdinalIgnoreCase))
+                    .ToList());
     }
 }
