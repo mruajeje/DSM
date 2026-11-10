@@ -22,7 +22,7 @@ internal static class Program
             var cfg = new Configuration();
 
             /*PROTECTED REGION ID(initializeDatabase) START*/
-            var cs = CreateDB.Create();
+            var cs = configuration["ConnectionStrings:DbConnection"]!;
 
             cfg.Configure(Path.Combine(AppContext.BaseDirectory, "hibernate.cfg.xml"));
             cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionString, cs);

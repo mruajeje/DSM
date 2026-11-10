@@ -1,0 +1,3282 @@
+[
+{
+  "TimestampUtc": "2026-11-10, 15:40:42",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=4f63c8ea-1d7a-40d6-bc9c-1cf6211a9037 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "4f63c8ea-1d7a-40d6-bc9c-1cf6211a9037",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:42",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=4f63c8ea-1d7a-40d6-bc9c-1cf6211a9037 SqlStatements=INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "4f63c8ea-1d7a-40d6-bc9c-1cf6211a9037",
+    "SqlStatements": [
+      "INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=82ab41fd-1eba-45f6-8d1e-06699b0dc2a9 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "82ab41fd-1eba-45f6-8d1e-06699b0dc2a9",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=82ab41fd-1eba-45f6-8d1e-06699b0dc2a9 SqlStatements=UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "82ab41fd-1eba-45f6-8d1e-06699b0dc2a9",
+    "SqlStatements": [
+      "UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=56cbb80c-b3b3-4136-a315-3bfbe8545ef0 SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "56cbb80c-b3b3-4136-a315-3bfbe8545ef0",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=56cbb80c-b3b3-4136-a315-3bfbe8545ef0 SqlStatements=INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "56cbb80c-b3b3-4136-a315-3bfbe8545ef0",
+    "SqlStatements": [
+      "INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=f9c09440-480d-473e-84c7-1601f79bd7e9 SqlStatementCount=0",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "f9c09440-480d-473e-84c7-1601f79bd7e9",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=8a2dd3fb-b5ed-4e9f-b887-f1bd49bb3bd4 SqlStatementCount=1",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "8a2dd3fb-b5ed-4e9f-b887-f1bd49bb3bd4",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=8a2dd3fb-b5ed-4e9f-b887-f1bd49bb3bd4 SqlStatements=INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "8a2dd3fb-b5ed-4e9f-b887-f1bd49bb3bd4",
+    "SqlStatements": [
+      "INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=8310ff1e-57b7-46e6-8277-6c4f9e3a0460 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "8310ff1e-57b7-46e6-8277-6c4f9e3a0460",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=61d61f22-4b59-438e-8c43-f936f1d930bc SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "61d61f22-4b59-438e-8c43-f936f1d930bc",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=61d61f22-4b59-438e-8c43-f936f1d930bc SqlStatements=INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "61d61f22-4b59-438e-8c43-f936f1d930bc",
+    "SqlStatements": [
+      "INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=b42efd0f-2be9-4bde-a20c-e03ec10345c4 SqlStatementCount=0",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "b42efd0f-2be9-4bde-a20c-e03ec10345c4",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=4c21b6f0-1cc5-4667-8f66-cf2703540e1c SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "4c21b6f0-1cc5-4667-8f66-cf2703540e1c",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=4c21b6f0-1cc5-4667-8f66-cf2703540e1c SqlStatements=INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "4c21b6f0-1cc5-4667-8f66-cf2703540e1c",
+    "SqlStatements": [
+      "INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=29843e90-46cd-402e-9986-8dc664202961 SqlStatementCount=0",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "29843e90-46cd-402e-9986-8dc664202961",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=0b037042-cd0a-43c4-86c9-d4dbd10982e9 SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "0b037042-cd0a-43c4-86c9-d4dbd10982e9",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=0b037042-cd0a-43c4-86c9-d4dbd10982e9 SqlStatements=INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "0b037042-cd0a-43c4-86c9-d4dbd10982e9",
+    "SqlStatements": [
+      "INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=d8b27bd9-309d-4400-9116-0d90ab53704f SqlStatementCount=0",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "d8b27bd9-309d-4400-9116-0d90ab53704f",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=53349402-e6bb-4e2c-ab0c-18786b02dbd7 SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "53349402-e6bb-4e2c-ab0c-18786b02dbd7",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=53349402-e6bb-4e2c-ab0c-18786b02dbd7 SqlStatements=INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "53349402-e6bb-4e2c-ab0c-18786b02dbd7",
+    "SqlStatements": [
+      "INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=20dd99d4-91ec-441f-98c1-7722854d536d SqlStatementCount=0",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "20dd99d4-91ec-441f-98c1-7722854d536d",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=7ccc5bf1-083d-4f0d-8df2-cc102e138909 SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "7ccc5bf1-083d-4f0d-8df2-cc102e138909",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=7ccc5bf1-083d-4f0d-8df2-cc102e138909 SqlStatements=INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "7ccc5bf1-083d-4f0d-8df2-cc102e138909",
+    "SqlStatements": [
+      "INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:43",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=78f1ab36-c0fc-4d8e-9b6b-f62dc90a30f1 SqlStatementCount=0",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "78f1ab36-c0fc-4d8e-9b6b-f62dc90a30f1",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=39bc24d8-b2a6-4787-b889-98e1b2a53342 SqlStatementCount=2",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "39bc24d8-b2a6-4787-b889-98e1b2a53342",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=39bc24d8-b2a6-4787-b889-98e1b2a53342 SqlStatements=UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?, UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "39bc24d8-b2a6-4787-b889-98e1b2a53342",
+    "SqlStatements": [
+      "UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?",
+      "UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=303e2bcd-51ad-49b2-bfe0-53e02da61e2e SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "303e2bcd-51ad-49b2-bfe0-53e02da61e2e",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=e73a5a29-e82f-4cc3-8db3-e628996679fa SqlStatementCount=0",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "e73a5a29-e82f-4cc3-8db3-e628996679fa",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=f73b68b8-3515-48e7-8a06-cd7f02310ba1 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "f73b68b8-3515-48e7-8a06-cd7f02310ba1",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=c3666784-4b43-49c4-b5e3-618698809fa1 SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "c3666784-4b43-49c4-b5e3-618698809fa1",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=c3666784-4b43-49c4-b5e3-618698809fa1 SqlStatements=DELETE FROM Vehiculo WHERE id = ?",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "c3666784-4b43-49c4-b5e3-618698809fa1",
+    "SqlStatements": [
+      "DELETE FROM Vehiculo WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=2592b406-fea0-4500-bdca-cc0903db23ba SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "2592b406-fea0-4500-bdca-cc0903db23ba",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=2592b406-fea0-4500-bdca-cc0903db23ba SqlStatements=DELETE FROM Pago WHERE id = ?",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "2592b406-fea0-4500-bdca-cc0903db23ba",
+    "SqlStatements": [
+      "DELETE FROM Pago WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=0587cd86-d9b4-4ff5-8d10-c3924093e823 SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "0587cd86-d9b4-4ff5-8d10-c3924093e823",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=0587cd86-d9b4-4ff5-8d10-c3924093e823 SqlStatements=DELETE FROM Reserva WHERE id = ?",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "0587cd86-d9b4-4ff5-8d10-c3924093e823",
+    "SqlStatements": [
+      "DELETE FROM Reserva WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=9242d56b-5986-4b90-999a-72566ad9e7af SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "9242d56b-5986-4b90-999a-72566ad9e7af",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=9242d56b-5986-4b90-999a-72566ad9e7af SqlStatements=DELETE FROM Mensaje WHERE id = ?",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "9242d56b-5986-4b90-999a-72566ad9e7af",
+    "SqlStatements": [
+      "DELETE FROM Mensaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=7e9a671c-b462-49bd-aa8f-e111ab4565ef SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "7e9a671c-b462-49bd-aa8f-e111ab4565ef",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=7e9a671c-b462-49bd-aa8f-e111ab4565ef SqlStatements=DELETE FROM Resena WHERE id = ?",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "7e9a671c-b462-49bd-aa8f-e111ab4565ef",
+    "SqlStatements": [
+      "DELETE FROM Resena WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=9f9f574a-20a4-4df8-944c-bc28a5fc009b SqlStatementCount=2",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "9f9f574a-20a4-4df8-944c-bc28a5fc009b",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=9f9f574a-20a4-4df8-944c-bc28a5fc009b SqlStatements=UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?, DELETE FROM Viaje WHERE id = ?",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "9f9f574a-20a4-4df8-944c-bc28a5fc009b",
+    "SqlStatements": [
+      "UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?",
+      "DELETE FROM Viaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=2ce2ea08-3abe-4f21-8b1c-a5074835ad16 SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "2ce2ea08-3abe-4f21-8b1c-a5074835ad16",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=2ce2ea08-3abe-4f21-8b1c-a5074835ad16 SqlStatements=DELETE FROM Notificacion WHERE id = ?",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "2ce2ea08-3abe-4f21-8b1c-a5074835ad16",
+    "SqlStatements": [
+      "DELETE FROM Notificacion WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=11b53ae4-e149-4c43-9d84-9faf3aca4e0a SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "11b53ae4-e149-4c43-9d84-9faf3aca4e0a",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:40:44",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=11b53ae4-e149-4c43-9d84-9faf3aca4e0a SqlStatements=DELETE FROM Usuario WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "11b53ae4-e149-4c43-9d84-9faf3aca4e0a",
+    "SqlStatements": [
+      "DELETE FROM Usuario WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:37",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=10bf6cf8-f78c-4171-9d81-ca3076967a40 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "10bf6cf8-f78c-4171-9d81-ca3076967a40",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:37",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=10bf6cf8-f78c-4171-9d81-ca3076967a40 SqlStatements=INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "10bf6cf8-f78c-4171-9d81-ca3076967a40",
+    "SqlStatements": [
+      "INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=cd8b843d-3e29-4d23-8062-d6076873e1cf SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "cd8b843d-3e29-4d23-8062-d6076873e1cf",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=cd8b843d-3e29-4d23-8062-d6076873e1cf SqlStatements=UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "cd8b843d-3e29-4d23-8062-d6076873e1cf",
+    "SqlStatements": [
+      "UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=0c80d8a3-2903-4ce8-aca1-d1c48c3dd402 SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "0c80d8a3-2903-4ce8-aca1-d1c48c3dd402",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=0c80d8a3-2903-4ce8-aca1-d1c48c3dd402 SqlStatements=INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "0c80d8a3-2903-4ce8-aca1-d1c48c3dd402",
+    "SqlStatements": [
+      "INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=555023e9-6136-4922-9426-e302d1470473 SqlStatementCount=0",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "555023e9-6136-4922-9426-e302d1470473",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=2a70c7ba-66e9-4bd4-9cd3-9dd2029d2089 SqlStatementCount=1",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "2a70c7ba-66e9-4bd4-9cd3-9dd2029d2089",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=2a70c7ba-66e9-4bd4-9cd3-9dd2029d2089 SqlStatements=INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "2a70c7ba-66e9-4bd4-9cd3-9dd2029d2089",
+    "SqlStatements": [
+      "INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=30c8ff71-f426-4417-965c-0bd451f7c232 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "30c8ff71-f426-4417-965c-0bd451f7c232",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=fa072ab3-d1a7-4a9c-85a0-c5321c5e972e SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "fa072ab3-d1a7-4a9c-85a0-c5321c5e972e",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=fa072ab3-d1a7-4a9c-85a0-c5321c5e972e SqlStatements=INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "fa072ab3-d1a7-4a9c-85a0-c5321c5e972e",
+    "SqlStatements": [
+      "INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=bf81f015-afe7-4e98-a376-e28cab6d874a SqlStatementCount=0",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "bf81f015-afe7-4e98-a376-e28cab6d874a",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=6289cba7-0e0e-4d7a-b0a5-e2e6398b3499 SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "6289cba7-0e0e-4d7a-b0a5-e2e6398b3499",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=6289cba7-0e0e-4d7a-b0a5-e2e6398b3499 SqlStatements=INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "6289cba7-0e0e-4d7a-b0a5-e2e6398b3499",
+    "SqlStatements": [
+      "INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=5a4356eb-c696-4c09-b85d-67d149d6721f SqlStatementCount=0",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "5a4356eb-c696-4c09-b85d-67d149d6721f",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=09971827-80fa-427f-ba7e-9769b4215341 SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "09971827-80fa-427f-ba7e-9769b4215341",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=09971827-80fa-427f-ba7e-9769b4215341 SqlStatements=INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "09971827-80fa-427f-ba7e-9769b4215341",
+    "SqlStatements": [
+      "INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=be111138-b9dd-4434-a246-8bab783f2559 SqlStatementCount=0",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "be111138-b9dd-4434-a246-8bab783f2559",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=4e20cdd8-bfb5-4a3c-921a-53f11529b5ae SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "4e20cdd8-bfb5-4a3c-921a-53f11529b5ae",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=4e20cdd8-bfb5-4a3c-921a-53f11529b5ae SqlStatements=INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "4e20cdd8-bfb5-4a3c-921a-53f11529b5ae",
+    "SqlStatements": [
+      "INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=b8048d16-34e2-4a2d-a94a-b2110b05780a SqlStatementCount=0",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "b8048d16-34e2-4a2d-a94a-b2110b05780a",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=9fe16e4b-8ae7-4ae9-ab6e-a81a29418461 SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "9fe16e4b-8ae7-4ae9-ab6e-a81a29418461",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=9fe16e4b-8ae7-4ae9-ab6e-a81a29418461 SqlStatements=INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "9fe16e4b-8ae7-4ae9-ab6e-a81a29418461",
+    "SqlStatements": [
+      "INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=7cf89fde-e0b9-45b4-9d01-d1e05b2d77c8 SqlStatementCount=0",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "7cf89fde-e0b9-45b4-9d01-d1e05b2d77c8",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=392cdd3f-2c4b-4784-83dc-ddcce2f5e75a SqlStatementCount=2",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "392cdd3f-2c4b-4784-83dc-ddcce2f5e75a",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=392cdd3f-2c4b-4784-83dc-ddcce2f5e75a SqlStatements=UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?, UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "392cdd3f-2c4b-4784-83dc-ddcce2f5e75a",
+    "SqlStatements": [
+      "UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?",
+      "UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=acbc0982-f9b7-414e-84e2-90a937cc0816 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "acbc0982-f9b7-414e-84e2-90a937cc0816",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=d08ec87a-04b2-4cd6-9111-c322bfd7f885 SqlStatementCount=0",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "d08ec87a-04b2-4cd6-9111-c322bfd7f885",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=b0f3f2ad-2d94-416a-8d25-70eddaf2acab SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "b0f3f2ad-2d94-416a-8d25-70eddaf2acab",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=0670b604-6b80-4067-bfff-2f8fcd5a8791 SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "0670b604-6b80-4067-bfff-2f8fcd5a8791",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=0670b604-6b80-4067-bfff-2f8fcd5a8791 SqlStatements=DELETE FROM Vehiculo WHERE id = ?",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "0670b604-6b80-4067-bfff-2f8fcd5a8791",
+    "SqlStatements": [
+      "DELETE FROM Vehiculo WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=b48c3f15-a74a-4b09-9ef0-be71a8d0e9d8 SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "b48c3f15-a74a-4b09-9ef0-be71a8d0e9d8",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=b48c3f15-a74a-4b09-9ef0-be71a8d0e9d8 SqlStatements=DELETE FROM Pago WHERE id = ?",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "b48c3f15-a74a-4b09-9ef0-be71a8d0e9d8",
+    "SqlStatements": [
+      "DELETE FROM Pago WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=7ba8660b-cb40-408f-8943-00d015692ac8 SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "7ba8660b-cb40-408f-8943-00d015692ac8",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=7ba8660b-cb40-408f-8943-00d015692ac8 SqlStatements=DELETE FROM Reserva WHERE id = ?",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "7ba8660b-cb40-408f-8943-00d015692ac8",
+    "SqlStatements": [
+      "DELETE FROM Reserva WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=a3e7906e-3b8e-446e-9d73-5e0e11e583a5 SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "a3e7906e-3b8e-446e-9d73-5e0e11e583a5",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=a3e7906e-3b8e-446e-9d73-5e0e11e583a5 SqlStatements=DELETE FROM Mensaje WHERE id = ?",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "a3e7906e-3b8e-446e-9d73-5e0e11e583a5",
+    "SqlStatements": [
+      "DELETE FROM Mensaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:38",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=8f989e6e-de74-42fe-86c9-2b83bde0bc76 SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "8f989e6e-de74-42fe-86c9-2b83bde0bc76",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=8f989e6e-de74-42fe-86c9-2b83bde0bc76 SqlStatements=DELETE FROM Resena WHERE id = ?",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "8f989e6e-de74-42fe-86c9-2b83bde0bc76",
+    "SqlStatements": [
+      "DELETE FROM Resena WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=9de77340-2f0b-4ce4-8d71-c1cd4f72ea21 SqlStatementCount=2",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "9de77340-2f0b-4ce4-8d71-c1cd4f72ea21",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=9de77340-2f0b-4ce4-8d71-c1cd4f72ea21 SqlStatements=UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?, DELETE FROM Viaje WHERE id = ?",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "9de77340-2f0b-4ce4-8d71-c1cd4f72ea21",
+    "SqlStatements": [
+      "UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?",
+      "DELETE FROM Viaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=b465c654-7418-4473-9a73-b98d09238417 SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "b465c654-7418-4473-9a73-b98d09238417",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=b465c654-7418-4473-9a73-b98d09238417 SqlStatements=DELETE FROM Notificacion WHERE id = ?",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "b465c654-7418-4473-9a73-b98d09238417",
+    "SqlStatements": [
+      "DELETE FROM Notificacion WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=61a739ee-3fa2-4645-b91c-013fa1949511 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "61a739ee-3fa2-4645-b91c-013fa1949511",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 15:55:39",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=61a739ee-3fa2-4645-b91c-013fa1949511 SqlStatements=DELETE FROM Usuario WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "61a739ee-3fa2-4645-b91c-013fa1949511",
+    "SqlStatements": [
+      "DELETE FROM Usuario WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:16",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=6cdeffef-5d17-48d5-8797-f405b24d285a SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "6cdeffef-5d17-48d5-8797-f405b24d285a",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:16",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=6cdeffef-5d17-48d5-8797-f405b24d285a SqlStatements=INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "6cdeffef-5d17-48d5-8797-f405b24d285a",
+    "SqlStatements": [
+      "INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=5e53397b-1957-45d9-a074-0e1b9fdfc377 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "5e53397b-1957-45d9-a074-0e1b9fdfc377",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=5e53397b-1957-45d9-a074-0e1b9fdfc377 SqlStatements=UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "5e53397b-1957-45d9-a074-0e1b9fdfc377",
+    "SqlStatements": [
+      "UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=6c3fd061-769c-45ff-8d98-0b02a1102eac SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "6c3fd061-769c-45ff-8d98-0b02a1102eac",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=6c3fd061-769c-45ff-8d98-0b02a1102eac SqlStatements=INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "6c3fd061-769c-45ff-8d98-0b02a1102eac",
+    "SqlStatements": [
+      "INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=c4623cd9-f188-4b2e-abe1-8b08083009c0 SqlStatementCount=0",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "c4623cd9-f188-4b2e-abe1-8b08083009c0",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=64d2b141-9085-41ee-9f61-0dc9e2020d3b SqlStatementCount=1",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "64d2b141-9085-41ee-9f61-0dc9e2020d3b",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=64d2b141-9085-41ee-9f61-0dc9e2020d3b SqlStatements=INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "64d2b141-9085-41ee-9f61-0dc9e2020d3b",
+    "SqlStatements": [
+      "INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=0f2cdac7-2273-4691-a425-367fd36ff3cd SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "0f2cdac7-2273-4691-a425-367fd36ff3cd",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=0e96fe7d-13a8-4ef7-9cf5-e10113cc0928 SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "0e96fe7d-13a8-4ef7-9cf5-e10113cc0928",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=0e96fe7d-13a8-4ef7-9cf5-e10113cc0928 SqlStatements=INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "0e96fe7d-13a8-4ef7-9cf5-e10113cc0928",
+    "SqlStatements": [
+      "INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=3e7a7fd9-f8f4-4781-8992-3f15690d0357 SqlStatementCount=0",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "3e7a7fd9-f8f4-4781-8992-3f15690d0357",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=d2dec590-e36b-4206-aee4-1e5206fbed37 SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "d2dec590-e36b-4206-aee4-1e5206fbed37",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=d2dec590-e36b-4206-aee4-1e5206fbed37 SqlStatements=INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "d2dec590-e36b-4206-aee4-1e5206fbed37",
+    "SqlStatements": [
+      "INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=31d211d6-981a-4928-83c5-ba4373390064 SqlStatementCount=0",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "31d211d6-981a-4928-83c5-ba4373390064",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=fd16423d-8301-42f0-951e-8a52373b475f SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "fd16423d-8301-42f0-951e-8a52373b475f",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=fd16423d-8301-42f0-951e-8a52373b475f SqlStatements=INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "fd16423d-8301-42f0-951e-8a52373b475f",
+    "SqlStatements": [
+      "INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=743b637e-d940-4ee3-b87e-16f9f850e407 SqlStatementCount=0",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "743b637e-d940-4ee3-b87e-16f9f850e407",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=9e5db816-6bc4-40c8-b18b-9f3c937c9e7f SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "9e5db816-6bc4-40c8-b18b-9f3c937c9e7f",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=9e5db816-6bc4-40c8-b18b-9f3c937c9e7f SqlStatements=INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "9e5db816-6bc4-40c8-b18b-9f3c937c9e7f",
+    "SqlStatements": [
+      "INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=c20d4da1-bc10-49c1-b13a-07b31c89405c SqlStatementCount=0",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "c20d4da1-bc10-49c1-b13a-07b31c89405c",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=b6821092-df18-496f-8248-73e79ced5fa0 SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "b6821092-df18-496f-8248-73e79ced5fa0",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=b6821092-df18-496f-8248-73e79ced5fa0 SqlStatements=INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "b6821092-df18-496f-8248-73e79ced5fa0",
+    "SqlStatements": [
+      "INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=019d17b9-09c5-4a27-bdad-03e3ac03a736 SqlStatementCount=0",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "019d17b9-09c5-4a27-bdad-03e3ac03a736",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=46b66da3-c371-4547-bbc6-fbfacd0818f5 SqlStatementCount=2",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "46b66da3-c371-4547-bbc6-fbfacd0818f5",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=46b66da3-c371-4547-bbc6-fbfacd0818f5 SqlStatements=UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?, UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "46b66da3-c371-4547-bbc6-fbfacd0818f5",
+    "SqlStatements": [
+      "UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?",
+      "UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=3f4c931d-ef73-4213-88a3-8235501c2f23 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "3f4c931d-ef73-4213-88a3-8235501c2f23",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=bba0559f-4fcd-4a06-9f95-d4cd0708a002 SqlStatementCount=0",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "bba0559f-4fcd-4a06-9f95-d4cd0708a002",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=45a4d3e0-54c3-4348-a5a0-2a9ace3d09ae SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "45a4d3e0-54c3-4348-a5a0-2a9ace3d09ae",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=025f9ee4-bb32-4d45-bda6-0475b13e045d SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "025f9ee4-bb32-4d45-bda6-0475b13e045d",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=025f9ee4-bb32-4d45-bda6-0475b13e045d SqlStatements=DELETE FROM Vehiculo WHERE id = ?",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "025f9ee4-bb32-4d45-bda6-0475b13e045d",
+    "SqlStatements": [
+      "DELETE FROM Vehiculo WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=a9a31dac-b3e4-42a8-aab6-65f1916538ff SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "a9a31dac-b3e4-42a8-aab6-65f1916538ff",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=a9a31dac-b3e4-42a8-aab6-65f1916538ff SqlStatements=DELETE FROM Pago WHERE id = ?",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "a9a31dac-b3e4-42a8-aab6-65f1916538ff",
+    "SqlStatements": [
+      "DELETE FROM Pago WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=4483da9e-cc4b-49c9-86c4-fe94a8dbafaa SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "4483da9e-cc4b-49c9-86c4-fe94a8dbafaa",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=4483da9e-cc4b-49c9-86c4-fe94a8dbafaa SqlStatements=DELETE FROM Reserva WHERE id = ?",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "4483da9e-cc4b-49c9-86c4-fe94a8dbafaa",
+    "SqlStatements": [
+      "DELETE FROM Reserva WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=f9e34369-73ca-464a-81b5-adeb67099a7d SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "f9e34369-73ca-464a-81b5-adeb67099a7d",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=f9e34369-73ca-464a-81b5-adeb67099a7d SqlStatements=DELETE FROM Mensaje WHERE id = ?",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "f9e34369-73ca-464a-81b5-adeb67099a7d",
+    "SqlStatements": [
+      "DELETE FROM Mensaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=502854ee-608c-4189-bb84-4ee4af0da53e SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "502854ee-608c-4189-bb84-4ee4af0da53e",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:17",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=502854ee-608c-4189-bb84-4ee4af0da53e SqlStatements=DELETE FROM Resena WHERE id = ?",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "502854ee-608c-4189-bb84-4ee4af0da53e",
+    "SqlStatements": [
+      "DELETE FROM Resena WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:18",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=c60d15b4-1354-4719-bcf1-fbf318015e14 SqlStatementCount=2",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "c60d15b4-1354-4719-bcf1-fbf318015e14",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:18",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=c60d15b4-1354-4719-bcf1-fbf318015e14 SqlStatements=UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?, DELETE FROM Viaje WHERE id = ?",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "c60d15b4-1354-4719-bcf1-fbf318015e14",
+    "SqlStatements": [
+      "UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?",
+      "DELETE FROM Viaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:18",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=dd1ff151-0e31-45fe-9ffa-2615ea72f5de SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "dd1ff151-0e31-45fe-9ffa-2615ea72f5de",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:18",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=dd1ff151-0e31-45fe-9ffa-2615ea72f5de SqlStatements=DELETE FROM Notificacion WHERE id = ?",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "dd1ff151-0e31-45fe-9ffa-2615ea72f5de",
+    "SqlStatements": [
+      "DELETE FROM Notificacion WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:18",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=52f5440f-3419-40ae-ad69-8e06bbc2badb SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "52f5440f-3419-40ae-ad69-8e06bbc2badb",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:06:18",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=52f5440f-3419-40ae-ad69-8e06bbc2badb SqlStatements=DELETE FROM Usuario WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "52f5440f-3419-40ae-ad69-8e06bbc2badb",
+    "SqlStatements": [
+      "DELETE FROM Usuario WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=75588436-cc6b-47ad-96db-2aedb16d5a33 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "75588436-cc6b-47ad-96db-2aedb16d5a33",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=75588436-cc6b-47ad-96db-2aedb16d5a33 SqlStatements=INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "75588436-cc6b-47ad-96db-2aedb16d5a33",
+    "SqlStatements": [
+      "INSERT INTO Usuario (password, nombreCompleto, email, telefono, dni, esAdmin, estadoVerificacion, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=f26a3079-5d87-417b-8c9a-10beb9ec6c1a SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "f26a3079-5d87-417b-8c9a-10beb9ec6c1a",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=f26a3079-5d87-417b-8c9a-10beb9ec6c1a SqlStatements=UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "f26a3079-5d87-417b-8c9a-10beb9ec6c1a",
+    "SqlStatements": [
+      "UPDATE Usuario SET password = ?, nombreCompleto = ?, email = ?, telefono = ?, dni = ?, esAdmin = ?, estadoVerificacion = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=e66c7059-adb3-45f9-9fc6-ae0e3dd5dd72 SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "e66c7059-adb3-45f9-9fc6-ae0e3dd5dd72",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=e66c7059-adb3-45f9-9fc6-ae0e3dd5dd72 SqlStatements=INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "e66c7059-adb3-45f9-9fc6-ae0e3dd5dd72",
+    "SqlStatements": [
+      "INSERT INTO Vehiculo (marcaModelo, matricula, informacionAdicional, FK_Usuario_propietario, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.SaveAsync Operation=Save Entity=Vehiculo TransactionId=3414540d-4620-4299-a00e-6411213a8723 SqlStatementCount=0",
+  "BusinessOperation": "VehiculoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Vehiculo",
+    "TransactionId": "3414540d-4620-4299-a00e-6411213a8723",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=03536ab5-44dd-4071-800a-4e9627db5c2e SqlStatementCount=1",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "03536ab5-44dd-4071-800a-4e9627db5c2e",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=03536ab5-44dd-4071-800a-4e9627db5c2e SqlStatements=INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "03536ab5-44dd-4071-800a-4e9627db5c2e",
+    "SqlStatements": [
+      "INSERT INTO Viaje (fechaHoraSalida, numPlazasDisponibles, permiteMascotas, permiteEquipaje, observaciones, estado, latitudActual, longitudActual, fechaUltimaPosicion, origen_ciudad, origen_direccion, origen_latitud, origen_longitud, destino_ciudad, destino_direccion, destino_latitud, destino_longitud, precio_moneda, precio_cantidad, FK_Usuario_conductor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=56dd3a07-a4b5-46b1-9b61-5859c0d8cd19 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "56dd3a07-a4b5-46b1-9b61-5859c0d8cd19",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=716bf8e6-4dc6-4e16-9784-a7f7f50f3047 SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "716bf8e6-4dc6-4e16-9784-a7f7f50f3047",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:57",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=716bf8e6-4dc6-4e16-9784-a7f7f50f3047 SqlStatements=INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "716bf8e6-4dc6-4e16-9784-a7f7f50f3047",
+    "SqlStatements": [
+      "INSERT INTO Reserva (numPlazasReservadas, estado, fechaSolicitud, FK_Viaje_viaje, FK_Usuario_pasajero, FK_Pago_pago, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.SaveAsync Operation=Save Entity=Reserva TransactionId=2bf66e4c-167e-475c-b5c3-ac8bfa4da00a SqlStatementCount=0",
+  "BusinessOperation": "ReservaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Reserva",
+    "TransactionId": "2bf66e4c-167e-475c-b5c3-ac8bfa4da00a",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=a7650f2c-cddd-4306-b13f-47df8791ce06 SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "a7650f2c-cddd-4306-b13f-47df8791ce06",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=a7650f2c-cddd-4306-b13f-47df8791ce06 SqlStatements=INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "a7650f2c-cddd-4306-b13f-47df8791ce06",
+    "SqlStatements": [
+      "INSERT INTO Pago (fechaPago, estado, idTransaccionPasarela, monto_moneda, monto_cantidad, FK_Reserva_reserva, id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.SaveAsync Operation=Save Entity=Pago TransactionId=81efa2b8-1746-4a39-b1a6-dfcc02a58e65 SqlStatementCount=0",
+  "BusinessOperation": "PagoRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Pago",
+    "TransactionId": "81efa2b8-1746-4a39-b1a6-dfcc02a58e65",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=c22f1737-b88d-4c1a-b154-27c1cf546155 SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "c22f1737-b88d-4c1a-b154-27c1cf546155",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=c22f1737-b88d-4c1a-b154-27c1cf546155 SqlStatements=INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "c22f1737-b88d-4c1a-b154-27c1cf546155",
+    "SqlStatements": [
+      "INSERT INTO Mensaje (contenido, fechaHora, FK_Viaje_viaje, FK_Usuario_remitente, id) VALUES (?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.SaveAsync Operation=Save Entity=Mensaje TransactionId=516d1c9f-7640-407e-b4a1-d4e4099c36b9 SqlStatementCount=0",
+  "BusinessOperation": "MensajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Mensaje",
+    "TransactionId": "516d1c9f-7640-407e-b4a1-d4e4099c36b9",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=9585ab21-4bcd-4eba-af17-522335968fc9 SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "9585ab21-4bcd-4eba-af17-522335968fc9",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=9585ab21-4bcd-4eba-af17-522335968fc9 SqlStatements=INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "9585ab21-4bcd-4eba-af17-522335968fc9",
+    "SqlStatements": [
+      "INSERT INTO Resena (puntuacion, comentario, fechaCreacion, estado, motivoModeracion, FK_Viaje_viaje, FK_Usuario_autor, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.SaveAsync Operation=Save Entity=Resena TransactionId=bd3a7ef0-cf2f-4cba-958a-58b092a523ec SqlStatementCount=0",
+  "BusinessOperation": "ResenaRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Resena",
+    "TransactionId": "bd3a7ef0-cf2f-4cba-958a-58b092a523ec",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=68020a77-bfb6-49cd-b293-7f28e008fb34 SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "68020a77-bfb6-49cd-b293-7f28e008fb34",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=68020a77-bfb6-49cd-b293-7f28e008fb34 SqlStatements=INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "68020a77-bfb6-49cd-b293-7f28e008fb34",
+    "SqlStatements": [
+      "INSERT INTO Notificacion (titulo, texto, fechaHora, leida, FK_Usuario_usuarioNotificado, id) VALUES (?, ?, ?, ?, ?, ?)"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.SaveAsync Operation=Save Entity=Notificacion TransactionId=9e8e7f14-65e1-4b79-a561-6f9ba8a308b1 SqlStatementCount=0",
+  "BusinessOperation": "NotificacionRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Notificacion",
+    "TransactionId": "9e8e7f14-65e1-4b79-a561-6f9ba8a308b1",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=668690a6-8855-42c2-8a7e-6b7b0f73cff0 SqlStatementCount=2",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "668690a6-8855-42c2-8a7e-6b7b0f73cff0",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=668690a6-8855-42c2-8a7e-6b7b0f73cff0 SqlStatements=UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?, UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "668690a6-8855-42c2-8a7e-6b7b0f73cff0",
+    "SqlStatements": [
+      "UPDATE Viaje SET FK_Usuario_viajespasajero = ? WHERE id = ?",
+      "UPDATE Usuario SET FK_Viaje_pasajero = ? WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=5b6f819e-460d-4f61-bb6a-12ff3e141e33 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "5b6f819e-460d-4f61-bb6a-12ff3e141e33",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.SaveAsync Operation=Save Entity=Usuario TransactionId=6acab6e4-4caa-4d3b-84ed-7314d9ea698f SqlStatementCount=0",
+  "BusinessOperation": "UsuarioRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Usuario",
+    "TransactionId": "6acab6e4-4caa-4d3b-84ed-7314d9ea698f",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.SaveAsync Operation=Save Entity=Viaje TransactionId=df47abce-435c-4c26-968d-b71932981387 SqlStatementCount=0",
+  "BusinessOperation": "ViajeRepository.SaveAsync",
+  "Operation": "Save",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.SaveAsync",
+    "Operation": "Save",
+    "Entity": "Viaje",
+    "TransactionId": "df47abce-435c-4c26-968d-b71932981387",
+    "SqlStatementCount": 0
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=1603c2d3-ea0b-4558-b2c8-c1a3d7d1d16a SqlStatementCount=1",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "1603c2d3-ea0b-4558-b2c8-c1a3d7d1d16a",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.VehiculoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=VehiculoRepository.DeleteAsync Operation=Delete Entity=Vehiculo TransactionId=1603c2d3-ea0b-4558-b2c8-c1a3d7d1d16a SqlStatements=DELETE FROM Vehiculo WHERE id = ?",
+  "BusinessOperation": "VehiculoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Vehiculo",
+  "Properties": {
+    "BusinessOperation": "VehiculoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Vehiculo",
+    "TransactionId": "1603c2d3-ea0b-4558-b2c8-c1a3d7d1d16a",
+    "SqlStatements": [
+      "DELETE FROM Vehiculo WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=4c93c85a-5295-4d20-be7e-a71f01fcbc6b SqlStatementCount=1",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "4c93c85a-5295-4d20-be7e-a71f01fcbc6b",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.PagoRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=PagoRepository.DeleteAsync Operation=Delete Entity=Pago TransactionId=4c93c85a-5295-4d20-be7e-a71f01fcbc6b SqlStatements=DELETE FROM Pago WHERE id = ?",
+  "BusinessOperation": "PagoRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Pago",
+  "Properties": {
+    "BusinessOperation": "PagoRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Pago",
+    "TransactionId": "4c93c85a-5295-4d20-be7e-a71f01fcbc6b",
+    "SqlStatements": [
+      "DELETE FROM Pago WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=42b6aa7c-6873-4d17-9e29-f1219267ea23 SqlStatementCount=1",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "42b6aa7c-6873-4d17-9e29-f1219267ea23",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ReservaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ReservaRepository.DeleteAsync Operation=Delete Entity=Reserva TransactionId=42b6aa7c-6873-4d17-9e29-f1219267ea23 SqlStatements=DELETE FROM Reserva WHERE id = ?",
+  "BusinessOperation": "ReservaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Reserva",
+  "Properties": {
+    "BusinessOperation": "ReservaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Reserva",
+    "TransactionId": "42b6aa7c-6873-4d17-9e29-f1219267ea23",
+    "SqlStatements": [
+      "DELETE FROM Reserva WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=9ad8d9b2-0dd5-41ff-a513-bed05aeaff45 SqlStatementCount=1",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "9ad8d9b2-0dd5-41ff-a513-bed05aeaff45",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.MensajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=MensajeRepository.DeleteAsync Operation=Delete Entity=Mensaje TransactionId=9ad8d9b2-0dd5-41ff-a513-bed05aeaff45 SqlStatements=DELETE FROM Mensaje WHERE id = ?",
+  "BusinessOperation": "MensajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Mensaje",
+  "Properties": {
+    "BusinessOperation": "MensajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Mensaje",
+    "TransactionId": "9ad8d9b2-0dd5-41ff-a513-bed05aeaff45",
+    "SqlStatements": [
+      "DELETE FROM Mensaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=40cdcfe0-c0d2-4498-8122-b6f864ac3067 SqlStatementCount=1",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "40cdcfe0-c0d2-4498-8122-b6f864ac3067",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ResenaRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ResenaRepository.DeleteAsync Operation=Delete Entity=Resena TransactionId=40cdcfe0-c0d2-4498-8122-b6f864ac3067 SqlStatements=DELETE FROM Resena WHERE id = ?",
+  "BusinessOperation": "ResenaRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Resena",
+  "Properties": {
+    "BusinessOperation": "ResenaRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Resena",
+    "TransactionId": "40cdcfe0-c0d2-4498-8122-b6f864ac3067",
+    "SqlStatements": [
+      "DELETE FROM Resena WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=febcdfe3-ed16-4db2-ba97-c0bf71af4eff SqlStatementCount=2",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "febcdfe3-ed16-4db2-ba97-c0bf71af4eff",
+    "SqlStatementCount": 2
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.ViajeRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=ViajeRepository.DeleteAsync Operation=Delete Entity=Viaje TransactionId=febcdfe3-ed16-4db2-ba97-c0bf71af4eff SqlStatements=UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?, DELETE FROM Viaje WHERE id = ?",
+  "BusinessOperation": "ViajeRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Viaje",
+  "Properties": {
+    "BusinessOperation": "ViajeRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Viaje",
+    "TransactionId": "febcdfe3-ed16-4db2-ba97-c0bf71af4eff",
+    "SqlStatements": [
+      "UPDATE Usuario SET FK_Viaje_pasajero = null WHERE FK_Viaje_pasajero = ?",
+      "DELETE FROM Viaje WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=5f6cee68-5b4f-4cf9-8448-b84a723bcf2f SqlStatementCount=1",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "5f6cee68-5b4f-4cf9-8448-b84a723bcf2f",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.NotificacionRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=NotificacionRepository.DeleteAsync Operation=Delete Entity=Notificacion TransactionId=5f6cee68-5b4f-4cf9-8448-b84a723bcf2f SqlStatements=DELETE FROM Notificacion WHERE id = ?",
+  "BusinessOperation": "NotificacionRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Notificacion",
+  "Properties": {
+    "BusinessOperation": "NotificacionRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Notificacion",
+    "TransactionId": "5f6cee68-5b4f-4cf9-8448-b84a723bcf2f",
+    "SqlStatements": [
+      "DELETE FROM Notificacion WHERE id = ?"
+    ]
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Information",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository transaction committed successfully. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=c74b992f-2485-489a-8886-706e4d5f45a4 SqlStatementCount=1",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "c74b992f-2485-489a-8886-706e4d5f45a4",
+    "SqlStatementCount": 1
+  }
+},
+{
+  "TimestampUtc": "2026-11-10, 16:07:58",
+  "Level": "Debug",
+  "Category": "CarGoGen.Infrastructure.Repositories.UsuarioRepository",
+  "EventId": 0,
+  "Message": "NHibernate repository SQL statements committed. BusinessOperation=UsuarioRepository.DeleteAsync Operation=Delete Entity=Usuario TransactionId=c74b992f-2485-489a-8886-706e4d5f45a4 SqlStatements=DELETE FROM Usuario WHERE id = ?",
+  "BusinessOperation": "UsuarioRepository.DeleteAsync",
+  "Operation": "Delete",
+  "Entity": "Usuario",
+  "Properties": {
+    "BusinessOperation": "UsuarioRepository.DeleteAsync",
+    "Operation": "Delete",
+    "Entity": "Usuario",
+    "TransactionId": "c74b992f-2485-489a-8886-706e4d5f45a4",
+    "SqlStatements": [
+      "DELETE FROM Usuario WHERE id = ?"
+    ]
+  }
+}
+]

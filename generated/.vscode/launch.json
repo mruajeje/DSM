@@ -8,7 +8,7 @@
       "preLaunchTask": "build InitializeDB",
       "program": "${workspaceFolder}/InitializeDB/bin/Debug/net9.0/InitializeDB.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/InitializeDB",
+      "cwd": "${workspaceFolder}/generated/InitializeDB",
       "console": "integratedTerminal",
       "stopAtEntry": false
     }
