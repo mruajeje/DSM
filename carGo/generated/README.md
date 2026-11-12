@@ -147,3 +147,46 @@ dotnet test --filter "FullyQualifiedName~PagoUseCaseTests"
 
 1. **Invariantes de Dominio**: Todas las operaciones comprueban permisos y estados antes de alterar datos (`ModelException`).
 2. **Protección HARIA**: Las regiones `PROTECTED REGION` conservan las modificaciones hechas en `Program.cs` e infraestructura ante posibles regeneraciones del modelo TDM.
+
+
+
+
+## Arrancar la aplicación web (CarGo.Web)
+
+### Requisitos
+- .NET 9 SDK instalado (`dotnet --version` debe mostrar 9.x).
+- Backend compilado: `dotnet build generated\CarGo.sln` (desde la raíz del proyecto, donde está `carGo.tdm`).
+
+### Paso 1: crear la base de datos con datos de demo
+Desde `generated\InitializeDB`:
+
+```powershell
+dotnet run -- --reset
+```
+
+- Crea `generated\InitializeDB\CarGo.db` y la rellena con datos de demo: 4 usuarios, 2 vehículos, 6 viajes, 2 reservas y 1 notificación.
+- `--reset` **recrea la base y borra los datos anteriores**. Antes hace una copia en `database\backups`.
+- Sin `--reset`, si la base ya existe se conservan los datos y no se vuelve a sembrar.
+
+### Paso 2: arrancar la web
+Desde la raíz del proyecto:
+
+```powershell
+dotnet run --project generated\CarGo.Web\CarGo.Web.csproj
+```
+
+La consola muestra la URL (`Now listening on: ...`). Ábrela en el navegador y para parar usa `Ctrl+C`.
+La web lee la base desde `ConnectionStrings:DbConnection` en `generated\CarGo.Web\appsettings.Haria.json`, que debe apuntar a `../InitializeDB/CarGo.db`.
+
+### Cuentas de demo
+| Usuario | Contraseña | Notas |
+|---|---|---|
+| admin@cargo.com | Admin123! | Administrador |
+| ana@cargo.com | Ana12345! | Conductora verificada |
+| luis@cargo.com | Luis12345! | Conductor verificado |
+| marta@cargo.com | Marta12345! | Pasajera, verificación pendiente |
+
+### Si regeneras desde HARIA
+- La configuración de SQLite y el nombre del proyecto (`CarGo`) están en `haria.config.json`, en la raíz. **No lo borres y no edites a mano `appsettings.json` ni `hibernate.cfg.xml`**: HARIA los sobrescribe en cada generación.
+- El código manual vive en las carpetas `manual` y en las regiones `PROTECTED REGION` (por ejemplo, en `Program.cs` y `SeedData.cs` de `InitializeDB`), que HARIA conserva.
+- Antes de un `--reset` o de cambiar el modelo, haz una copia: `powershell -ExecutionPolicy Bypass -File .\scripts\backup-db.ps1`.
