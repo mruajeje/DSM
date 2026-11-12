@@ -15,7 +15,7 @@ Para poder consumir la API o conectar el Frontend con una base de datos local fu
 ### Paso 1: Generar e Inicializar la Base de Datos Local (SQLite)
 Antes de arrancar la aplicación o probar endpoints, debemos instanciar y poblar el esquema local con datos iniciales:
 
-1. Acreditar que los archivos `hibernate.cfg.xml` y `appsettings.json` en `generated/InitializeDB` apuntan al archivo SQLite `CarGoGenNHibernate.db`.
+1. Acreditar que los archivos `hibernate.cfg.xml` y `appsettings.json` en `generated/InitializeDB` apuntan al archivo SQLite `CarGo.db`.
 2. Ejecutar la compilación y semilla desde la terminal o mediante depuración en VS Code:
    ```powershell
    cd generated/InitializeDB
@@ -89,7 +89,7 @@ Durante el desarrollo e inicialización del proyecto surgieron diversas incidenc
   ```
 
 ### 4.2. Migración y Ubicación del Archivo SQLite (`.db`)
-* **Problema 1 (Ubicación del archivo):** Al cambiar a SQLite, el ejecutable generaba el archivo `CarGoGenNHibernate.db` dentro de la carpeta interna de compilación (`bin/Debug/net9.0/`) y no en la carpeta visible del proyecto `InitializeDB`.
+* **Problema 1 (Ubicación del archivo):** Al cambiar a SQLite, el ejecutable generaba el archivo `CarGo.db` dentro de la carpeta interna de compilación (`bin/Debug/net9.0/`) y no en la carpeta visible del proyecto `InitializeDB`.
 * **Problema 2 (Sobrescritura por el código generado):** Al ejecutar el debug, la llamada a `CreateDB.Create()` volvía a escribir la configuración por defecto de SQL Server sobreescribiendo los cambios de SQLite.
 * **Solución aplicada:**
   1. Se instaló el paquete NuGet en `InitializeDB`:
@@ -98,9 +98,9 @@ Durante el desarrollo e inicialización del proyecto surgieron diversas incidenc
      ```
   2. En `hibernate.cfg.xml` y `appsettings.json` se estableció el driver y dialecto de SQLite:
      ```xml
-     <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
-     <property name="connection.driver_class">NHibernate.Driver.SQLite20Driver</property>
-     <property name="connection.connection_string">Data Source=CarGoGenNHibernate.db</property>
+    <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
+    <property name="connection.driver_class">NHibernate.Driver.SQLite20Driver</property>
+    <property name="connection.connection_string">Data Source=../../../CarGo.db</property>
      ```
   3. En `Program.cs` (dentro de la región protegida `initializeDatabase`), se modificó la obtención de la cadena para leer de la configuración sin ejecutar la recreación del XML:
      ```csharp

@@ -1,11 +1,11 @@
-﻿using CarGoGen.Application.Services;
-using CarGoGen.Application.UseCases.Pago;
-using CarGoGen.Domain.Entities;
-using CarGoGen.Domain.ValueObjects;
-using CarGoGen.Domain.Enums;
-using CarGoGen.Infrastructure;
-using CarGoGen.Infrastructure.Repositories;
-using CarGoGen.Infrastructure.Security;
+﻿using CarGo.Application.Services;
+using CarGo.Application.UseCases.Pago;
+using CarGo.Domain.Entities;
+using CarGo.Domain.ValueObjects;
+using CarGo.Domain.Enums;
+using CarGo.Infrastructure;
+using CarGo.Infrastructure.Repositories;
+using CarGo.Infrastructure.Security;
 using Microsoft.Extensions.Logging;
 
 /*PROTECTED REGION ID(seedDataUsings) ENABLED START*/
@@ -24,6 +24,8 @@ public static class SeedData
 
             var usuarioService = new UsuarioService(unitOfWorkFactory);
             var sampleUsuario = await usuarioService.NewAsync("Sample Usuario NombreCompleto", "sample3@example.com", "Password123!", true, EstadoVerificacion.Pendiente);
+            var sampleUsuarioLoginToken = await usuarioService.LoginEmailAsync(sampleUsuario.Id, "Password123!");
+            Ensure(!string.IsNullOrWhiteSpace(sampleUsuarioLoginToken), "Usuario.loginEmail returns a login token for sampleUsuario.");
             var sampleUsuarioReadBack = await usuarioService.ReadOIDAsync(sampleUsuario.Id);
             Ensure(sampleUsuarioReadBack is not null, "Usuario read by OID returns the generated entity.");
             var sampleUsuarioReadAll = await usuarioService.ReadAllAsync();
@@ -158,6 +160,41 @@ public static class SeedData
             using var unitOfWorkFactory = new UnitOfWorkFactory(cfg, loggerFactory);
 
             /*PROTECTED REGION ID(initializeDataManual) ENABLED START*/
+            // Datos de demo para el frontend (region protegida: sobrevive a regenerar).
+            var usuarioSvc = new UsuarioService(unitOfWorkFactory);
+            if ((await usuarioSvc.ReadAllAsync()).Count > 0) return; // idempotente: nunca duplica
+
+            var vehiculoSvc = new VehiculoService(unitOfWorkFactory);
+            var viajeSvc = new ViajeService(unitOfWorkFactory);
+            var notifSvc = new NotificacionService(unitOfWorkFactory);
+
+            var admin = await usuarioSvc.NewAsync("Admin CarGo", "admin@cargo.com", "Admin123!", true, EstadoVerificacion.Verificado);
+            var ana = await usuarioSvc.NewAsync("Ana Garcia", "ana@cargo.com", "Ana12345!", false, EstadoVerificacion.Verificado);
+            var luis = await usuarioSvc.NewAsync("Luis Martinez", "luis@cargo.com", "Luis12345!", false, EstadoVerificacion.Verificado);
+            var marta = await usuarioSvc.NewAsync("Marta Lopez", "marta@cargo.com", "Marta12345!", false, EstadoVerificacion.Pendiente);
+
+            await vehiculoSvc.NewAsync("Seat Leon", "1234-ABC", "Gris, 5 plazas", ana.Id);
+            await vehiculoSvc.NewAsync("Renault Clio", "5678-DEF", "Azul, aire acondicionado", luis.Id);
+
+            var alicante = new Ubicacion { Ciudad = "Alicante", Direccion = "Estacion de Autobuses", Latitud = 38.3452, Longitud = -0.4810 };
+            var valencia = new Ubicacion { Ciudad = "Valencia", Direccion = "Estacio del Nord", Latitud = 39.4699, Longitud = -0.3763 };
+            var madrid = new Ubicacion { Ciudad = "Madrid", Direccion = "Estacion de Atocha", Latitud = 40.4068, Longitud = -3.6892 };
+            var barcelona = new Ubicacion { Ciudad = "Barcelona", Direccion = "Estacio de Sants", Latitud = 41.3791, Longitud = 2.1400 };
+            var murcia = new Ubicacion { Ciudad = "Murcia", Direccion = "Estacion del Carmen", Latitud = 37.9876, Longitud = -1.1297 };
+
+            var hoy = DateTime.Today;
+            var v1 = await viajeSvc.NewAsync(alicante, valencia, hoy.AddDays(1).AddHours(9), 3, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 12.5 }, true, true, EstadoViaje.Publicado, ana.Id);
+            var v2 = await viajeSvc.NewAsync(alicante, madrid, hoy.AddDays(2).AddHours(7), 4, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 25 }, false, true, EstadoViaje.Publicado, ana.Id);
+            await viajeSvc.NewAsync(valencia, barcelona, hoy.AddDays(3).AddHours(8), 2, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 20 }, true, false, EstadoViaje.Publicado, luis.Id);
+            await viajeSvc.NewAsync(murcia, alicante, hoy.AddDays(1).AddHours(18), 3, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 8 }, true, true, EstadoViaje.Publicado, luis.Id);
+            await viajeSvc.NewAsync(madrid, valencia, hoy.AddDays(-5).AddHours(10), 0, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 18 }, false, true, EstadoViaje.Finalizado, luis.Id);
+            await viajeSvc.NewAsync(barcelona, alicante, hoy.AddDays(4).AddHours(6), 3, new Dinero { Moneda = EnumMoneda.EUR, Cantidad = 30 }, true, true, EstadoViaje.Cancelado, ana.Id);
+
+            await viajeSvc.Reserva_newAsync(1, EstadoReserva.Pendiente, DateTime.Now, v1.Id, marta.Id);
+            await viajeSvc.Reserva_newAsync(2, EstadoReserva.Aceptada, DateTime.Now, v2.Id, marta.Id);
+
+            await notifSvc.NewAsync("Bienvenida", "Bienvenido a CarGo", DateTime.Now, false, marta.Id);
+            Console.WriteLine("Demo data inserted (4 usuarios, 2 vehiculos, 6 viajes, 2 reservas).");
             /*PROTECTED REGION END*/
         }
         catch (Exception ex)

@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using CarGoGen.Infrastructure.Logging;
-using CarGoGen.Infrastructure.Repositories;
+using CarGo.Infrastructure.Logging;
+using CarGo.Infrastructure.Repositories;
 
 namespace InitializeDB;
 
@@ -12,7 +12,7 @@ internal static class Program
     private static async Task Main(string[] args)
     {
         Console.WriteLine("-----------------------------------------------------------------------------");
-        Console.WriteLine("A new database called: CarGoGenNHibernate will be created (the previous information will be deleted).");
+        Console.WriteLine("A database called: CarGoNHibernate will be created if it does not exist.");
         Console.WriteLine("-----------------------------------------------------------------------------");
 
         try
@@ -22,7 +22,7 @@ internal static class Program
             var cfg = new Configuration();
 
             /*PROTECTED REGION ID(initializeDatabase) START*/
-            var cs = configuration["ConnectionStrings:DbConnection"]!;
+            var cs = CreateDB.Create();
 
             cfg.Configure(Path.Combine(AppContext.BaseDirectory, "hibernate.cfg.xml"));
             cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionString, cs);

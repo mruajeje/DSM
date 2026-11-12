@@ -1,0 +1,71 @@
+@* HARIA-WEB GENERATED sha256:7b2717edd8edb7c2f6e066d566d21de41d31374e3a30c25934a68fb6eb629677 *@
+@model CarGo.Web.ViewModels.ViajeViewModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<div class="row justify-content-center">
+    <div class="col-xl-9">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-body p-4">
+                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Detalles</span>
+                <h1 class="h3 mb-1">Viaje</h1>
+                <p class="text-body-secondary mb-0">Review the complete record information.</p>
+            </div>
+            <div class="card-body p-4">
+                <dl class="row mb-0 gy-2">
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Id)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Id)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenCiudad)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenCiudad)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenDireccion)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenDireccion)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenLatitud)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenLatitud)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenLongitud)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenLongitud)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoCiudad)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoCiudad)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoDireccion)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoDireccion)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoLatitud)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoLatitud)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoLongitud)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoLongitud)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.FechaHoraSalida)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.FechaHoraSalida)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.NumPlazasDisponibles)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.NumPlazasDisponibles)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PrecioMoneda)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PrecioMoneda)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PrecioCantidad)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PrecioCantidad)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PermiteMascotas)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PermiteMascotas)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PermiteEquipaje)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PermiteEquipaje)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Observaciones)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Observaciones)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Estado)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Estado)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.LatitudActual)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.LatitudActual)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.LongitudActual)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.LongitudActual)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.FechaUltimaPosicion)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.FechaUltimaPosicion)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.ConductorLabel)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.ConductorLabel)</dd>
+                </dl>
+
+            </div>
+            <div class="card-footer bg-body p-4">
+                <div class="d-flex flex-column flex-sm-row gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

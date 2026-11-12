@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarGo.Application\CarGo.Application.csproj" />
+    <ProjectReference Include="..\CarGo.Infrastructure\CarGo.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,60 @@
+@* HARIA-WEB GENERATED sha256:d49b06202393625065b1f34cf31fca54d80ed2c9f3d87ded26ec18efdfb4f145 *@
+@model CarGo.Web.ViewModels.NotificacionViewModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-body p-4">
+                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Editar</span>
+                <h1 class="h3 mb-1">Notificacion</h1>
+                <p class="text-body-secondary mb-0">Completa los campos y guarda los cambios.</p>
+            </div>
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <div class="card-body p-4">
+                    <div asp-validation-summary="All" class="alert alert-danger py-2" role="alert"></div>
+                    <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Titulo" class="form-label"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Texto" class="form-label"></label>
+            <input asp-for="Texto" class="form-control" />
+            <span asp-validation-for="Texto" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="FechaHora" class="form-label"></label>
+            <input asp-for="FechaHora" class="form-control" />
+            <span asp-validation-for="FechaHora" class="text-danger"></span>
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="Leida" class="form-check-input" />
+            <label asp-for="Leida" class="form-check-label"></label>
+            <span asp-validation-for="Leida" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="UsuarioNotificadoId" class="form-label"></label>
+            <select asp-for="UsuarioNotificadoId" asp-items="Model.UsuarioNotificadoOptions" class="form-select"><option value="">Selecciona...</option></select>
+            <span asp-validation-for="UsuarioNotificadoId" class="text-danger"></span>
+        </div>
+                </div>
+                <div class="card-footer bg-body p-4 d-flex flex-column flex-sm-row gap-2">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+
+}

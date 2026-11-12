@@ -1,0 +1,45 @@
+@* HARIA-WEB GENERATED sha256:adb4b301468337ba5d0d9c4672bcde38e2109718405ad7190c679c3e724273b3 *@
+@model CarGo.Web.ViewModels.ResenaViewModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<div class="row justify-content-center">
+    <div class="col-xl-9">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-body p-4">
+                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Detalles</span>
+                <h1 class="h3 mb-1">Resena</h1>
+                <p class="text-body-secondary mb-0">Review the complete record information.</p>
+            </div>
+            <div class="card-body p-4">
+                <dl class="row mb-0 gy-2">
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Id)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Id)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Puntuacion)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Puntuacion)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Comentario)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Comentario)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.FechaCreacion)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.FechaCreacion)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Estado)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Estado)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.MotivoModeracion)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.MotivoModeracion)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.ViajeLabel)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.ViajeLabel)</dd>
+            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.AutorLabel)</dt>
+            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.AutorLabel)</dd>
+                </dl>
+
+            </div>
+            <div class="card-footer bg-body p-4">
+                <div class="d-flex flex-column flex-sm-row gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

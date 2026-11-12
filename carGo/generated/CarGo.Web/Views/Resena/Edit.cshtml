@@ -1,0 +1,60 @@
+@* HARIA-WEB GENERATED sha256:c69d3c0ab4ce31fa4205624f82ff25258b4cb0e0130cae9ce89881950f70e082 *@
+@model CarGo.Web.ViewModels.ResenaViewModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-body p-4">
+                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Editar</span>
+                <h1 class="h3 mb-1">Resena</h1>
+                <p class="text-body-secondary mb-0">Completa los campos y guarda los cambios.</p>
+            </div>
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <div class="card-body p-4">
+                    <div asp-validation-summary="All" class="alert alert-danger py-2" role="alert"></div>
+                    <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Puntuacion" class="form-label"></label>
+            <input asp-for="Puntuacion" class="form-control" />
+            <span asp-validation-for="Puntuacion" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="FechaCreacion" class="form-label"></label>
+            <input asp-for="FechaCreacion" class="form-control" />
+            <span asp-validation-for="FechaCreacion" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Estado" class="form-label"></label>
+            <select asp-for="Estado" asp-items="Html.GetEnumSelectList<CarGo.Domain.Enums.EstadoResena>()" class="form-select"></select>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ViajeId" class="form-label"></label>
+            <select asp-for="ViajeId" asp-items="Model.ViajeOptions" class="form-select"><option value="">Selecciona...</option></select>
+            <span asp-validation-for="ViajeId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="AutorId" class="form-label"></label>
+            <select asp-for="AutorId" asp-items="Model.AutorOptions" class="form-select"><option value="">Selecciona...</option></select>
+            <span asp-validation-for="AutorId" class="text-danger"></span>
+        </div>
+                </div>
+                <div class="card-footer bg-body p-4 d-flex flex-column flex-sm-row gap-2">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+
+}

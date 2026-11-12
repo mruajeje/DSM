@@ -1,0 +1,66 @@
+@* HARIA-WEB GENERATED sha256:3a783fe2e2ef0f7b9c2e61245a727a60057ec2dd7767c16f272dddf2acd5d5b4 *@
+@model IEnumerable<CarGo.Web.ViewModels.ResenaViewModel>
+
+@{
+    ViewData["Title"] = "Resena";
+}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-body d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-4">
+        <div>
+            <h1 class="h3 mb-1">Resena</h1>
+            <p class="text-body-secondary mb-0">Consulta y gestiona los registros disponibles.</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="card-body p-0">
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Puntuacion)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Comentario)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.FechaCreacion)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Estado)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.MotivoModeracion)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.ViajeLabel)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.AutorLabel)</th>
+                        <th scope="col" class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Puntuacion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Comentario)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MotivoModeracion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ViajeLabel)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AutorLabel)</td>
+                            <td class="text-end text-nowrap">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center p-5">
+            <h2 class="h5">Todavía no hay registros</h2>
+            <p class="text-body-secondary">Crea el primer registro para comenzar.</p>
+            <a asp-action="Create" class="btn btn-primary">Crear</a>
+        </div>
+    }
+    </div>
+</div>
