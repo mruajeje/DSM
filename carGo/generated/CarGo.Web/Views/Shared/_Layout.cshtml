@@ -13,25 +13,43 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm" aria-label="Navegación principal">
             <div class="container">
-                <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">CarGo.Web</a>
+                <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">CarGo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Mostrar u ocultar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNavigation">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacidad</a></li>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Viaje" asp-action="Index">Viajes</a></li>
+                            @if (User.IsInRole("Conductor"))
+                            {
+                                <li class="nav-item"><a class="nav-link" asp-controller="Viaje" asp-action="Create">Publicar viaje</a></li>
+                            }
+                            <li class="nav-item"><a class="nav-link" asp-controller="Vehiculo" asp-action="Index">Vehículos</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Reserva" asp-action="Index">Reservas</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Pago" asp-action="Index">Pagos</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Mensaje" asp-action="Index">Mensajes</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Resena" asp-action="Index">Reseñas</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Notificacion" asp-action="Index">Notificaciones</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item"><a class="nav-link" asp-controller="Usuario" asp-action="Index">Usuarios</a></li>
+                            }
+                        }
                     </ul>
                     <div class="d-flex align-items-lg-center gap-2">
                     @if (User.Identity?.IsAuthenticated == true)
                     {
-                        <span class="navbar-text text-white-50 small">@User.Identity.Name</span>
+                        <a class="btn btn-outline-light btn-sm" asp-controller="Usuario" asp-action="Details" asp-route-id="@User.Identity.Name">Mi perfil</a>
                         <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
-                            <button type="submit" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
+                            <button type="submit" class="btn btn-light btn-sm">Cerrar sesión</button>
                         </form>
                     }
                     else
                     {
+                        <a class="btn btn-outline-light btn-sm" asp-controller="Usuario" asp-action="Register">Crear cuenta</a>
                         <a class="btn btn-light btn-sm" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
                     }
                     </div>
@@ -41,12 +59,22 @@
     </header>
 
     <main class="container flex-grow-1 py-4 py-lg-5">
+        @* PROVISIONAL: cuando exista Views/Shared/_Mensajes.cshtml (Ada), sustituir este bloque por: <partial name="_Mensajes" /> *@
+        @if (TempData["Exito"] is string mensajeExito)
+        {
+            <div class="alert alert-success" role="status">@mensajeExito</div>
+        }
+        @if (TempData["Error"] is string mensajeError)
+        {
+            <div class="alert alert-danger" role="alert">@mensajeError</div>
+        }
+
         @RenderBody()
     </main>
 
     <footer class="border-top bg-body py-3 mt-auto">
         <div class="container d-flex flex-column flex-sm-row justify-content-between gap-2 small text-body-secondary">
-            <span>&copy; @DateTime.Now.Year CarGo.Web</span>
+            <span>&copy; @DateTime.Now.Year CarGo</span>
             <a asp-controller="Home" asp-action="Privacy" class="link-secondary">Privacidad</a>
         </div>
     </footer>

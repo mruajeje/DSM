@@ -1,8 +1,8 @@
-@* HARIA-WEB GENERATED sha256:c15ca6ecc556618a41c7eccf106571f873f77fedc9ac739ffa01ce8a0009eb04 *@
 @model CarGo.Web.ViewModels.UsuarioViewModel
 
 @{
     ViewData["Title"] = "Editar";
+    var esAdmin = User.IsInRole("Admin");
 }
 
 <div class="row justify-content-center">
@@ -34,20 +34,30 @@
             <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-        <div class="form-check mb-3">
-            <input asp-for="EsAdmin" class="form-check-input" />
-            <label asp-for="EsAdmin" class="form-check-label"></label>
-            <span asp-validation-for="EsAdmin" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="EstadoVerificacion" class="form-label"></label>
-            <select asp-for="EstadoVerificacion" asp-items="Html.GetEnumSelectList<CarGo.Domain.Enums.EstadoVerificacion>()" class="form-select"></select>
-            <span asp-validation-for="EstadoVerificacion" class="text-danger"></span>
-        </div>
+        @if (esAdmin)
+        {
+            <div class="form-check mb-3">
+                <input asp-for="EsAdmin" class="form-check-input" />
+                <label asp-for="EsAdmin" class="form-check-label"></label>
+                <span asp-validation-for="EsAdmin" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EstadoVerificacion" class="form-label"></label>
+                <select asp-for="EstadoVerificacion" asp-items="Html.GetEnumSelectList<CarGo.Domain.Enums.EstadoVerificacion>()" class="form-select"></select>
+                <span asp-validation-for="EstadoVerificacion" class="text-danger"></span>
+            </div>
+        }
                 </div>
                 <div class="card-footer bg-body p-4 d-flex flex-column flex-sm-row gap-2">
                     <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                    @if (esAdmin)
+                    {
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancelar</a>
+                    }
                 </div>
             </form>
         </div>
@@ -56,6 +66,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
-
 }

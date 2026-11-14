@@ -31,7 +31,8 @@ public partial class UsuarioController : Controller
     }
     /*PROTECTED REGION END*/
     [HttpGet]
-    /*PROTECTED REGION ID(UsuarioController_Index_GET_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_Index_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Index()
     {
@@ -47,7 +48,10 @@ public partial class UsuarioController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Details(int id)
     {
-    /*PROTECTED REGION ID(UsuarioController_Details_GET_body) START*/
+    /*PROTECTED REGION ID(UsuarioController_Details_GET_body) ENABLED START*/
+
+        // Solo el propio usuario o un admin pueden ver un perfil
+        if (!(User.IsInRole("Admin") || (int.TryParse(User.Identity?.Name, out var me) && me == id))) return Forbid();
 
         var entity = await _usuarioService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
@@ -56,7 +60,8 @@ public partial class UsuarioController : Controller
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(UsuarioController_Create_GET_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_Create_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public IActionResult Create()
     {
@@ -68,7 +73,8 @@ public partial class UsuarioController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    /*PROTECTED REGION ID(UsuarioController_Create_POST_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_Create_POST_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Create(CarGo.Web.ViewModels.UsuarioViewModel model)
     {
@@ -113,7 +119,11 @@ public partial class UsuarioController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Register(CarGo.Web.ViewModels.UsuarioViewModel model)
     {
-    /*PROTECTED REGION ID(UsuarioController_Register_POST_body) START*/
+    /*PROTECTED REGION ID(UsuarioController_Register_POST_body) ENABLED START*/
+
+        // Una cuenta nueva nunca es admin ni está verificada, diga lo que diga el formulario
+        model.EsAdmin = false;
+        model.EstadoVerificacion = EstadoVerificacion.Pendiente;
 
         ModelState.Remove(nameof(model.Telefono)); // Campo fuera del contrato Create de Application.
         ModelState.Remove(nameof(model.Dni)); // Campo fuera del contrato Create de Application.
@@ -141,7 +151,8 @@ public partial class UsuarioController : Controller
             ModelState.AddModelError(string.Empty, "Tu cuenta ya está creada. Inicia sesión desde la página de acceso.");
             return View(model);
         }
-        return RedirectToAction(nameof(Index));
+        // Index de Usuario es solo para admin: tras registrarse se va al inicio
+        return RedirectToAction("Index", "Home");
     /*PROTECTED REGION END*/
     }
 
@@ -150,7 +161,9 @@ public partial class UsuarioController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id)
     {
-    /*PROTECTED REGION ID(UsuarioController_Edit_GET_body) START*/
+    /*PROTECTED REGION ID(UsuarioController_Edit_GET_body) ENABLED START*/
+
+        if (!(User.IsInRole("Admin") || (int.TryParse(User.Identity?.Name, out var me) && me == id))) return Forbid();
 
         var entity = await _usuarioService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
@@ -164,16 +177,25 @@ public partial class UsuarioController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id, CarGo.Web.ViewModels.UsuarioViewModel model)
     {
-    /*PROTECTED REGION ID(UsuarioController_Edit_POST_body) START*/
+    /*PROTECTED REGION ID(UsuarioController_Edit_POST_body) ENABLED START*/
+
+        var esAdminLogueado = User.IsInRole("Admin");
+        if (!(esAdminLogueado || (int.TryParse(User.Identity?.Name, out var me) && me == id))) return Forbid();
 
         ModelState.Remove(nameof(model.Telefono)); // Campo fuera del contrato Edit de Application.
         ModelState.Remove(nameof(model.Dni)); // Campo fuera del contrato Edit de Application.
         if (!ModelState.IsValid) return View(model);
         var stored = await _usuarioService.ReadOIDAsync(id);
         if (stored is null) return NotFound();
+
+        // Solo un admin puede cambiar el rol de admin y el estado de verificación
+        var esAdmin = esAdminLogueado ? model.EsAdmin : stored.EsAdmin;
+        var estado = esAdminLogueado ? model.EstadoVerificacion : stored.EstadoVerificacion;
+
         try
         {
-            await _usuarioService.ModifyAsync(id, model.NombreCompleto, model.Email, (string.IsNullOrEmpty(model.Password) ? stored.Password : model.Password), model.EsAdmin, model.EstadoVerificacion);
+            // Contraseña opcional: si viene vacía se conserva la actual
+            await _usuarioService.ModifyAsync(id, model.NombreCompleto, model.Email, (string.IsNullOrEmpty(model.Password) ? stored.Password : model.Password), esAdmin, estado);
         }
         catch (Exception error) when (error is not OperationCanceledException)
         {
@@ -181,12 +203,13 @@ public partial class UsuarioController : Controller
             ModelState.AddModelError(string.Empty, "No se ha podido guardar el registro. Inténtalo de nuevo.");
             return View(model);
         }
-        return RedirectToAction(nameof(Index));
+        return esAdminLogueado ? RedirectToAction(nameof(Index)) : RedirectToAction(nameof(Details), new { id });
     /*PROTECTED REGION END*/
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(UsuarioController_Delete_GET_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_Delete_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Delete(int id)
     {
@@ -201,7 +224,8 @@ public partial class UsuarioController : Controller
     [HttpPost]
     [ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    /*PROTECTED REGION ID(UsuarioController_DeleteConfirmed_POST_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_DeleteConfirmed_POST_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
@@ -214,7 +238,8 @@ public partial class UsuarioController : Controller
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(UsuarioController_ReadFilterByEmail_GET_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_ReadFilterByEmail_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> ReadFilterByEmail(string p_email)
     {
@@ -226,7 +251,8 @@ public partial class UsuarioController : Controller
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(UsuarioController_ReadFilterByDni_GET_attributes) START*/
+    /*PROTECTED REGION ID(UsuarioController_ReadFilterByDni_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> ReadFilterByDni(string p_dni)
     {

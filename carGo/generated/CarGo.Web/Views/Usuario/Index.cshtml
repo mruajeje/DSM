@@ -1,4 +1,3 @@
-@* HARIA-WEB GENERATED sha256:4bf796724c8d0c778d34ecca66db44d649fc5adbdff827bf4af3502c59be92c6 *@
 @model IEnumerable<CarGo.Web.ViewModels.UsuarioViewModel>
 
 @{
@@ -12,6 +11,22 @@
             <p class="text-body-secondary mb-0">Consulta y gestiona los registros disponibles.</p>
         </div>
         <a asp-action="Create" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="card-body border-bottom p-4">
+        <form asp-action="Buscar" method="get" class="row g-2 align-items-end">
+            <div class="col-sm-5">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" name="email" value="@ViewData["Email"]" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <label for="dni" class="form-label">DNI</label>
+                <input id="dni" name="dni" value="@ViewData["Dni"]" class="form-control" />
+            </div>
+            <div class="col-sm-3 d-flex gap-2">
+                <button type="submit" class="btn btn-outline-primary">Buscar</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Limpiar</a>
+            </div>
+        </form>
     </div>
     <div class="card-body p-0">
     @if (Model.Any())
@@ -55,8 +70,8 @@
     else
     {
         <div class="text-center p-5">
-            <h2 class="h5">Todavía no hay registros</h2>
-            <p class="text-body-secondary">Crea el primer registro para comenzar.</p>
+            <h2 class="h5">No hay registros</h2>
+            <p class="text-body-secondary">No se ha encontrado ningún usuario con esos datos.</p>
             <a asp-action="Create" class="btn btn-primary">Crear</a>
         </div>
     }

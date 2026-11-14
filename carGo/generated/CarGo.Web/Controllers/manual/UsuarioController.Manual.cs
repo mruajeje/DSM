@@ -46,4 +46,35 @@ public partial class UsuarioController
         return RedirectToAction(nameof(Details), new { id = usuarioId });
     /*PROTECTED REGION END*/
     }
+
+    // Buscador de usuarios por email y/o DNI (solo admin). Reutiliza la vista Index.
+    [HttpGet]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Buscar(string? email, string? dni)
+    {
+        var emailBuscado = email?.Trim();
+        var dniBuscado = dni?.Trim().ToUpperInvariant();
+
+        IEnumerable<Usuario> resultado;
+        if (!string.IsNullOrEmpty(emailBuscado))
+        {
+            resultado = await _usuarioService.ReadFilterByEmailAsync(emailBuscado);
+            if (!string.IsNullOrEmpty(dniBuscado))
+            {
+                resultado = resultado.Where(u => string.Equals(u.Dni, dniBuscado, StringComparison.OrdinalIgnoreCase));
+            }
+        }
+        else if (!string.IsNullOrEmpty(dniBuscado))
+        {
+            resultado = await _usuarioService.ReadFilterByDniAsync(dniBuscado);
+        }
+        else
+        {
+            resultado = await _usuarioService.ReadAllAsync();
+        }
+
+        ViewData["Email"] = emailBuscado;
+        ViewData["Dni"] = dniBuscado;
+        return View("Index", resultado.Select(UsuarioAssembler.ToViewModel).ToList());
+    }
 }

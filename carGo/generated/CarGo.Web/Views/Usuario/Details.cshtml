@@ -1,8 +1,9 @@
-@* HARIA-WEB GENERATED sha256:c427f259011104bea56baef95b36e930c777c992e58a9af56ec5cd0614581d6e *@
 @model CarGo.Web.ViewModels.UsuarioViewModel
 
 @{
     ViewData["Title"] = "Detalles";
+    var esAdmin = User.IsInRole("Admin");
+    var esPropietario = User.Identity?.Name == Model.Id.ToString();
 }
 
 <div class="row justify-content-center">
@@ -11,7 +12,7 @@
             <div class="card-header bg-body p-4">
                 <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Detalles</span>
                 <h1 class="h3 mb-1">Usuario</h1>
-                <p class="text-body-secondary mb-0">Review the complete record information.</p>
+                <p class="text-body-secondary mb-0">Información completa del registro.</p>
             </div>
             <div class="card-body p-4">
                 <dl class="row mb-0 gy-2">
@@ -31,12 +32,35 @@
             <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.EstadoVerificacion)</dd>
                 </dl>
 
+                @if (esPropietario && string.IsNullOrWhiteSpace(Model.Dni))
+                {
+                    <hr class="my-4" />
+                    <h2 class="h5">Verificar mi DNI</h2>
+                    <p class="text-body-secondary">Indica tu DNI (8 números y la letra). Una vez guardado no se puede cambiar y queda pendiente de revisión.</p>
+                    <form asp-controller="Usuario" asp-action="VerificarDni" method="post" class="row g-2 align-items-end">
+                        <input type="hidden" name="p_oid" value="@Model.Id" />
+                        <div class="col-sm-6 col-md-4">
+                            <label for="p_dni" class="form-label">DNI</label>
+                            <input id="p_dni" name="p_dni" class="form-control" maxlength="9" placeholder="12345678Z" required />
+                        </div>
+                        <div class="col-sm-auto">
+                            <button type="submit" class="btn btn-primary">Verificar DNI</button>
+                        </div>
+                    </form>
+                }
             </div>
             <div class="card-footer bg-body p-4">
                 <div class="d-flex flex-column flex-sm-row gap-2">
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
-                <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
-            </div>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                    @if (esAdmin)
+                    {
+                        <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Volver al inicio</a>
+                    }
+                </div>
             </div>
         </div>
     </div>

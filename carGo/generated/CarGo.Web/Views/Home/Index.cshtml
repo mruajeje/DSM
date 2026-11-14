@@ -1,4 +1,72 @@
-@* HARIA-WEB GENERATED sha256:8f8ec3988845d58a673b4ac9dfc8a716a77f52a855041accdde5e1ef9a481f96 *@
-@{ ViewData["Title"] = "Inicio"; }
+@{
+    ViewData["Title"] = "Inicio";
+    var autenticado = User.Identity?.IsAuthenticated == true;
+    var esAdmin = User.IsInRole("Admin");
+    var esConductor = User.IsInRole("Conductor");
 
-<partial name="_BusinessNavigation" />
+    var enlaces = new List<(string Titulo, string Descripcion, string Controlador)>
+    {
+        ("Viajes", "Busca y consulta los viajes disponibles.", "Viaje"),
+        ("Vehículos", "Registra tus vehículos para poder publicar viajes.", "Vehiculo"),
+        ("Reservas", "Tus reservas de viaje.", "Reserva"),
+        ("Pagos", "Pagos y reembolsos.", "Pago"),
+        ("Mensajes", "Conversaciones sobre los viajes.", "Mensaje"),
+        ("Reseñas", "Opiniones sobre los viajes.", "Resena"),
+        ("Notificaciones", "Avisos de la plataforma.", "Notificacion"),
+    };
+    if (esAdmin)
+    {
+        enlaces.Add(("Usuarios", "Gestión de cuentas y verificación.", "Usuario"));
+    }
+}
+
+@if (!autenticado)
+{
+    <div class="text-center py-5">
+        <h1 class="display-5 fw-bold mb-3">Comparte coche, comparte camino</h1>
+        <p class="lead text-body-secondary mb-4">Publica tus viajes o reserva plaza en los de otras personas.</p>
+        <div class="d-flex justify-content-center gap-2">
+            <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+            <a class="btn btn-outline-primary btn-lg" asp-controller="Usuario" asp-action="Register">Crear cuenta</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="mb-4">
+        <h1 class="h2 mb-1">Bienvenida a CarGo</h1>
+        <p class="text-body-secondary mb-0">
+            Tu perfil:
+            @if (esAdmin) { <span class="badge text-bg-danger">Admin</span> }
+            @if (esConductor) { <span class="badge text-bg-primary">Conductor</span> }
+            <span class="badge text-bg-secondary">Pasajero</span>
+        </p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        @if (esConductor)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5">Publicar viaje</h2>
+                        <p class="text-body-secondary">Ofrece plazas en tu próximo trayecto.</p>
+                        <a class="btn btn-primary" asp-controller="Viaje" asp-action="Create">Publicar</a>
+                    </div>
+                </div>
+            </div>
+        }
+        @foreach (var enlace in enlaces)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5">@enlace.Titulo</h2>
+                        <p class="text-body-secondary">@enlace.Descripcion</p>
+                        <a class="btn btn-outline-primary" asp-controller="@enlace.Controlador" asp-action="Index">Ver listado</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

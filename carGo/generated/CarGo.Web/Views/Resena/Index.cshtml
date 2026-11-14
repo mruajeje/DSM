@@ -1,8 +1,8 @@
-@* HARIA-WEB GENERATED sha256:3a783fe2e2ef0f7b9c2e61245a727a60057ec2dd7767c16f272dddf2acd5d5b4 *@
 @model IEnumerable<CarGo.Web.ViewModels.ResenaViewModel>
 
 @{
     ViewData["Title"] = "Resena";
+    var esAdmin = User.IsInRole("Admin");
 }
 
 <div class="card border-0 shadow-sm">
@@ -28,6 +28,10 @@
                         <th scope="col">@Html.DisplayNameFor(model => model.MotivoModeracion)</th>
                         <th scope="col">@Html.DisplayNameFor(model => model.ViajeLabel)</th>
                         <th scope="col">@Html.DisplayNameFor(model => model.AutorLabel)</th>
+                        @if (esAdmin)
+                        {
+                            <th scope="col">Moderar</th>
+                        }
                         <th scope="col" class="text-end">Acciones</th>
                     </tr>
                 </thead>
@@ -43,6 +47,24 @@
                             <td>@Html.DisplayFor(modelItem => item.MotivoModeracion)</td>
                             <td>@Html.DisplayFor(modelItem => item.ViajeLabel)</td>
                             <td>@Html.DisplayFor(modelItem => item.AutorLabel)</td>
+                            @if (esAdmin)
+                            {
+                                <td>
+                                    @if (item.Estado == CarGo.Domain.Enums.EstadoResena.Pendiente)
+                                    {
+                                        <form asp-controller="Resena" asp-action="ModerarContenido" method="post" class="d-flex flex-column gap-1">
+                                            <input type="hidden" name="p_oid" value="@item.Id" />
+                                            <select name="p_decision" class="form-select form-select-sm">
+                                                <option value="Aceptada">Aceptar</option>
+                                                <option value="Oculta">Ocultar</option>
+                                                <option value="Rechazada">Rechazar</option>
+                                            </select>
+                                            <input name="p_motivo" class="form-control form-control-sm" placeholder="Motivo (obligatorio si oculta o rechaza)" />
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">Moderar</button>
+                                        </form>
+                                    }
+                                </td>
+                            }
                             <td class="text-end text-nowrap">
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
