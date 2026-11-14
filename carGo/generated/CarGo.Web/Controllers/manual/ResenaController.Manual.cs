@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CarGo.Domain.Entities;
 using CarGo.Application.Services;
+using CarGo.Application.Exceptions;
 using CarGo.Web.Assemblers;
 
 using CarGo.Domain.Enums;
@@ -22,15 +23,26 @@ public partial class ResenaController
 {
     [HttpPost]
     [ValidateAntiForgeryToken]
-    /*PROTECTED REGION ID(ResenaController_ModerarContenido_POST_attributes) START*/
+    /*PROTECTED REGION ID(ResenaController_ModerarContenido_POST_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> ModerarContenido(int p_oid, int p_admin_oid, EstadoResena p_decision, string p_motivo)
     {
     /*PROTECTED REGION ID(ResenaController_ModerarContenido_POST_body) ENABLED START*/
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-        await _resenaService.ModerarContenidoAsync(p_oid, p_admin_oid, p_decision, p_motivo);
-        return NoContent();
+        // El admin es quien está logueado, no lo que venga del formulario
+        if (!int.TryParse(User.Identity?.Name, out var adminId)) return Forbid();
+
+        try
+        {
+            await _resenaService.ModerarContenidoAsync(p_oid, adminId, p_decision, p_motivo);
+            TempData["Exito"] = "Reseña moderada correctamente.";
+        }
+        catch (ModelException error)
+        {
+            TempData["Error"] = error.Message;
+        }
+        return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
 }

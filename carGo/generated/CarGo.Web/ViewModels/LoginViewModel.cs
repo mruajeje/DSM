@@ -1,4 +1,3 @@
-// HARIA-WEB GENERATED sha256:697c5987702218eb236809a2093c9fa991ddf11c889a94fc734e972f796ee5b2
 using System.ComponentModel.DataAnnotations;
 
 namespace CarGo.Web.ViewModels;
@@ -7,8 +6,15 @@ public sealed class LoginViewModel
 {
     public string UserClass { get; set; } = "Usuario";
     public string? Identifier { get; set; }
+
+    // Ya no se usa para iniciar sesión (se entra por email); se conserva por compatibilidad
     [Display(Name = "id")]
     public int Id { get; set; }
+
+    [Required(ErrorMessage = "Debes indicar {0}.")]
+    [EmailAddress(ErrorMessage = "El correo electrónico no es válido.")]
+    [Display(Name = "Correo electrónico")]
+    public string Email { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
     [DataType(DataType.Password)]

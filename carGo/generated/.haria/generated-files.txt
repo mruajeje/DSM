@@ -1,6 +1,7 @@
 ﻿# HARIA generated file manifest
 # Do not edit manually.
 .gitignore
+CarGo.Application\.haria\obsolete-manual.targets
 CarGo.Application\Abstractions\IHariaPasswordHasher.cs
 CarGo.Application\Abstractions\IHariaTokenGenerator.cs
 CarGo.Application\Abstractions\IMensajeRepository.cs

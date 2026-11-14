@@ -1,9 +1,9 @@
-// HARIA-WEB GENERATED sha256:11a6a027fc371f89618b05cc193170a6228655f1d6b01a161c0d24fd5b36e096
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CarGo.Application.Abstractions;
 using CarGo.Web.Assemblers;
 using CarGo.Web.Utils.Security;
 using CarGo.Web.ViewModels;
@@ -13,13 +13,16 @@ namespace CarGo.Web.Controllers;
 public sealed class AccountController : Controller
 {
     private readonly CarGo.Application.Services.UsuarioService _userService;
-    private readonly CarGo.Application.Abstractions.IUnitOfWorkFactory _userRepository;
+    private readonly IUnitOfWorkFactory _userRepository;
+    private readonly IHariaPasswordHasher _passwordHasher;
 
     public AccountController(CarGo.Application.Services.UsuarioService userService,
-        CarGo.Application.Abstractions.IUnitOfWorkFactory userRepository)
+        IUnitOfWorkFactory userRepository,
+        IHariaPasswordHasher passwordHasher)
     {
         _userService = userService;
         _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
     }
 
     [AllowAnonymous]
@@ -37,16 +40,15 @@ public sealed class AccountController : Controller
             return View(model);
         }
 
-        var token = await _userService.LoginEmailAsync(model.Id, model.Password);
-        if (string.IsNullOrWhiteSpace(token))
-        {
-            ModelState.AddModelError(string.Empty, "Credenciales incorrectas.");
-            return View(model);
-        }
+        var email = model.Email.Trim();
 
+        // La entidad se carga dentro del UnitOfWork para que AddTrustedClaims pueda leer los vehículos
         await using var unitOfWork = _userRepository.Create();
-        var entity = await unitOfWork.UsuarioRepository.ReadAsync(model.Id);
-        if (entity is null)
+        var usuarios = await unitOfWork.UsuarioRepository.ReadFilterByEmailAsync(email);
+        var entity = usuarios.FirstOrDefault();
+
+        // Mismo mensaje si falla el email o la contraseña, para no dar pistas
+        if (entity is null || !_passwordHasher.VerifyPassword(entity.Password, model.Password))
         {
             ModelState.AddModelError(string.Empty, "Credenciales incorrectas.");
             return View(model);

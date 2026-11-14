@@ -314,6 +314,21 @@ public sealed class ModelGeneratedTests
             await viajeService.RemovePasajeroAsync(sampleViaje.Id, new[] { sampleUsuario.Id });
             Ensure(sampleViaje.Pasajero.Contains(sampleUsuario), "Viaje.removePasajero relates Viaje and Usuario.");
 
+            // Detach optional references and shared collections before deleting seed data.
+            sampleUsuario.Vehiculos.Clear();
+            sampleUsuario.Viajes.Clear();
+            sampleUsuario.Viajespasajero.Clear();
+            sampleUsuario.Reservas.Clear();
+            sampleUsuario.MensajesEnviados.Clear();
+            sampleUsuario.ResenasEscritas.Clear();
+            sampleUsuario.Notificaciones.Clear();
+            await usuarioService.ModifierUsuarioDefaultAsync(sampleUsuario);
+            // Detach optional references and shared collections before deleting seed data.
+            sampleViaje.Pasajero.Clear();
+            sampleViaje.Reservas.Clear();
+            sampleViaje.Mensajes.Clear();
+            sampleViaje.Resenas.Clear();
+            await viajeService.ModifierViajeDefaultAsync(sampleViaje);
             await vehiculoService.DestroyAsync(sampleVehiculo.Id);
             await pagoService.DestroyAsync(samplePago.Id);
             await viajeService.Reserva_destroyAsync(sampleReserva.Id);
