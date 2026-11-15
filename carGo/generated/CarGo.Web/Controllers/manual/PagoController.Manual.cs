@@ -8,6 +8,7 @@ using CarGo.Web.Assemblers;
 
 using CarGo.Domain.Enums;
 using CarGo.Domain.ValueObjects;
+using CarGo.Application.Exceptions;
 /*PROTECTED REGION END*/
 
 namespace CarGo.Web.Controllers;
@@ -28,11 +29,19 @@ public partial class PagoController
     {
     /*PROTECTED REGION ID(PagoController_RealizarPago_POST_body) ENABLED START*/
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-        await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
-        var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork);
-        await useCase.RealizarPagoAsync(p_oid);
-        return NoContent();
+        try
+        {
+            await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
+            var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork);
+            await useCase.RealizarPagoAsync(p_oid);
+            TempData["Exito"] = "Pago realizado correctamente.";
+        }
+        catch (ModelException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction(nameof(Details), new { id = p_oid });
     /*PROTECTED REGION END*/
     }
 
@@ -44,11 +53,19 @@ public partial class PagoController
     {
     /*PROTECTED REGION ID(PagoController_ReembolsarPago_POST_body) ENABLED START*/
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-        await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
-        var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork);
-        await useCase.ReembolsarPagoAsync(p_oid);
-        return NoContent();
+        try
+        {
+            await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
+            var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork);
+            await useCase.ReembolsarPagoAsync(p_oid);
+            TempData["Exito"] = "Pago reembolsado.";
+        }
+        catch (ModelException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction(nameof(Details), new { id = p_oid });
     /*PROTECTED REGION END*/
     }
 }

@@ -8,6 +8,7 @@ using CarGo.Web.Assemblers;
 
 using CarGo.Domain.Enums;
 using CarGo.Domain.ValueObjects;
+using CarGo.Application.Exceptions;
 /*PROTECTED REGION END*/
 
 namespace CarGo.Web.Controllers;
@@ -28,9 +29,22 @@ public partial class ReservaController
     {
     /*PROTECTED REGION ID(ReservaController_AceptarPasajero_POST_body) ENABLED START*/
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-        await _viajeService.Reserva_aceptarPasajeroAsync(p_oid, p_conductor_oid);
-        return NoContent();
+        if (!int.TryParse(User.Identity?.Name, out var conductorId))
+        {
+            return Challenge();
+        }
+
+        try
+        {
+            await _viajeService.Reserva_aceptarPasajeroAsync(p_oid, conductorId);
+            TempData["Exito"] = "Reserva aceptada correctamente.";
+        }
+        catch (ModelException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
 
@@ -42,9 +56,22 @@ public partial class ReservaController
     {
     /*PROTECTED REGION ID(ReservaController_RechazarPasajero_POST_body) ENABLED START*/
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-        await _viajeService.Reserva_rechazarPasajeroAsync(p_oid, p_conductor_oid);
-        return NoContent();
+        if (!int.TryParse(User.Identity?.Name, out var conductorId))
+        {
+            return Challenge();
+        }
+
+        try
+        {
+            await _viajeService.Reserva_rechazarPasajeroAsync(p_oid, conductorId);
+            TempData["Exito"] = "Reserva rechazada.";
+        }
+        catch (ModelException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
 
@@ -56,9 +83,22 @@ public partial class ReservaController
     {
     /*PROTECTED REGION ID(ReservaController_CancelarReserva_POST_body) ENABLED START*/
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-        await _viajeService.Reserva_cancelarReservaAsync(p_oid, p_usuario_oid);
-        return NoContent();
+        if (!int.TryParse(User.Identity?.Name, out var usuarioId))
+        {
+            return Challenge();
+        }
+
+        try
+        {
+            await _viajeService.Reserva_cancelarReservaAsync(p_oid, usuarioId);
+            TempData["Exito"] = "Reserva cancelada.";
+        }
+        catch (ModelException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
 }

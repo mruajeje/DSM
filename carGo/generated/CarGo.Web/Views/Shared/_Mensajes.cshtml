@@ -1,0 +1,22 @@
+@{
+    var exito = TempData["Exito"] as string;
+    var error = TempData["Error"] as string;
+    var erroresModelo = ViewData.ModelState.TryGetValue(string.Empty, out var entrada)
+        ? entrada.Errors.Select(e => e.ErrorMessage).Where(m => !string.IsNullOrWhiteSpace(m)).ToList()
+        : new List<string>();
+}
+
+@if (!string.IsNullOrWhiteSpace(exito))
+{
+    <div class="alert alert-success" role="status">@exito</div>
+}
+
+@if (!string.IsNullOrWhiteSpace(error))
+{
+    <div class="alert alert-danger" role="alert">@error</div>
+}
+
+@foreach (var mensaje in erroresModelo)
+{
+    <div class="alert alert-danger" role="alert">@mensaje</div>
+}
