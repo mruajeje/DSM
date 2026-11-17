@@ -35,10 +35,16 @@ public partial class NotificacionController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Index()
     {
-    /*PROTECTED REGION ID(NotificacionController_Index_GET_body) START*/
+    /*PROTECTED REGION ID(NotificacionController_Index_GET_body) ENABLED START*/
 
-        var entities = await _notificacionService.ReadAllAsync();
-        return View(entities.Select(NotificacionAssembler.ToViewModel).ToList());
+        // Admin ve todas; el resto, solo las suyas
+        var usuarioActual = UsuarioActualId();
+        var modelos = (await _notificacionService.ReadAllAsync()).Select(NotificacionAssembler.ToViewModel);
+        if (!User.IsInRole("Admin"))
+        {
+            modelos = modelos.Where(n => usuarioActual.HasValue && n.UsuarioNotificadoId == usuarioActual);
+        }
+        return View(modelos.ToList());
     /*PROTECTED REGION END*/
     }
 
@@ -47,16 +53,19 @@ public partial class NotificacionController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Details(int id)
     {
-    /*PROTECTED REGION ID(NotificacionController_Details_GET_body) START*/
+    /*PROTECTED REGION ID(NotificacionController_Details_GET_body) ENABLED START*/
 
         var entity = await _notificacionService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
-        return View(NotificacionAssembler.ToViewModel(entity));
+        var model = NotificacionAssembler.ToViewModel(entity);
+        if (!(User.IsInRole("Admin") || model.UsuarioNotificadoId == UsuarioActualId())) return Forbid();
+        return View(model);
     /*PROTECTED REGION END*/
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(NotificacionController_Create_GET_attributes) START*/
+    /*PROTECTED REGION ID(NotificacionController_Create_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Create()
     {
@@ -71,7 +80,8 @@ public partial class NotificacionController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    /*PROTECTED REGION ID(NotificacionController_Create_POST_attributes) START*/
+    /*PROTECTED REGION ID(NotificacionController_Create_POST_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Create(CarGo.Web.ViewModels.NotificacionViewModel model)
     {
@@ -118,7 +128,8 @@ public partial class NotificacionController : Controller
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(NotificacionController_Edit_GET_attributes) START*/
+    /*PROTECTED REGION ID(NotificacionController_Edit_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id)
     {
@@ -134,7 +145,8 @@ public partial class NotificacionController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    /*PROTECTED REGION ID(NotificacionController_Edit_POST_attributes) START*/
+    /*PROTECTED REGION ID(NotificacionController_Edit_POST_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id, CarGo.Web.ViewModels.NotificacionViewModel model)
     {
@@ -182,7 +194,8 @@ public partial class NotificacionController : Controller
     }
 
     [HttpGet]
-    /*PROTECTED REGION ID(NotificacionController_Delete_GET_attributes) START*/
+    /*PROTECTED REGION ID(NotificacionController_Delete_GET_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Delete(int id)
     {
@@ -197,7 +210,8 @@ public partial class NotificacionController : Controller
     [HttpPost]
     [ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    /*PROTECTED REGION ID(NotificacionController_DeleteConfirmed_POST_attributes) START*/
+    /*PROTECTED REGION ID(NotificacionController_DeleteConfirmed_POST_attributes) ENABLED START*/
+    [Authorize(Roles = "Admin")]
     /*PROTECTED REGION END*/
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

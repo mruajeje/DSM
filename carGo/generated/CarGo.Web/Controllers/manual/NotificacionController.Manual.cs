@@ -44,4 +44,7 @@ public partial class NotificacionController
         return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
+
+    // Id del usuario logueado (sale de la cookie)
+    private int? UsuarioActualId() => int.TryParse(User.Identity?.Name, out var id) ? id : null;
 }

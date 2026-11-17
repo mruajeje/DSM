@@ -2,15 +2,19 @@
 
 @{
     ViewData["Title"] = "Notificacion";
+    var esAdmin = User.IsInRole("Admin");
 }
 
 <div class="card border-0 shadow-sm">
     <div class="card-header bg-body d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-4">
         <div>
-            <h1 class="h3 mb-1">Notificacion</h1>
-            <p class="text-body-secondary mb-0">Consulta y gestiona los registros disponibles.</p>
+            <h1 class="h3 mb-1">Notificaciones</h1>
+            <p class="text-body-secondary mb-0">Avisos de la plataforma.</p>
         </div>
-        <a asp-action="Create" class="btn btn-primary">Crear</a>
+        @if (esAdmin)
+        {
+            <a asp-action="Create" class="btn btn-primary">Crear</a>
+        }
     </div>
     <div class="card-body p-0">
     @if (Model.Any())
@@ -47,8 +51,11 @@
                                     </form>
                                 }
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                @if (esAdmin)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                }
                             </td>
                     </tr>
                 }
@@ -59,9 +66,8 @@
     else
     {
         <div class="text-center p-5">
-            <h2 class="h5">Todavía no hay registros</h2>
-            <p class="text-body-secondary">Crea el primer registro para comenzar.</p>
-            <a asp-action="Create" class="btn btn-primary">Crear</a>
+            <h2 class="h5">No tienes notificaciones</h2>
+            <p class="text-body-secondary">Aquí aparecerán tus avisos.</p>
         </div>
     }
     </div>

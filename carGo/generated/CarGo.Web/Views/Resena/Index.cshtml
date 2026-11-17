@@ -3,13 +3,14 @@
 @{
     ViewData["Title"] = "Resena";
     var esAdmin = User.IsInRole("Admin");
+    int? usuarioActual = int.TryParse(User.Identity?.Name, out var uid) ? uid : null;
 }
 
 <div class="card border-0 shadow-sm">
     <div class="card-header bg-body d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-4">
         <div>
-            <h1 class="h3 mb-1">Resena</h1>
-            <p class="text-body-secondary mb-0">Consulta y gestiona los registros disponibles.</p>
+            <h1 class="h3 mb-1">Reseñas</h1>
+            <p class="text-body-secondary mb-0">Opiniones sobre los viajes.</p>
         </div>
         <a asp-action="Create" class="btn btn-primary">Crear</a>
     </div>
@@ -67,8 +68,11 @@
                             }
                             <td class="text-end text-nowrap">
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                @if (esAdmin || (usuarioActual.HasValue && item.AutorId == usuarioActual))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                }
                             </td>
                     </tr>
                 }
@@ -79,8 +83,8 @@
     else
     {
         <div class="text-center p-5">
-            <h2 class="h5">Todavía no hay registros</h2>
-            <p class="text-body-secondary">Crea el primer registro para comenzar.</p>
+            <h2 class="h5">Todavía no hay reseñas</h2>
+            <p class="text-body-secondary">Escribe la primera.</p>
             <a asp-action="Create" class="btn btn-primary">Crear</a>
         </div>
     }

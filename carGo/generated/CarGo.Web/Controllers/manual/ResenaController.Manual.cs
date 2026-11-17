@@ -45,4 +45,11 @@ public partial class ResenaController
         return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
+
+    // Id del usuario logueado (sale de la cookie)
+    private int? UsuarioActualId() => int.TryParse(User.Identity?.Name, out var id) ? id : null;
+
+    // Admin, o el autor de la reseña
+    private bool EsAdminOAutor(int? autorId) =>
+        User.IsInRole("Admin") || (autorId.HasValue && autorId == UsuarioActualId());
 }

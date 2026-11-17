@@ -35,10 +35,16 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Index()
     {
-    /*PROTECTED REGION ID(ResenaController_Index_GET_body) START*/
+    /*PROTECTED REGION ID(ResenaController_Index_GET_body) ENABLED START*/
 
-        var entities = await _resenaService.ReadAllAsync();
-        return View(entities.Select(ResenaAssembler.ToViewModel).ToList());
+        // Admin ve todas; el resto, las aceptadas y las suyas
+        var usuarioActual = UsuarioActualId();
+        var modelos = (await _resenaService.ReadAllAsync()).Select(ResenaAssembler.ToViewModel);
+        if (!User.IsInRole("Admin"))
+        {
+            modelos = modelos.Where(r => r.Estado == EstadoResena.Aceptada || (usuarioActual.HasValue && r.AutorId == usuarioActual));
+        }
+        return View(modelos.ToList());
     /*PROTECTED REGION END*/
     }
 
@@ -47,11 +53,13 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Details(int id)
     {
-    /*PROTECTED REGION ID(ResenaController_Details_GET_body) START*/
+    /*PROTECTED REGION ID(ResenaController_Details_GET_body) ENABLED START*/
 
         var entity = await _resenaService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
-        return View(ResenaAssembler.ToViewModel(entity));
+        var model = ResenaAssembler.ToViewModel(entity);
+        if (!(User.IsInRole("Admin") || model.Estado == EstadoResena.Aceptada || model.AutorId == UsuarioActualId())) return Forbid();
+        return View(model);
     /*PROTECTED REGION END*/
     }
 
@@ -75,7 +83,17 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Create(CarGo.Web.ViewModels.ResenaViewModel model)
     {
-    /*PROTECTED REGION ID(ResenaController_Create_POST_body) START*/
+    /*PROTECTED REGION ID(ResenaController_Create_POST_body) ENABLED START*/
+
+        // Autor, estado y fecha los decide el servidor, no el formulario
+        var usuarioActual = UsuarioActualId();
+        if (usuarioActual is null) return Forbid();
+        model.AutorId = usuarioActual;
+        model.Estado = EstadoResena.Pendiente;
+        model.FechaCreacion = DateTime.Now;
+        ModelState.Remove(nameof(model.AutorId));
+        ModelState.Remove(nameof(model.Estado));
+        ModelState.Remove(nameof(model.FechaCreacion));
 
         ModelState.Remove(nameof(model.MotivoModeracion)); // Campo fuera del contrato Create de Application.
         await using var unitOfWork = _formUnitOfWorkFactory.Create();
@@ -128,11 +146,12 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id)
     {
-    /*PROTECTED REGION ID(ResenaController_Edit_GET_body) START*/
+    /*PROTECTED REGION ID(ResenaController_Edit_GET_body) ENABLED START*/
 
         var entity = await _resenaService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
         var model = ResenaAssembler.ToViewModel(entity);
+        if (!EsAdminOAutor(model.AutorId)) return Forbid();
         await LoadFormOptionsAsync(model);
         return View(model);
     /*PROTECTED REGION END*/
@@ -144,7 +163,7 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id, CarGo.Web.ViewModels.ResenaViewModel model)
     {
-    /*PROTECTED REGION ID(ResenaController_Edit_POST_body) START*/
+    /*PROTECTED REGION ID(ResenaController_Edit_POST_body) ENABLED START*/
 
         ModelState.Remove(nameof(model.Comentario)); // Campo fuera del contrato Edit de Application.
         ModelState.Remove(nameof(model.MotivoModeracion)); // Campo fuera del contrato Edit de Application.
@@ -153,6 +172,15 @@ public partial class ResenaController : Controller
         var entity = await service.ReadOIDResenaDefaultAsync(id);
         if (entity is null) return NotFound();
 
+        // Solo el autor o un admin; y autor, estado y fecha se conservan siempre
+        var autorGuardado = ResenaAssembler.ToViewModel(entity).AutorId;
+        if (!EsAdminOAutor(autorGuardado)) return Forbid();
+        model.AutorId = autorGuardado;
+        model.Estado = entity.Estado;
+        model.FechaCreacion = entity.FechaCreacion;
+        ModelState.Remove(nameof(model.AutorId));
+        ModelState.Remove(nameof(model.Estado));
+        ModelState.Remove(nameof(model.FechaCreacion));
 
         await LoadFormOptionsAsync(model, unitOfWork);
         if (model.ViajeId is int selectedViaje &&
@@ -199,11 +227,13 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Delete(int id)
     {
-    /*PROTECTED REGION ID(ResenaController_Delete_GET_body) START*/
+    /*PROTECTED REGION ID(ResenaController_Delete_GET_body) ENABLED START*/
 
         var entity = await _resenaService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
-        return View(ResenaAssembler.ToViewModel(entity));
+        var model = ResenaAssembler.ToViewModel(entity);
+        if (!EsAdminOAutor(model.AutorId)) return Forbid();
+        return View(model);
     /*PROTECTED REGION END*/
     }
 
@@ -214,7 +244,11 @@ public partial class ResenaController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-    /*PROTECTED REGION ID(ResenaController_DeleteConfirmed_POST_body) START*/
+    /*PROTECTED REGION ID(ResenaController_DeleteConfirmed_POST_body) ENABLED START*/
+
+        var entity = await _resenaService.ReadOIDAsync(id);
+        if (entity is null) return NotFound();
+        if (!EsAdminOAutor(ResenaAssembler.ToViewModel(entity).AutorId)) return Forbid();
 
         if (!ModelState.IsValid) return View("Delete", new CarGo.Web.ViewModels.ResenaViewModel());
         await _resenaService.DestroyAsync(id);
