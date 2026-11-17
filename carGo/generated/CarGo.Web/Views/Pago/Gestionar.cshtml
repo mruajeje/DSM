@@ -1,0 +1,83 @@
+@model IEnumerable<CarGo.Web.ViewModels.PagoViewModel>
+@using CarGo.Domain.Enums
+
+@{
+    ViewData["Title"] = "Gestionar pagos";
+
+    string Insignia(EstadoPago estado) => estado switch
+    {
+        EstadoPago.Pendiente => "text-bg-warning",
+        EstadoPago.Completado => "text-bg-success",
+        _ => "text-bg-secondary"
+    };
+}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-body d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-4">
+        <div>
+            <h1 class="h3 mb-1">Gestionar pagos</h1>
+            <p class="text-body-secondary mb-0">Realiza los pagos pendientes y reembolsa los completados.</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">Nuevo pago</a>
+    </div>
+    <div class="card-body p-0">
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Reserva</th>
+                        <th scope="col">Importe</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Transacción</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>
+                            @if (p.ReservaId is not null)
+                            {
+                                <a asp-controller="Reserva" asp-action="Details" asp-route-id="@p.ReservaId">Reserva @p.ReservaId</a>
+                            }
+                        </td>
+                        <td>@p.MontoCantidad.ToString("N2") @p.MontoMoneda</td>
+                        <td>@p.FechaPago.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@p.IdTransaccionPasarela</td>
+                        <td><span class="badge @Insignia(p.Estado)">@p.Estado</span></td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-sm btn-outline-secondary">Ver</a>
+                            @if (p.Estado == EstadoPago.Pendiente)
+                            {
+                                <form asp-action="RealizarPago" method="post" class="d-inline">
+                                    <input type="hidden" name="p_oid" value="@p.Id" />
+                                    <button type="submit" class="btn btn-sm btn-success">Realizar pago</button>
+                                </form>
+                            }
+                            @if (p.Estado == EstadoPago.Completado)
+                            {
+                                <form asp-action="ReembolsarPago" method="post" class="d-inline"
+                                      onsubmit="return confirm('¿Seguro que quieres reembolsar este pago?');">
+                                    <input type="hidden" name="p_oid" value="@p.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Reembolsar</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-body-secondary p-4 mb-0">No hay pagos que mostrar.</p>
+    }
+    </div>
+</div>

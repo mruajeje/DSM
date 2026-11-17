@@ -44,7 +44,7 @@ public partial class ReservaController
             TempData["Error"] = ex.Message;
         }
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Gestionar));
     /*PROTECTED REGION END*/
     }
 
@@ -71,7 +71,7 @@ public partial class ReservaController
             TempData["Error"] = ex.Message;
         }
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Gestionar));
     /*PROTECTED REGION END*/
     }
 
@@ -98,7 +98,7 @@ public partial class ReservaController
             TempData["Error"] = ex.Message;
         }
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Gestionar));
     /*PROTECTED REGION END*/
     }
 }

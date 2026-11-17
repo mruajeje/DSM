@@ -31,7 +31,10 @@ public partial class PagoController
 
         try
         {
+<<<<<<< Updated upstream
             await using var unitOfWork = _useCaseUnitOfWorkFactory.Create(); 
+=======
+            await using var unitOfWork = _useCaseUnitOfWorkFactory.Create(); //abre una sesion de trabajo para el caso de uso
             // La pasarela de pago se registra aquí para no depender de Program.cs (que HARIA regenera)
             var servicios = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
             CarGo.Infrastructure.Utils.Manual.ExternalUtilRegistration.Register(
@@ -48,7 +51,6 @@ public partial class PagoController
             TempData["Error"] = ex.Message;
         }
 
-        return RedirectToAction(nameof(Details), new { id = p_oid });
     /*PROTECTED REGION END*/
     }
 
@@ -79,7 +81,6 @@ public partial class PagoController
             TempData["Error"] = ex.Message;
         }
 
-        return RedirectToAction(nameof(Details), new { id = p_oid });
     /*PROTECTED REGION END*/
     }
 }

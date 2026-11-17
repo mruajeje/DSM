@@ -1,0 +1,82 @@
+@model CarGo.Web.ViewModels.ReservaBuscarViewModel
+@using CarGo.Domain.Enums
+
+@{
+    ViewData["Title"] = "Buscar reservas";
+}
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-body p-4">
+        <h1 class="h3 mb-1">Buscar reservas</h1>
+        <p class="text-body-secondary mb-0">Filtra por estado y por fecha de solicitud. Si no indicas fechas, se busca en el último mes.</p>
+    </div>
+    <div class="card-body p-4">
+        <form method="get" asp-action="Buscar" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label asp-for="Estado" class="form-label">Estado</label>
+                <select asp-for="Estado" asp-items="Html.GetEnumSelectList<EstadoReserva>()" class="form-select">
+                    <option value="">Selecciona un estado</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Desde" class="form-label">Desde</label>
+                <input asp-for="Desde" type="date" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Hasta" class="form-label">Hasta (incluido)</label>
+                <input asp-for="Hasta" type="date" class="form-control" />
+            </div>
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Buscado)
+{
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-body p-4 d-flex justify-content-between align-items-center">
+            <h2 class="h5 mb-0">Resultados (@Model.Resultados.Count)</h2>
+            <a asp-action="Gestionar" class="btn btn-outline-secondary btn-sm">Volver a gestionar</a>
+        </div>
+        <div class="card-body p-0">
+        @if (Model.Resultados.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Viaje</th>
+                            <th scope="col">Pasajero</th>
+                            <th scope="col">Plazas</th>
+                            <th scope="col">Solicitada</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col" class="text-end"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var r in Model.Resultados)
+                    {
+                        <tr>
+                            <td>@r.Id</td>
+                            <td>@r.ViajeLabel</td>
+                            <td>@r.PasajeroLabel</td>
+                            <td>@r.NumPlazasReservadas</td>
+                            <td>@r.FechaSolicitud.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@r.Estado</td>
+                            <td class="text-end"><a asp-action="Details" asp-route-id="@r.Id" class="btn btn-sm btn-outline-secondary">Ver</a></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-body-secondary p-4 mb-0">No hay reservas con esos criterios.</p>
+        }
+        </div>
+    </div>
+}
