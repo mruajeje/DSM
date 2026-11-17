@@ -177,7 +177,7 @@ public static class SeedData
             /*PROTECTED REGION ID(initializeDataManual) ENABLED START*/
             // Datos de demo para el frontend (region protegida: sobrevive a regenerar).
             var usuarioSvc = new UsuarioService(unitOfWorkFactory);
-            if ((await usuarioSvc.ReadAllAsync()).Count > 0) return; // idempotente: nunca duplica
+            if ((await usuarioSvc.ReadFilterByEmailAsync("admin@cargo.com")).Count > 0) return; // idempotente: no duplica la demo
 
             var vehiculoSvc = new VehiculoService(unitOfWorkFactory);
             var viajeSvc = new ViajeService(unitOfWorkFactory);
