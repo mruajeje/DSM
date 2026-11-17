@@ -124,6 +124,9 @@ public partial class UsuarioController : Controller
         // Una cuenta nueva nunca es admin ni está verificada, diga lo que diga el formulario
         model.EsAdmin = false;
         model.EstadoVerificacion = EstadoVerificacion.Pendiente;
+        // El formulario no envía estos campos: se descartan sus errores de validación
+        ModelState.Remove(nameof(model.EsAdmin));
+        ModelState.Remove(nameof(model.EstadoVerificacion));
 
         ModelState.Remove(nameof(model.Telefono)); // Campo fuera del contrato Create de Application.
         ModelState.Remove(nameof(model.Dni)); // Campo fuera del contrato Create de Application.
@@ -181,6 +184,13 @@ public partial class UsuarioController : Controller
 
         var esAdminLogueado = User.IsInRole("Admin");
         if (!(esAdminLogueado || (int.TryParse(User.Identity?.Name, out var me) && me == id))) return Forbid();
+
+        // Un usuario normal no envía EsAdmin ni EstadoVerificacion: se descartan sus errores de validación
+        if (!esAdminLogueado)
+        {
+            ModelState.Remove(nameof(model.EsAdmin));
+            ModelState.Remove(nameof(model.EstadoVerificacion));
+        }
 
         ModelState.Remove(nameof(model.Telefono)); // Campo fuera del contrato Edit de Application.
         ModelState.Remove(nameof(model.Dni)); // Campo fuera del contrato Edit de Application.
