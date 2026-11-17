@@ -23,9 +23,40 @@ public sealed partial class PagoUseCase
             await _unitOfWork.BeginTransactionAsync("PagoUseCase.ReembolsarPagoAsync");
             pagoService = new PagoService(_unitOfWork);
 
-            // Write here your custom transaction code...
-            // Use pagoService, _unitOfWork.PagoRepository or _utils!.GetRequiredService<TService>() as the generated CP equivalent.
+            // Iniciar transacción
+            await _unitOfWork.BeginTransactionAsync(
+                "PagoUseCase.ReembolsarPagoAsync");
 
+            // Buscar el pago
+            var pago = await _unitOfWork.PagoRepository.ReadAsync(p_oid)
+                ?? throw new ModelException("Pago no encontrado.");
+
+            // Comprobar que está completado
+            if (pago.Estado != EstadoPago.Completado)
+                throw new ModelException(
+                    "Solo se pueden reembolsar pagos completados.");
+
+            // Comprobar que tiene una transacción asociada
+            if (string.IsNullOrWhiteSpace(pago.IdTransaccionPasarela))
+                throw new ModelException(
+                    "El pago no tiene una transacción asociada.");
+
+             // Obtener la pasarela simulada
+            var pasarela = _utils?.GetRequiredService<IPasarelaPago>()
+                ?? throw new ModelException(
+                    "No se ha configurado la pasarela de pago.");
+
+            // Ejecutar el reembolso
+            await pasarela.ReembolsarPagoAsync(
+                pago.IdTransaccionPasarela);
+
+            // Actualizar el estado
+            pago.Estado = EstadoPago.Reembolsado;
+
+            // Guardar los cambios
+            await _unitOfWork.PagoRepository.SaveAsync(pago);
+
+            // Confirmar transacción
             await _unitOfWork.CommitAsync();
         }
         catch (Exception ex)

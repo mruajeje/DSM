@@ -16,7 +16,32 @@ public sealed partial class ViajeService
         /*PROTECTED REGION ID(CarGo.Application.Services_Viaje_gestionarBajaPasajero) ENABLED START*/
         // Write here your custom code...
 
-        throw new ModelException("Application service generation for Viaje.gestionarBajaPasajero is pending.", new NotImplementedException("Method GestionarBajaPasajeroAsync() not yet implemented."));
+        // Buscar el viaje
+        Viaje viaje = await _repository.ReadAsync(p_oid)
+            ?? throw new ModelException("Viaje not found.");
+
+        // Buscar el usuario
+        Usuario usuario = await _unitOfWork.UsuarioRepository.ReadAsync(p_usuario_oid)
+            ?? throw new ModelException("Usuario not found.");
+
+            // Comprobar que el usuario está añadido al viaje
+        if (viaje.Pasajero?.Contains(usuario) != true)
+        {
+            throw new ModelException("El usuario no está añadido a este viaje.");
+        }
+
+        // Eliminar el usuario de la lista de pasajeros del viaje
+        viaje.Pasajero.Remove(usuario);
+
+        // Eliminar el viaje de la lista de viajes del usuario
+        usuario.Viajespasajero?.Remove(viaje);
+
+        // Devolver una plaza libre
+        viaje.NumPlazasDisponibles++;
+
+        // Guardar los cambios
+        await _unitOfWork.UsuarioRepository.SaveAsync(usuario);
+        await _repository.SaveAsync(viaje);
         /*PROTECTED REGION END*/
     }
 }

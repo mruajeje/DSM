@@ -32,7 +32,14 @@ public partial class PagoController
         try
         {
             await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
-            var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork);
+            // La pasarela de pago se registra aquí para no depender de Program.cs (que HARIA regenera)
+            var servicios = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            CarGo.Infrastructure.Utils.Manual.ExternalUtilRegistration.Register(
+                servicios,
+                Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Microsoft.Extensions.Configuration.IConfiguration>(HttpContext.RequestServices));
+            using var proveedor = Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(servicios);
+            var utils = new CarGo.Infrastructure.Utils.Generated.UnitOfWorkUtils(proveedor);
+            var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork, utils);
             await useCase.RealizarPagoAsync(p_oid);
             TempData["Exito"] = "Pago realizado correctamente.";
         }
@@ -56,7 +63,14 @@ public partial class PagoController
         try
         {
             await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
-            var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork);
+            // La pasarela de pago se registra aquí para no depender de Program.cs (que HARIA regenera)
+            var servicios = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            CarGo.Infrastructure.Utils.Manual.ExternalUtilRegistration.Register(
+                servicios,
+                Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Microsoft.Extensions.Configuration.IConfiguration>(HttpContext.RequestServices));
+            using var proveedor = Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(servicios);
+            var utils = new CarGo.Infrastructure.Utils.Generated.UnitOfWorkUtils(proveedor);
+            var useCase = new CarGo.Application.UseCases.Pago.PagoUseCase(unitOfWork, utils);
             await useCase.ReembolsarPagoAsync(p_oid);
             TempData["Exito"] = "Pago reembolsado.";
         }
