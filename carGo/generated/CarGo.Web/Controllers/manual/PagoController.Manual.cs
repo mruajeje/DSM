@@ -31,7 +31,7 @@ public partial class PagoController
 
         try
         {
-            await using var unitOfWork = _useCaseUnitOfWorkFactory.Create();
+            await using var unitOfWork = _useCaseUnitOfWorkFactory.Create(); 
             // La pasarela de pago se registra aquí para no depender de Program.cs (que HARIA regenera)
             var servicios = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
             CarGo.Infrastructure.Utils.Manual.ExternalUtilRegistration.Register(

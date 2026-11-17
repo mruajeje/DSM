@@ -28,8 +28,27 @@
                                 <li class="nav-item"><a class="nav-link" asp-controller="Viaje" asp-action="Create">Publicar viaje</a></li>
                             }
                             <li class="nav-item"><a class="nav-link" asp-controller="Vehiculo" asp-action="Index">Vehículos</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Reserva" asp-action="Index">Reservas</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Pago" asp-action="Index">Pagos</a></li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Reservas</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Reserva" asp-action="Index">Listado</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Reserva" asp-action="Buscar">Buscar reservas</a></li>
+                                    @if (User.IsInRole("Conductor") || User.IsInRole("Admin"))
+                                    {
+                                        <li><a class="dropdown-item" asp-controller="Reserva" asp-action="Gestionar">Gestionar reservas</a></li>
+                                    }
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pagos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Pago" asp-action="Index">Listado</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Pago" asp-action="Gestionar">Gestionar pagos</a></li>
+                                </ul>
+                            </li>
+
                             <li class="nav-item"><a class="nav-link" asp-controller="Mensaje" asp-action="Index">Mensajes</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Resena" asp-action="Index">Reseñas</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Notificacion" asp-action="Index">Notificaciones</a></li>
@@ -59,7 +78,15 @@
     </header>
 
     <main class="container flex-grow-1 py-4 py-lg-5">
-        <partial name="_Mensajes" />
+        @* PROVISIONAL: cuando exista Views/Shared/_Mensajes.cshtml (Ada), sustituir este bloque por: <partial name="_Mensajes" /> *@
+        @if (TempData["Exito"] is string mensajeExito)
+        {
+            <div class="alert alert-success" role="status">@mensajeExito</div>
+        }
+        @if (TempData["Error"] is string mensajeError)
+        {
+            <div class="alert alert-danger" role="alert">@mensajeError</div>
+        }
 
         @RenderBody()
     </main>
