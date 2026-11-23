@@ -1,79 +1,122 @@
-@* HARIA-WEB GENERATED sha256:17d5a09cbc0144c309cb080ee700285d758481d980d61e92109235954abbed3a *@
-@model IEnumerable<CarGo.Web.ViewModels.ViajeViewModel>
+@model CarGo.Web.ViewModels.ViajeBuscarViewModel
 
 @{
-    ViewData["Title"] = "Viaje";
+    ViewData["Title"] = "Viajes";
 }
 
-<div class="card border-0 shadow-sm">
+<div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-body d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-4">
         <div>
-            <h1 class="h3 mb-1">Viaje</h1>
-            <p class="text-body-secondary mb-0">Consulta y gestiona los registros disponibles.</p>
+            <h1 class="h3 mb-1">Viajes disponibles</h1>
+            <p class="text-body-secondary mb-0">Filtra por ruta, fechas, plazas, precio, preferencias o conductor verificado.</p>
         </div>
-        <a asp-action="Create" class="btn btn-primary">Crear</a>
+        <a asp-action="Create" class="btn btn-primary">Publicar viaje</a>
     </div>
+    <div class="card-body p-4 bg-body-tertiary">
+        <form asp-action="Index" method="get" class="row g-3">
+            <!-- Filtro 1: Origen / Destino -->
+            <div class="col-md-3">
+                <label asp-for="Origen" class="form-label"></label>
+                <input asp-for="Origen" class="form-control" placeholder="Ej. Alicante" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Destino" class="form-label"></label>
+                <input asp-for="Destino" class="form-control" placeholder="Ej. Madrid" />
+            </div>
+
+            <!-- Filtro 2: Fecha y Plazas -->
+            <div class="col-md-2">
+                <label asp-for="FechaDesde" class="form-label"></label>
+                <input asp-for="FechaDesde" type="datetime-local" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label asp-for="FechaHasta" class="form-label"></label>
+                <input asp-for="FechaHasta" type="datetime-local" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label asp-for="PlazasMinimas" class="form-label"></label>
+                <input asp-for="PlazasMinimas" type="number" min="1" class="form-control" placeholder="1" />
+            </div>
+
+            <!-- Filtro 3: Precio -->
+            <div class="col-md-2">
+                <label asp-for="PrecioMinimo" class="form-label"></label>
+                <input asp-for="PrecioMinimo" type="number" step="0.5" min="0" class="form-control" placeholder="0" />
+            </div>
+            <div class="col-md-2">
+                <label asp-for="PrecioMaximo" class="form-label"></label>
+                <input asp-for="PrecioMaximo" type="number" step="0.5" min="0" class="form-control" placeholder="50" />
+            </div>
+
+            <!-- Filtros 4, 5 y 6: Preferencias, Disponibles y Conductor Verificado -->
+            <div class="col-md-8 d-flex flex-wrap align-items-end gap-4 pb-1">
+                <div class="form-check">
+                    <input asp-for="PermiteMascotas" class="form-check-input" />
+                    <label asp-for="PermiteMascotas" class="form-check-label"></label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="PermiteEquipaje" class="form-check-input" />
+                    <label asp-for="PermiteEquipaje" class="form-check-label"></label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="SoloDisponibles" class="form-check-input" />
+                    <label asp-for="SoloDisponibles" class="form-check-label"></label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="SoloConductorVerificado" class="form-check-input" />
+                    <label asp-for="SoloConductorVerificado" class="form-check-label"></label>
+                </div>
+            </div>
+
+            <div class="col-12 d-flex gap-2 justify-content-end">
+                <a asp-action="Index" class="btn btn-outline-secondary">Limpiar filtros</a>
+                <button type="submit" class="btn btn-primary">Buscar viajes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
     <div class="card-body p-0">
-    @if (Model.Any())
+    @if (Model.Resultados.Any())
     {
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.OrigenCiudad)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.OrigenDireccion)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.OrigenLatitud)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.OrigenLongitud)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.DestinoCiudad)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.DestinoDireccion)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.DestinoLatitud)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.DestinoLongitud)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.FechaHoraSalida)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.NumPlazasDisponibles)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.PrecioMoneda)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.PrecioCantidad)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.PermiteMascotas)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.PermiteEquipaje)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Observaciones)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Estado)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.LatitudActual)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.LongitudActual)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.FechaUltimaPosicion)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.ConductorLabel)</th>
+                        <th scope="col">Ruta</th>
+                        <th scope="col">Salida</th>
+                        <th scope="col">Plazas</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Preferencias</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Conductor</th>
                         <th scope="col" class="text-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.Resultados)
                 {
                     <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OrigenCiudad)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OrigenDireccion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OrigenLatitud)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OrigenLongitud)</td>
-                            <td>@Html.DisplayFor(modelItem => item.DestinoCiudad)</td>
-                            <td>@Html.DisplayFor(modelItem => item.DestinoDireccion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.DestinoLatitud)</td>
-                            <td>@Html.DisplayFor(modelItem => item.DestinoLongitud)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FechaHoraSalida)</td>
-                            <td>@Html.DisplayFor(modelItem => item.NumPlazasDisponibles)</td>
-                            <td>@Html.DisplayFor(modelItem => item.PrecioMoneda)</td>
-                            <td>@Html.DisplayFor(modelItem => item.PrecioCantidad)</td>
-                            <td>@Html.DisplayFor(modelItem => item.PermiteMascotas)</td>
-                            <td>@Html.DisplayFor(modelItem => item.PermiteEquipaje)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Observaciones)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
-                            <td>@Html.DisplayFor(modelItem => item.LatitudActual)</td>
-                            <td>@Html.DisplayFor(modelItem => item.LongitudActual)</td>
-                            <td>@Html.DisplayFor(modelItem => item.FechaUltimaPosicion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ConductorLabel)</td>
-                            <td class="text-end text-nowrap">
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
-                            </td>
+                        <td>
+                            <strong>@item.OrigenCiudad</strong> &rarr; <strong>@item.DestinoCiudad</strong>
+                            <div class="small text-body-secondary">@item.OrigenDireccion &rarr; @item.DestinoDireccion</div>
+                        </td>
+                        <td>@item.FechaHoraSalida.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td><span class="badge text-bg-info">@item.NumPlazasDisponibles</span></td>
+                        <td>@item.PrecioCantidad.ToString("0.00") @item.PrecioMoneda</td>
+                        <td>
+                            @if (item.PermiteMascotas) { <span class="badge text-bg-secondary me-1">Mascotas</span> }
+                            @if (item.PermiteEquipaje) { <span class="badge text-bg-secondary">Equipaje</span> }
+                            @if (!item.PermiteMascotas && !item.PermiteEquipaje) { <span class="text-body-secondary small">Sin extras</span> }
+                        </td>
+                        <td><span class="badge text-bg-light border text-dark">@item.Estado</span></td>
+                        <td>@item.ConductorLabel</td>
+                        <td class="text-end text-nowrap">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </td>
                     </tr>
                 }
                 </tbody>
@@ -83,9 +126,9 @@
     else
     {
         <div class="text-center p-5">
-            <h2 class="h5">Todavía no hay registros</h2>
-            <p class="text-body-secondary">Crea el primer registro para comenzar.</p>
-            <a asp-action="Create" class="btn btn-primary">Crear</a>
+            <h2 class="h5">No se han encontrado viajes</h2>
+            <p class="text-body-secondary">Prueba a ampliar los criterios de búsqueda o publica un nuevo viaje.</p>
+            <a asp-action="Create" class="btn btn-primary">Publicar viaje</a>
         </div>
     }
     </div>

@@ -1,71 +1,120 @@
-@* HARIA-WEB GENERATED sha256:7b2717edd8edb7c2f6e066d566d21de41d31374e3a30c25934a68fb6eb629677 *@
 @model CarGo.Web.ViewModels.ViajeViewModel
 
 @{
-    ViewData["Title"] = "Detalles";
+    ViewData["Title"] = "Detalles del viaje";
 }
 
-<div class="row justify-content-center">
-    <div class="col-xl-9">
+@if (TempData["SuccessMessage"] is string okMsg)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @okMsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (TempData["ErrorMessage"] is string errMsg)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @errMsg
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row justify-content-center g-4">
+    <div class="col-xl-8">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-body p-4">
-                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Detalles</span>
-                <h1 class="h3 mb-1">Viaje</h1>
-                <p class="text-body-secondary mb-0">Review the complete record information.</p>
+            <div class="card-header bg-body p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="badge text-bg-primary-subtle text-primary-emphasis mb-2">Viaje #@Model.Id</span>
+                    <h1 class="h3 mb-0">@Model.OrigenCiudad &rarr; @Model.DestinoCiudad</h1>
+                </div>
+                <span class="badge text-bg-secondary fs-6">@Model.Estado</span>
             </div>
             <div class="card-body p-4">
                 <dl class="row mb-0 gy-2">
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Id)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Id)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenCiudad)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenCiudad)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenDireccion)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenDireccion)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenLatitud)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenLatitud)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.OrigenLongitud)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.OrigenLongitud)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoCiudad)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoCiudad)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoDireccion)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoDireccion)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoLatitud)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoLatitud)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.DestinoLongitud)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.DestinoLongitud)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.FechaHoraSalida)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.FechaHoraSalida)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.NumPlazasDisponibles)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.NumPlazasDisponibles)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PrecioMoneda)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PrecioMoneda)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PrecioCantidad)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PrecioCantidad)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PermiteMascotas)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PermiteMascotas)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.PermiteEquipaje)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.PermiteEquipaje)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Observaciones)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Observaciones)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Estado)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Estado)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.LatitudActual)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.LatitudActual)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.LongitudActual)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.LongitudActual)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.FechaUltimaPosicion)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.FechaUltimaPosicion)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.ConductorLabel)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.ConductorLabel)</dd>
-                </dl>
+                    <dt class="col-sm-4 text-body-secondary">Origen</dt>
+                    <dd class="col-sm-8">@Model.OrigenCiudad (@Model.OrigenDireccion) — [@Model.OrigenLatitud, @Model.OrigenLongitud]</dd>
 
+                    <dt class="col-sm-4 text-body-secondary">Destino</dt>
+                    <dd class="col-sm-8">@Model.DestinoCiudad (@Model.DestinoDireccion) — [@Model.DestinoLatitud, @Model.DestinoLongitud]</dd>
+
+                    <dt class="col-sm-4 text-body-secondary">@Html.DisplayNameFor(m => m.FechaHoraSalida)</dt>
+                    <dd class="col-sm-8">@Model.FechaHoraSalida.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                    <dt class="col-sm-4 text-body-secondary">@Html.DisplayNameFor(m => m.NumPlazasDisponibles)</dt>
+                    <dd class="col-sm-8">@Model.NumPlazasDisponibles</dd>
+
+                    <dt class="col-sm-4 text-body-secondary">@Html.DisplayNameFor(m => m.PrecioCantidad)</dt>
+                    <dd class="col-sm-8">@Model.PrecioCantidad.ToString("0.00") @Model.PrecioMoneda</dd>
+
+                    <dt class="col-sm-4 text-body-secondary">Preferencias</dt>
+                    <dd class="col-sm-8">
+                        Mascotas: <strong>@(Model.PermiteMascotas ? "Sí" : "No")</strong> |
+                        Equipaje: <strong>@(Model.PermiteEquipaje ? "Sí" : "No")</strong>
+                    </dd>
+
+                    <dt class="col-sm-4 text-body-secondary">@Html.DisplayNameFor(m => m.Observaciones)</dt>
+                    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Observaciones) ? "—" : Model.Observaciones)</dd>
+
+                    <dt class="col-sm-4 text-body-secondary">@Html.DisplayNameFor(m => m.ConductorLabel)</dt>
+                    <dd class="col-sm-8">@Model.ConductorLabel</dd>
+
+                    <dt class="col-sm-4 text-body-secondary">Geolocalización actual</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.LatitudActual.HasValue && Model.LongitudActual.HasValue)
+                        {
+                            <span>Lat: @Model.LatitudActual, Lon: @Model.LongitudActual (actualizado: @Model.FechaUltimaPosicion?.ToString("dd/MM/yyyy HH:mm"))</span>
+                        }
+                        else
+                        {
+                            <span class="text-body-secondary">Sin posición registrada</span>
+                        }
+                    </dd>
+                </dl>
             </div>
-            <div class="card-footer bg-body p-4">
-                <div class="d-flex flex-column flex-sm-row gap-2">
+            <div class="card-footer bg-body p-4 d-flex flex-column flex-sm-row gap-2">
                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
                 <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
             </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <!-- Acción 1: Gestionar Plazas -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-body p-3">
+                <h2 class="h6 mb-0">Gestionar plazas del viaje</h2>
             </div>
+            <form asp-action="GestionarPlazas" method="post" class="card-body p-3">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="p_oid" value="@Model.Id" />
+                <div class="mb-3">
+                    <label for="p_nuevasPlazas" class="form-label">Total de plazas ofertadas</label>
+                    <input type="number" id="p_nuevasPlazas" name="p_nuevasPlazas" min="0" value="@Model.NumPlazasDisponibles" class="form-control" required />
+                    <div class="form-text">No puede ser inferior al número de pasajeros ya confirmados.</div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary w-100">Actualizar plazas</button>
+            </form>
+        </div>
+
+        <!-- Acción 2: Geolocalizar Trayecto -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-body p-3">
+                <h2 class="h6 mb-0">Geolocalizar trayecto</h2>
+            </div>
+            <form asp-action="GeolocalizarTrayecto" method="post" class="card-body p-3">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="p_oid" value="@Model.Id" />
+                <div class="mb-2">
+                    <label for="p_latitud" class="form-label">Latitud (-90 a 90)</label>
+                    <input type="text" inputmode="decimal" id="p_latitud" name="p_latitud" value="@(Model.LatitudActual.HasValue && Model.LatitudActual != 0 ? Model.LatitudActual.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) : "")" placeholder="Ej. 38.3847" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="p_longitud" class="form-label">Longitud (-180 a 180)</label>
+                    <input type="text" inputmode="decimal" id="p_longitud" name="p_longitud" value="@(Model.LongitudActual.HasValue && Model.LongitudActual != 0 ? Model.LongitudActual.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) : "")" placeholder="Ej. -0.5141" class="form-control" required />
+                </div>
+                <div class="form-text mb-3">Requiere que el viaje esté en estado <strong>EnCurso</strong>.</div>
+                <button type="submit" class="btn btn-outline-success w-100">Enviar posición actual</button>
+            </form>
         </div>
     </div>
 </div>

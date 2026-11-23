@@ -9,12 +9,15 @@ public sealed class VehiculoViewModel : IValidatableObject
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
+    [Display(Name = "Marca y modelo")]
     public string MarcaModelo { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
+    [Display(Name = "Matrícula")]
     public string Matricula { get; set; } = string.Empty;
 
     [UIHint("HariaReadOnly:Edit")]
+    [Display(Name = "Información adicional")]
     public string? InformacionAdicional { get; set; }
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
@@ -33,11 +36,21 @@ public sealed class VehiculoViewModel : IValidatableObject
     /*PROTECTED REGION END*/
 
     /*PROTECTED REGION ID(VehiculoViewModel_manual) ENABLED START*/
-    // Add custom properties and validation here.
     private IEnumerable<ValidationResult> ValidateAdditional(ValidationContext validationContext)
     {
-        yield break;
-    }
+        if (!string.IsNullOrWhiteSpace(MarcaModelo) && MarcaModelo.Trim().Length < 2)
+        {
+            yield return new ValidationResult(
+                "La marca y modelo debe tener al menos 2 caracteres.",
+                new[] { nameof(MarcaModelo) });
+        }
 
+        if (!string.IsNullOrWhiteSpace(Matricula) && Matricula.Trim().Length < 4)
+        {
+            yield return new ValidationResult(
+                "La matrícula debe tener al menos 4 caracteres.",
+                new[] { nameof(Matricula) });
+        }
+    }
     /*PROTECTED REGION END*/
 }

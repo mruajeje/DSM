@@ -9,63 +9,71 @@ public sealed class ViajeViewModel : IValidatableObject
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
-    [Display(Name = "origen / ciudad")]
+    [Display(Name = "Origen / Ciudad")]
     public string OrigenCiudad { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
-    [Display(Name = "origen / direccion")]
+    [Display(Name = "Origen / Dirección")]
     public string OrigenDireccion { get; set; } = string.Empty;
 
-    [Display(Name = "origen / latitud")]
+    [Display(Name = "Origen / Latitud")]
     public double OrigenLatitud { get; set; }
 
-    [Display(Name = "origen / longitud")]
+    [Display(Name = "Origen / Longitud")]
     public double OrigenLongitud { get; set; }
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
-    [Display(Name = "destino / ciudad")]
+    [Display(Name = "Destino / Ciudad")]
     public string DestinoCiudad { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
-    [Display(Name = "destino / direccion")]
+    [Display(Name = "Destino / Dirección")]
     public string DestinoDireccion { get; set; } = string.Empty;
 
-    [Display(Name = "destino / latitud")]
+    [Display(Name = "Destino / Latitud")]
     public double DestinoLatitud { get; set; }
 
-    [Display(Name = "destino / longitud")]
+    [Display(Name = "Destino / Longitud")]
     public double DestinoLongitud { get; set; }
 
     [DataType(DataType.DateTime)]
+    [Display(Name = "Fecha y hora de salida")]
     public DateTime FechaHoraSalida { get; set; }
 
+    [Display(Name = "Plazas disponibles")]
     public int NumPlazasDisponibles { get; set; }
 
     [EnumDataType(typeof(CarGo.Domain.Enums.EnumMoneda), ErrorMessage = "El valor de {0} no es válido.")]
-    [Display(Name = "precio / moneda")]
+    [Display(Name = "Moneda")]
     public CarGo.Domain.Enums.EnumMoneda PrecioMoneda { get; set; }
 
-    [Display(Name = "precio / cantidad")]
+    [Display(Name = "Precio")]
     public double PrecioCantidad { get; set; }
 
+    [Display(Name = "Permite mascotas")]
     public bool PermiteMascotas { get; set; }
 
+    [Display(Name = "Permite equipaje")]
     public bool PermiteEquipaje { get; set; }
 
-    [UIHint("HariaReadOnly:Create,Edit")]
+    [Display(Name = "Observaciones")]
     public string? Observaciones { get; set; }
 
     [EnumDataType(typeof(CarGo.Domain.Enums.EstadoViaje), ErrorMessage = "El valor de {0} no es válido.")]
+    [Display(Name = "Estado del viaje")]
     public CarGo.Domain.Enums.EstadoViaje Estado { get; set; }
 
     [UIHint("HariaReadOnly:Create,Edit")]
+    [Display(Name = "Latitud actual")]
     public double? LatitudActual { get; set; }
 
     [UIHint("HariaReadOnly:Create,Edit")]
+    [Display(Name = "Longitud actual")]
     public double? LongitudActual { get; set; }
 
     [UIHint("HariaReadOnly:Create,Edit")]
     [DataType(DataType.DateTime)]
+    [Display(Name = "Última posición")]
     public DateTime? FechaUltimaPosicion { get; set; }
 
     [Required(ErrorMessage = "Debes indicar {0}.")]
@@ -84,11 +92,21 @@ public sealed class ViajeViewModel : IValidatableObject
     /*PROTECTED REGION END*/
 
     /*PROTECTED REGION ID(ViajeViewModel_manual) ENABLED START*/
-    // Add custom properties and validation here.
     private IEnumerable<ValidationResult> ValidateAdditional(ValidationContext validationContext)
     {
-        yield break;
-    }
+        if (NumPlazasDisponibles < 0)
+        {
+            yield return new ValidationResult(
+                "El número de plazas disponibles no puede ser negativo.",
+                new[] { nameof(NumPlazasDisponibles) });
+        }
 
+        if (PrecioCantidad < 0)
+        {
+            yield return new ValidationResult(
+                "El precio no puede ser negativo.",
+                new[] { nameof(PrecioCantidad) });
+        }
+    }
     /*PROTECTED REGION END*/
 }

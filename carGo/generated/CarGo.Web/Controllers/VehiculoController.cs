@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CarGo.Domain.Entities;
 using CarGo.Application.Services;
+using CarGo.Application.Exceptions;
 using CarGo.Web.Assemblers;
 
 using CarGo.Domain.Enums;
@@ -30,13 +31,13 @@ public partial class VehiculoController : Controller
         _logger = logger ?? global::Microsoft.Extensions.Logging.Abstractions.NullLogger<VehiculoController>.Instance;
     }
     /*PROTECTED REGION END*/
+
     [HttpGet]
     /*PROTECTED REGION ID(VehiculoController_Index_GET_attributes) START*/
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Index()
     {
     /*PROTECTED REGION ID(VehiculoController_Index_GET_body) START*/
-
         var entities = await _vehiculoService.ReadAllAsync();
         return View(entities.Select(VehiculoAssembler.ToViewModel).ToList());
     /*PROTECTED REGION END*/
@@ -48,7 +49,6 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> Details(int id)
     {
     /*PROTECTED REGION ID(VehiculoController_Details_GET_body) START*/
-
         var entity = await _vehiculoService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
         return View(VehiculoAssembler.ToViewModel(entity));
@@ -61,9 +61,7 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> Create()
     {
     /*PROTECTED REGION ID(VehiculoController_Create_GET_body) START*/
-
         var model = new CarGo.Web.ViewModels.VehiculoViewModel();
-
         await LoadFormOptionsAsync(model);
         return View(model);
     /*PROTECTED REGION END*/
@@ -76,12 +74,8 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> Create(CarGo.Web.ViewModels.VehiculoViewModel model)
     {
     /*PROTECTED REGION ID(VehiculoController_Create_POST_body) START*/
-
-
         await using var unitOfWork = _formUnitOfWorkFactory.Create();
         var service = new VehiculoService(unitOfWork);
-
-
 
         await LoadFormOptionsAsync(model, unitOfWork);
         if (model.PropietarioId is int selectedPropietario &&
@@ -89,12 +83,16 @@ public partial class VehiculoController : Controller
             ModelState.AddModelError("PropietarioId", "Selecciona un registro existente de Usuario.");
         if (model.PropietarioId is null) ModelState.AddModelError("PropietarioId", "Debes seleccionar una opción.");
 
-
         if (!ModelState.IsValid) return View(model);
 
         await unitOfWork.BeginTransactionAsync("MVC.Vehiculo.Create");
         try
         {
+            model.MarcaModelo = model.MarcaModelo.Trim();
+            model.Matricula = model.Matricula.Trim().ToUpperInvariant();
+            model.InformacionAdicional = string.IsNullOrWhiteSpace(model.InformacionAdicional)
+                ? null
+                : model.InformacionAdicional.Trim();
 
             var entity = await service.NewAsync(model.MarcaModelo, model.Matricula, model.InformacionAdicional, model.PropietarioId.GetValueOrDefault());
             entity.Propietario = model.PropietarioId is int referencePropietario
@@ -103,13 +101,20 @@ public partial class VehiculoController : Controller
             await service.ModifierVehiculoDefaultAsync(entity);
 
             await unitOfWork.CommitAsync();
+            TempData["SuccessMessage"] = "Vehículo registrado correctamente.";
+        }
+        catch (ModelException ex)
+        {
+            await unitOfWork.RollbackAsync();
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(model);
         }
         catch (Exception error)
         {
             await unitOfWork.RollbackAsync();
             if (error is OperationCanceledException) throw;
             _logger.LogError(error, "Could not save the record and its lines.");
-            ModelState.AddModelError(string.Empty, "No se han podido guardar el registro y sus líneas.");
+            ModelState.AddModelError(string.Empty, "No se ha podido guardar el vehículo.");
             return View(model);
         }
 
@@ -123,7 +128,6 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> Edit(int id)
     {
     /*PROTECTED REGION ID(VehiculoController_Edit_GET_body) START*/
-
         var entity = await _vehiculoService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
         var model = VehiculoAssembler.ToViewModel(entity);
@@ -139,13 +143,11 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> Edit(int id, CarGo.Web.ViewModels.VehiculoViewModel model)
     {
     /*PROTECTED REGION ID(VehiculoController_Edit_POST_body) START*/
-
         ModelState.Remove(nameof(model.InformacionAdicional)); // Campo fuera del contrato Edit de Application.
         await using var unitOfWork = _formUnitOfWorkFactory.Create();
         var service = new VehiculoService(unitOfWork);
         var entity = await service.ReadOIDVehiculoDefaultAsync(id);
         if (entity is null) return NotFound();
-
 
         await LoadFormOptionsAsync(model, unitOfWork);
         if (model.PropietarioId is int selectedPropietario &&
@@ -153,12 +155,13 @@ public partial class VehiculoController : Controller
             ModelState.AddModelError("PropietarioId", "Selecciona un registro existente de Usuario.");
         if (model.PropietarioId is null) ModelState.AddModelError("PropietarioId", "Debes seleccionar una opción.");
 
-
         if (!ModelState.IsValid) return View(model);
 
         await unitOfWork.BeginTransactionAsync("MVC.Vehiculo.Edit");
         try
         {
+            model.MarcaModelo = model.MarcaModelo.Trim();
+            model.Matricula = model.Matricula.Trim().ToUpperInvariant();
 
             await service.ModifyAsync(id, model.MarcaModelo, model.Matricula);
             entity.Propietario = model.PropietarioId is int referencePropietario
@@ -167,13 +170,20 @@ public partial class VehiculoController : Controller
             await service.ModifierVehiculoDefaultAsync(entity);
 
             await unitOfWork.CommitAsync();
+            TempData["SuccessMessage"] = "Vehículo actualizado correctamente.";
+        }
+        catch (ModelException ex)
+        {
+            await unitOfWork.RollbackAsync();
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(model);
         }
         catch (Exception error)
         {
             await unitOfWork.RollbackAsync();
             if (error is OperationCanceledException) throw;
             _logger.LogError(error, "Could not save the record and its lines.");
-            ModelState.AddModelError(string.Empty, "No se han podido guardar el registro y sus líneas.");
+            ModelState.AddModelError(string.Empty, "No se ha podido actualizar el vehículo.");
             return View(model);
         }
 
@@ -187,7 +197,6 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> Delete(int id)
     {
     /*PROTECTED REGION ID(VehiculoController_Delete_GET_body) START*/
-
         var entity = await _vehiculoService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
         return View(VehiculoAssembler.ToViewModel(entity));
@@ -202,9 +211,21 @@ public partial class VehiculoController : Controller
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
     /*PROTECTED REGION ID(VehiculoController_DeleteConfirmed_POST_body) START*/
-
         if (!ModelState.IsValid) return View("Delete", new CarGo.Web.ViewModels.VehiculoViewModel());
-        await _vehiculoService.DestroyAsync(id);
+        try
+        {
+            await _vehiculoService.DestroyAsync(id);
+            TempData["SuccessMessage"] = "Vehículo eliminado correctamente.";
+        }
+        catch (ModelException ex)
+        {
+            TempData["ErrorMessage"] = ex.Message;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting Vehiculo {Id}", id);
+            TempData["ErrorMessage"] = "No se puede eliminar el vehículo porque tiene viajes asociados.";
+        }
         return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }
@@ -220,15 +241,12 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION ID(VehiculoController_method_LoadFormOptionsAsync_CarGoWebViewModelsVehiculoViewModel_CarGoApplicationAbstractionsIUnitOfWork) START*/
     private async Task LoadFormOptionsAsync(CarGo.Web.ViewModels.VehiculoViewModel model, CarGo.Application.Abstractions.IUnitOfWork unitOfWork)
     {
-
         var options0 = (await unitOfWork.UsuarioRepository.ReadAllAsync()).Select(item => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = Convert.ToString(item.Id, System.Globalization.CultureInfo.InvariantCulture), Text = Convert.ToString(item.NombreCompleto, System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty }).ToList();
         model.PropietarioOptions = options0.Select(item => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
         {
             Value = item.Value,
             Text = item.Text
         }).ToList();
-
     }
     /*PROTECTED REGION END*/
-
 }
