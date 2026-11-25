@@ -78,15 +78,7 @@
     </header>
 
     <main class="container flex-grow-1 py-4 py-lg-5">
-        @* PROVISIONAL: cuando exista Views/Shared/_Mensajes.cshtml (Ada), sustituir este bloque por: <partial name="_Mensajes" /> *@
-        @if (TempData["Exito"] is string mensajeExito)
-        {
-            <div class="alert alert-success" role="status">@mensajeExito</div>
-        }
-        @if (TempData["Error"] is string mensajeError)
-        {
-            <div class="alert alert-danger" role="alert">@mensajeError</div>
-        }
+        <partial name="_Mensajes" />
 
         @RenderBody()
     </main>
