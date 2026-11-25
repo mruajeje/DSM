@@ -149,6 +149,103 @@ dotnet test --filter "FullyQualifiedName~PagoUseCaseTests"
 2. **Protección HARIA**: Las regiones `PROTECTED REGION` conservan las modificaciones hechas en `Program.cs` e infraestructura ante posibles regeneraciones del modelo TDM.
 
 
+## 8. Reservas, pagos y mensajes (interfaz web)
+
+### 8.1. Pantallas
+
+| Pantalla | Ruta | Quién la ve | Qué hace |
+|---|---|---|---|
+| Listado de reservas | `/Reserva` | Cualquier usuario con sesión | CRUD generado por HARIA Web |
+| Gestionar reservas | `/Reserva/Gestionar` | Conductor y Admin (menú) | Aceptar, rechazar y cancelar; opción «Solo mis reservas» |
+| Buscar reservas | `/Reserva/Buscar` | Cualquier usuario con sesión | Filtro por estado y fecha de solicitud (la fecha «hasta» cuenta como incluida) |
+| Listado de pagos | `/Pago` | Cualquier usuario con sesión | CRUD generado por HARIA Web |
+| Gestionar pagos | `/Pago/Gestionar` | Cualquier usuario con sesión | Realizar pagos pendientes y reembolsar los completados |
+| Mensajes | `/Mensaje` | Cualquier usuario con sesión | CRUD generado por HARIA Web |
+
+Las pantallas de gestión y búsqueda están en archivos propios que HARIA no regenera:
+`Controllers/manual/ReservaController.Gestion.cs`, `Controllers/manual/PagoController.Gestion.cs`,
+`ViewModels/ReservaBuscarViewModel.cs` y las vistas `Gestionar.cshtml` y `Buscar.cshtml`.
+
+### 8.2. Reglas de negocio (se comprueban en los servicios, no en la vista)
+
+| Operación | Reglas |
+|---|---|
+| `aceptarPasajero` | Solo el conductor del viaje; la reserva debe estar pendiente y el viaje publicado; deben quedar plazas suficientes. Resta las plazas y añade al pasajero al viaje. |
+| `rechazarPasajero` | Solo el conductor del viaje; solo reservas pendientes. |
+| `cancelarReserva` | La puede cancelar el pasajero o el conductor; no vale si ya está cancelada o rechazada. Si estaba aceptada, devuelve las plazas al viaje. |
+| `realizarPago` | El pago debe estar pendiente. Se cobra a través de la pasarela y pasa a completado con su identificador de transacción. |
+| `reembolsarPago` | El pago debe estar completado y tener identificador de transacción. Pasa a reembolsado. |
+
+Todos los errores de reglas son `ModelException`; el controlador los captura y los muestra como aviso rojo.
+
+### 8.3. Seguridad de las acciones
+
+Las acciones `AceptarPasajero`, `RechazarPasajero` y `CancelarReserva` **no se fían del formulario**: el identificador
+del usuario sale de la sesión (`User.Identity.Name`). El parámetro `p_conductor_oid` / `p_usuario_oid` que declara el modelo
+se ignora. Así nadie puede hacerse pasar por otro usuario enviando un identificador distinto.
+
+### 8.4. Avisos al usuario
+
+`Views/Shared/_Mensajes.cshtml` es un partial que muestra:
+- `TempData["Exito"]` como aviso verde,
+- `TempData["Error"]` como aviso rojo,
+- los errores generales de `ModelState`.
+
+Las acciones dejan el aviso en `TempData` y redirigen, de forma que sobrevive a la redirección y se muestra una sola vez.
+
+### 8.5. Pasarela de pago simulada
+
+- `IPasarelaPago` (`CarGo.Application/Abstractions`) define cobrar y reembolsar.
+- `PasarelaPagoSimulada` (`CarGo.Infrastructure/Services`) es la implementación de demostración.
+- Se registra en `ExternalUtilRegistration` (`CarGo.Infrastructure/Utils/manual`).
+- La web no registra las utilidades externas en `Program.cs` (HARIA lo regenera), por lo que las acciones
+  `RealizarPago` y `ReembolsarPago` construyen su propio proveedor con `ExternalUtilRegistration.Register`.
+
+---
+
+## 9. Pruebas de extremo a extremo (manuales)
+
+### 9.1. Preparación
+
+```powershell
+cd generated\InitializeDB
+dotnet run -- --reset
+cd ..\..
+dotnet run --project generated\CarGo.Web\CarGo.Web.csproj
+```
+
+Abrir `http://localhost:5226` (o la URL que muestre la consola). Datos de partida: 4 usuarios, 2 vehículos, 6 viajes,
+2 reservas (la 1 de Marta, pendiente, en el viaje 1 de Ana; la 2 de Marta, aceptada, en el viaje 2 de Ana) y 1 notificación.
+**No hay ningún pago**: se crea en el paso 6.
+
+### 9.2. Recorrido completo
+
+| # | Usuario | Acción | Resultado esperado | OK |
+|---|---|---|---|---|
+| 1 | ana@cargo.com | Viajes → Publicar viaje (usando su vehículo) | El viaje aparece en el listado, estado Publicado | ☐ |
+| 2 | marta@cargo.com | Reservas → crear reserva de 1 plaza en ese viaje, estado Pendiente | La reserva aparece como Pendiente | ☐ |
+| 3 | luis@cargo.com | Gestionar reservas → Aceptar la reserva de Marta (Luis no es el conductor) | Aviso rojo «Solo el conductor del viaje puede aceptar pasajeros.» La reserva sigue Pendiente | ☐ |
+| 4 | ana@cargo.com | Gestionar reservas → Aceptar | Aviso verde; la reserva pasa a Aceptada; el viaje pierde 1 plaza | ☐ |
+| 5 | ana@cargo.com | Gestionar reservas → intentar aceptar otra vez | No hay botón Aceptar en una reserva ya aceptada | ☐ |
+| 6 | marta@cargo.com | Pagos → crear pago pendiente (importe del viaje, reserva anterior) | El pago aparece como Pendiente | ☐ |
+| 7 | marta@cargo.com | Gestionar pagos → Realizar pago | Aviso verde; el pago pasa a Completado y muestra un identificador de transacción | ☐ |
+| 8 | marta@cargo.com | Gestionar reservas (Solo mis reservas) → Cancelar | Aviso verde; la reserva pasa a Cancelada; el viaje recupera la plaza | ☐ |
+| 9 | marta@cargo.com | Gestionar pagos → Reembolsar | Aviso verde; el pago pasa a Reembolsado | ☐ |
+| 10 | cualquiera | Reservas → Buscar: estado Cancelada y el rango de fechas de hoy | La reserva cancelada aparece en los resultados | ☐ |
+| 11 | marta@cargo.com | Reservas → Buscar con «desde» posterior a «hasta» | Aviso rojo con el error de fechas | ☐ |
+| 12 | admin@cargo.com | Rechazar una reserva pendiente que no sea suya | El administrador no es el conductor: aviso rojo (solo el conductor puede rechazar) | ☐ |
+
+### 9.3. Pruebas automáticas
+
+```powershell
+cd generated
+dotnet build
+dotnet build CarGo.Web\CarGo.Web.csproj
+dotnet test
+```
+
+La solución `CarGo.sln` no incluye `CarGo.Web`, por eso se compila aparte. Las pruebas de reservas y pagos están en
+`ViajeServiceReservaTests` y `PagoUseCaseTests`.
 
 
 ## Arrancar la aplicación web (CarGo.Web)
