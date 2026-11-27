@@ -2,6 +2,18 @@
 
 @{
     ViewData["Title"] = "Detalles del vehículo";
+
+    // Buscar si existe imagen subida en wwwroot/uploads/vehiculos/
+    var carpeta = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "uploads", "vehiculos");
+    string? urlFoto = null;
+    if (System.IO.Directory.Exists(carpeta))
+    {
+        var archivo = System.IO.Directory.GetFiles(carpeta, $"vehiculo_{Model.Id}.*").FirstOrDefault();
+        if (archivo != null)
+        {
+            urlFoto = $"/uploads/vehiculos/{System.IO.Path.GetFileName(archivo)}?v={DateTime.Now.Ticks}";
+        }
+    }
 }
 
 @if (TempData["SuccessMessage"] is string okMsg)
@@ -19,8 +31,8 @@
     </div>
 }
 
-<div class="row justify-content-center">
-    <div class="col-xl-8">
+<div class="row justify-content-center g-4">
+    <div class="col-xl-7">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-body p-4 d-flex justify-content-between align-items-center">
                 <div>
@@ -30,6 +42,13 @@
                 <span class="badge text-bg-secondary fs-6">@Model.Matricula</span>
             </div>
             <div class="card-body p-4">
+                @if (urlFoto != null)
+                {
+                    <div class="mb-4 text-center">
+                        <img src="@urlFoto" alt="Foto de @Model.MarcaModelo" class="img-fluid rounded-3 shadow-sm" style="max-height: 260px; object-fit: cover;" />
+                    </div>
+                }
+
                 <dl class="row mb-0 gy-2">
                     <dt class="col-sm-4 text-body-secondary">Marca y modelo</dt>
                     <dd class="col-sm-8">@Model.MarcaModelo</dd>
@@ -48,6 +67,23 @@
                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
                 <a asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
             </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-body p-3">
+                <h2 class="h6 mb-0">Foto del vehículo</h2>
+            </div>
+            <form asp-action="SubirFoto" method="post" enctype="multipart/form-data" class="card-body p-3">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="p_oid" value="@Model.Id" />
+                <div class="mb-3">
+                    <label for="foto" class="form-label">Seleccionar imagen (JPG, PNG, WEBP)</label>
+                    <input type="file" id="foto" name="foto" accept="image/*" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-outline-primary w-100">Subir foto</button>
+            </form>
         </div>
     </div>
 </div>

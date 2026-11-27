@@ -68,8 +68,12 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Create()
     {
-    /*PROTECTED REGION ID(VehiculoController_Create_GET_body) START*/
+    /*PROTECTED REGION ID(VehiculoController_Create_GET_body) ENABLED START*/
         var model = new CarGo.Web.ViewModels.VehiculoViewModel();
+        if (!User.IsInRole("Admin") && int.TryParse(User.Identity?.Name, out var usuarioId))
+        {
+            model.PropietarioId = usuarioId;
+        }
         await LoadFormOptionsAsync(model);
         return View(model);
     /*PROTECTED REGION END*/
@@ -81,7 +85,14 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Create(CarGo.Web.ViewModels.VehiculoViewModel model)
     {
-    /*PROTECTED REGION ID(VehiculoController_Create_POST_body) START*/
+    /*PROTECTED REGION ID(VehiculoController_Create_POST_body) ENABLED START*/
+        // Si no es Admin, forzar siempre el propietario desde la cookie de sesión
+        if (!User.IsInRole("Admin"))
+        {
+            if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId)) return Forbid();
+            model.PropietarioId = usuarioSesionId;
+        }
+
         await using var unitOfWork = _formUnitOfWorkFactory.Create();
         var service = new VehiculoService(unitOfWork);
 
@@ -135,9 +146,16 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id)
     {
-    /*PROTECTED REGION ID(VehiculoController_Edit_GET_body) START*/
+    /*PROTECTED REGION ID(VehiculoController_Edit_GET_body) ENABLED START*/
         var entity = await _vehiculoService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            int.TryParse(User.Identity?.Name, out var usuarioId);
+            if (entity.Propietario?.Id != usuarioId) return Forbid();
+        }
+
         var model = VehiculoAssembler.ToViewModel(entity);
         await LoadFormOptionsAsync(model);
         return View(model);
@@ -150,12 +168,19 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id, CarGo.Web.ViewModels.VehiculoViewModel model)
     {
-    /*PROTECTED REGION ID(VehiculoController_Edit_POST_body) START*/
+    /*PROTECTED REGION ID(VehiculoController_Edit_POST_body) ENABLED START*/
         ModelState.Remove(nameof(model.InformacionAdicional)); // Campo fuera del contrato Edit de Application.
         await using var unitOfWork = _formUnitOfWorkFactory.Create();
         var service = new VehiculoService(unitOfWork);
         var entity = await service.ReadOIDVehiculoDefaultAsync(id);
         if (entity is null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId) || entity.Propietario?.Id != usuarioSesionId)
+                return Forbid();
+            model.PropietarioId = usuarioSesionId;
+        }
 
         await LoadFormOptionsAsync(model, unitOfWork);
         if (model.PropietarioId is int selectedPropietario &&
@@ -204,9 +229,16 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Delete(int id)
     {
-    /*PROTECTED REGION ID(VehiculoController_Delete_GET_body) START*/
+    /*PROTECTED REGION ID(VehiculoController_Delete_GET_body) ENABLED START*/
         var entity = await _vehiculoService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            int.TryParse(User.Identity?.Name, out var usuarioId);
+            if (entity.Propietario?.Id != usuarioId) return Forbid();
+        }
+
         return View(VehiculoAssembler.ToViewModel(entity));
     /*PROTECTED REGION END*/
     }
@@ -218,10 +250,19 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-    /*PROTECTED REGION ID(VehiculoController_DeleteConfirmed_POST_body) START*/
+    /*PROTECTED REGION ID(VehiculoController_DeleteConfirmed_POST_body) ENABLED START*/
         if (!ModelState.IsValid) return View("Delete", new CarGo.Web.ViewModels.VehiculoViewModel());
         try
         {
+            var entity = await _vehiculoService.ReadOIDAsync(id);
+            if (entity is null) return NotFound();
+
+            if (!User.IsInRole("Admin"))
+            {
+                if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId) || entity.Propietario?.Id != usuarioSesionId)
+                    return Forbid();
+            }
+
             await _vehiculoService.DestroyAsync(id);
             TempData["SuccessMessage"] = "Vehículo eliminado correctamente.";
         }

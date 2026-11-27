@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Viajes";
+    var esAdmin = User.IsInRole("Admin");
+    int.TryParse(User.Identity?.Name, out var usuarioActualId);
 }
 
 <div class="card border-0 shadow-sm mb-4">
@@ -114,8 +116,11 @@
                         <td>@item.ConductorLabel</td>
                         <td class="text-end text-nowrap">
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalles</a>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            @if (esAdmin || item.ConductorId == usuarioActualId)
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            }
                         </td>
                     </tr>
                 }

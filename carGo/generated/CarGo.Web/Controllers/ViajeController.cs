@@ -144,9 +144,18 @@ public partial class ViajeController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id)
     {
-    /*PROTECTED REGION ID(ViajeController_Edit_GET_body) START*/
+    /*PROTECTED REGION ID(ViajeController_Edit_GET_body) ENABLED START*/
         var entity = await _viajeService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId) || entity.Conductor?.Id != usuarioSesionId)
+            {
+                return Forbid();
+            }
+        }
+
         var model = ViajeAssembler.ToViewModel(entity);
         await LoadFormOptionsAsync(model);
         return View(model);
@@ -159,7 +168,7 @@ public partial class ViajeController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Edit(int id, CarGo.Web.ViewModels.ViajeViewModel model)
     {
-    /*PROTECTED REGION ID(ViajeController_Edit_POST_body) START*/
+    /*PROTECTED REGION ID(ViajeController_Edit_POST_body) ENABLED START*/
         ModelState.Remove(nameof(model.LatitudActual)); // Campo fuera del contrato Edit de Application.
         ModelState.Remove(nameof(model.LongitudActual)); // Campo fuera del contrato Edit de Application.
         ModelState.Remove(nameof(model.FechaUltimaPosicion)); // Campo fuera del contrato Edit de Application.
@@ -167,6 +176,15 @@ public partial class ViajeController : Controller
         var service = new ViajeService(unitOfWork);
         var entity = await service.ReadOIDViajeDefaultAsync(id);
         if (entity is null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId) || entity.Conductor?.Id != usuarioSesionId)
+            {
+                return Forbid();
+            }
+            model.ConductorId = usuarioSesionId;
+        }
 
         await LoadFormOptionsAsync(model, unitOfWork);
         if (model.ConductorId is int selectedConductor &&
@@ -223,9 +241,18 @@ public partial class ViajeController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Delete(int id)
     {
-    /*PROTECTED REGION ID(ViajeController_Delete_GET_body) START*/
+    /*PROTECTED REGION ID(ViajeController_Delete_GET_body) ENABLED START*/
         var entity = await _viajeService.ReadOIDAsync(id);
         if (entity is null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId) || entity.Conductor?.Id != usuarioSesionId)
+            {
+                return Forbid();
+            }
+        }
+
         return View(ViajeAssembler.ToViewModel(entity));
     /*PROTECTED REGION END*/
     }
@@ -237,10 +264,28 @@ public partial class ViajeController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-    /*PROTECTED REGION ID(ViajeController_DeleteConfirmed_POST_body) START*/
-        if (!ModelState.IsValid) return View("Delete", new CarGo.Web.ViewModels.ViajeViewModel());
+    /*PROTECTED REGION ID(ViajeController_DeleteConfirmed_POST_body) ENABLED START*/
+        if (!ModelState.IsValid)
+        {
+            return View("Delete", new CarGo.Web.ViewModels.ViajeViewModel());
+        }
+
         try
         {
+            var entity = await _viajeService.ReadOIDAsync(id);
+            if (entity is null)
+            {
+                return NotFound();
+            }
+
+            if (!User.IsInRole("Admin"))
+            {
+                if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId) || entity.Conductor?.Id != usuarioSesionId)
+                {
+                    return Forbid();
+                }
+            }
+
             await _viajeService.DestroyAsync(id);
             TempData["SuccessMessage"] = "Viaje eliminado correctamente.";
         }
@@ -253,6 +298,7 @@ public partial class ViajeController : Controller
             _logger.LogError(ex, "Error deleting Viaje {Id}", id);
             TempData["ErrorMessage"] = "No se puede eliminar el viaje porque tiene reservas o registros asociados.";
         }
+
         return RedirectToAction(nameof(Index));
     /*PROTECTED REGION END*/
     }

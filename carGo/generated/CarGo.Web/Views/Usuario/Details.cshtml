@@ -4,33 +4,82 @@
     ViewData["Title"] = "Detalles";
     var esAdmin = User.IsInRole("Admin");
     var esPropietario = User.Identity?.Name == Model.Id.ToString();
+
+    var carpetaUsuario = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "uploads", "usuarios");
+    string? urlAvatar = null;
+    if (System.IO.Directory.Exists(carpetaUsuario))
+    {
+        var archivoAvatar = System.IO.Directory.GetFiles(carpetaUsuario, $"usuario_{Model.Id}.*").FirstOrDefault();
+        if (archivoAvatar != null)
+        {
+            urlAvatar = $"/uploads/usuarios/{System.IO.Path.GetFileName(archivoAvatar)}?v={DateTime.Now.Ticks}";
+        }
+    }
 }
 
 <div class="row justify-content-center">
     <div class="col-xl-9">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-body p-4">
-                <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Detalles</span>
-                <h1 class="h3 mb-1">Usuario</h1>
-                <p class="text-body-secondary mb-0">Información completa del registro.</p>
+            <div class="card-header bg-body p-4 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+                <div>
+                    <span class="badge text-bg-primary-subtle text-primary-emphasis mb-3">Detalles</span>
+                    <h1 class="h3 mb-1">Usuario</h1>
+                    <p class="text-body-secondary mb-0">Información completa del registro.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    @if (urlAvatar != null)
+                    {
+                        <img src="@urlAvatar" alt="Foto de @Model.NombreCompleto" class="rounded-circle shadow-sm" style="width: 84px; height: 84px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        var inicial = !string.IsNullOrWhiteSpace(Model.NombreCompleto)
+                            ? Model.NombreCompleto.Substring(0, 1).ToUpper()
+                            : "U";
+                        <div class="rounded-circle bg-secondary-subtle text-secondary d-flex align-items-center justify-content-center shadow-sm" style="width: 84px; height: 84px; font-size: 2rem; font-weight: 600;">
+                            @inicial
+                        </div>
+                    }
+                </div>
             </div>
             <div class="card-body p-4">
                 <dl class="row mb-0 gy-2">
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Id)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Id)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.NombreCompleto)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.NombreCompleto)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Email)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Email)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Telefono)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Telefono)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Dni)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Dni)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.EsAdmin)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.EsAdmin)</dd>
-            <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.EstadoVerificacion)</dt>
-            <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.EstadoVerificacion)</dd>
+                    <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Id)</dt>
+                    <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Id)</dd>
+                    <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.NombreCompleto)</dt>
+                    <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.NombreCompleto)</dd>
+                    <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Email)</dt>
+                    <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Email)</dd>
+                    <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Telefono)</dt>
+                    <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Telefono)</dd>
+                    <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.Dni)</dt>
+                    <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.Dni)</dd>
+                    @if (esAdmin)
+                    {
+                        <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.EsAdmin)</dt>
+                        <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.EsAdmin)</dd>
+                    }
+                    <dt class="col-sm-4 col-lg-3 text-body-secondary">@Html.DisplayNameFor(model => model.EstadoVerificacion)</dt>
+                    <dd class="col-sm-8 col-lg-9">@Html.DisplayFor(model => model.EstadoVerificacion)</dd>
                 </dl>
+
+                @if (esPropietario || esAdmin)
+                {
+                    <hr class="my-4" />
+                    <h2 class="h5">Foto de perfil</h2>
+                    <p class="text-body-secondary">Sube una imagen en formato JPG, PNG o WEBP para actualizar tu avatar.</p>
+                    <form asp-controller="Usuario" asp-action="SubirFotoPerfil" method="post" enctype="multipart/form-data" class="row g-2 align-items-end">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="p_oid" value="@Model.Id" />
+                        <div class="col-sm-7 col-md-5">
+                            <label for="foto" class="form-label">Archivo de imagen</label>
+                            <input type="file" id="foto" name="foto" accept="image/*" class="form-control" required />
+                        </div>
+                        <div class="col-sm-auto">
+                            <button type="submit" class="btn btn-outline-primary">Subir foto</button>
+                        </div>
+                    </form>
+                }
 
                 @if (esPropietario && string.IsNullOrWhiteSpace(Model.Dni))
                 {

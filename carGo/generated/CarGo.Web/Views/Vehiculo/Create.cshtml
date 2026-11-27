@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Crear vehículo";
+    var esAdmin = User.IsInRole("Admin");
 }
 
 <div class="row justify-content-center">
@@ -31,13 +32,21 @@
                         <input asp-for="InformacionAdicional" class="form-control" placeholder="Color, maletero grande, aire acondicionado..." />
                         <span asp-validation-for="InformacionAdicional" class="text-danger"></span>
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="PropietarioId" class="form-label"></label>
-                        <select asp-for="PropietarioId" asp-items="Model.PropietarioOptions" class="form-select">
-                            <option value="">Selecciona un propietario...</option>
-                        </select>
-                        <span asp-validation-for="PropietarioId" class="text-danger"></span>
-                    </div>
+
+                    @if (esAdmin)
+                    {
+                        <div class="mb-3">
+                            <label asp-for="PropietarioId" class="form-label"></label>
+                            <select asp-for="PropietarioId" asp-items="Model.PropietarioOptions" class="form-select">
+                                <option value="">Selecciona un propietario...</option>
+                            </select>
+                            <span asp-validation-for="PropietarioId" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <input type="hidden" asp-for="PropietarioId" value="@User.Identity?.Name" />
+                    }
                 </div>
                 <div class="card-footer bg-body p-4 d-flex flex-column flex-sm-row gap-2">
                     <button type="submit" class="btn btn-primary">Guardar cambios</button>

@@ -1,6 +1,7 @@
 // HARIA-WEB MVC managed manual-controller
 /*PROTECTED REGION ID(UsuarioController_manual_usings) ENABLED START*/
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using CarGo.Domain.Entities;
 using CarGo.Application.Services;
@@ -76,5 +77,46 @@ public partial class UsuarioController
         ViewData["Email"] = emailBuscado;
         ViewData["Dni"] = dniBuscado;
         return View("Index", resultado.Select(UsuarioAssembler.ToViewModel).ToList());
+    }
+
+    // Subida de foto de perfil del usuario autenticado (o de cualquier usuario si es Admin)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> SubirFotoPerfil(int p_oid, IFormFile? foto)
+    {
+        if (!int.TryParse(User.Identity?.Name, out var usuarioSesionId)) return Forbid();
+
+        var destinoId = User.IsInRole("Admin") && p_oid > 0 ? p_oid : usuarioSesionId;
+
+        if (foto == null || foto.Length == 0)
+        {
+            TempData["Error"] = "Selecciona una imagen válida para tu perfil.";
+            return RedirectToAction(nameof(Details), new { id = destinoId });
+        }
+
+        var extensionesPermitidas = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+        var ext = Path.GetExtension(foto.FileName).ToLowerInvariant();
+        if (!extensionesPermitidas.Contains(ext))
+        {
+            TempData["Error"] = "Formato no permitido. Usa JPG, PNG o WEBP.";
+            return RedirectToAction(nameof(Details), new { id = destinoId });
+        }
+
+        var carpetaUploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "usuarios");
+        Directory.CreateDirectory(carpetaUploads);
+
+        foreach (var antiguo in Directory.GetFiles(carpetaUploads, $"usuario_{destinoId}.*"))
+        {
+            System.IO.File.Delete(antiguo);
+        }
+
+        var rutaDestino = Path.Combine(carpetaUploads, $"usuario_{destinoId}{ext}");
+        await using (var stream = new FileStream(rutaDestino, FileMode.Create))
+        {
+            await foto.CopyToAsync(stream);
+        }
+
+        TempData["Exito"] = "Foto de perfil actualizada correctamente.";
+        return RedirectToAction(nameof(Details), new { id = destinoId });
     }
 }
