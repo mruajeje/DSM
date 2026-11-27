@@ -21,3 +21,64 @@ code { color: var(--bs-code-color); }
 .validation-summary-valid {
     display: none;
 }
+
+/* ===== Navegación CarGo: barra superior fina + dock inferior ===== */
+.cargo-brand { font-weight: 700; font-size: 1.25rem; letter-spacing: .01em; color: var(--bs-body-color); }
+
+.cargo-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  color: var(--bs-body-color); text-decoration: none;
+}
+.cargo-icon-btn:hover, .cargo-icon-btn.active { background: var(--bs-tertiary-bg); }
+
+/* Deja hueco para que el dock no tape el contenido ni el pie */
+body.cargo-has-dock { padding-bottom: 5.5rem; }
+
+.cargo-dock {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  z-index: 1040;
+  display: flex; align-items: center; justify-content: space-between; gap: .25rem;
+  width: min(34rem, calc(100% - 1.5rem));
+  padding: .5rem .75rem;
+  background: var(--bs-dark, #212529);
+  border-radius: 2rem;
+  box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25);
+}
+
+.cargo-dock-slot { position: relative; display: flex; }
+
+.cargo-dock-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem;
+  min-width: 4rem; padding: .4rem .75rem;
+  background: transparent; border: 0; border-radius: 1.25rem;
+  color: rgba(255, 255, 255, .65); font-size: .72rem; line-height: 1; text-decoration: none;
+  transition: color .15s, background .15s;
+}
+.cargo-dock-item:hover, .cargo-dock-item:focus-visible { color: #fff; background: rgba(255, 255, 255, .1); }
+.cargo-dock-item.active, .cargo-dock-item.show { color: #fff; background: rgba(255, 255, 255, .16); }
+
+/* Botón central "+" */
+.cargo-dock-plus {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 3.4rem; height: 3.4rem; margin-top: -1.6rem;
+  border: .25rem solid var(--bs-body-bg, #fff); border-radius: 50%;
+  background: var(--bs-primary, #0d6efd); color: #fff;
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
+  transition: transform .15s, filter .15s;
+}
+.cargo-dock-plus:hover, .cargo-dock-plus:focus-visible { filter: brightness(1.1); transform: scale(1.06); }
+.cargo-dock-plus svg { width: 26px; height: 26px; }
+
+.cargo-dock-menu { min-width: 13rem; max-height: 70vh; overflow-y: auto; border-radius: 1rem; }
+
+.cargo-dock-item:focus-visible, .cargo-dock-plus:focus-visible, .cargo-icon-btn:focus-visible {
+  outline: 3px solid var(--bs-primary, #0d6efd); outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .cargo-dock-item { min-width: 3.2rem; padding: .4rem .4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cargo-dock-item, .cargo-dock-plus { transition: none; }
+}

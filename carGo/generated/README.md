@@ -82,25 +82,25 @@ Inicialización de esquemas, configuración del ORM y carga de semillas de datos
 Durante el desarrollo e inicialización del proyecto surgieron diversas incidencias técnicas que se resolvieron del siguiente modo:
 
 ### 4.1. Error de Autenticación en SQL Server (Error 18456)
-* **Problema:** Al intentar ejecutar `InitializeDB` contra SQL Server Express, la consola de depuración devolvía un error de inicio de sesión del usuario `nhibernateUser` (Error 18456), impidiendo crear las tablas. Además, la base de datos se creaba en el servidor SQL Server y no como archivo en el proyecto.
-* **Solución:** Se configuró la cadena de conexión para utilizar Autenticación de Windows (`Integrated Security=True`) tanto en `appsettings.json` como en `hibernate.cfg.xml`:
+- **Problema:** Al intentar ejecutar `InitializeDB` contra SQL Server Express, la consola de depuración devolvía un error de inicio de sesión del usuario `nhibernateUser` (Error 18456), impidiendo crear las tablas. Además, la base de datos se creaba en el servidor SQL Server y no como archivo en el proyecto.
+- **Solución:** Se configuró la cadena de conexión para utilizar Autenticación de Windows (`Integrated Security=True`) tanto en `appsettings.json` como en `hibernate.cfg.xml`:
   ```text
   Server=(local)\sqlexpress;Database=CarGoGenNHibernate;TrustServerCertificate=True;Integrated Security=True
   ```
 
 ### 4.2. Migración y Ubicación del Archivo SQLite (`.db`)
-* **Problema 1 (Ubicación del archivo):** Al cambiar a SQLite, el ejecutable generaba el archivo `CarGo.db` dentro de la carpeta interna de compilación (`bin/Debug/net9.0/`) y no en la carpeta visible del proyecto `InitializeDB`.
-* **Problema 2 (Sobrescritura por el código generado):** Al ejecutar el debug, la llamada a `CreateDB.Create()` volvía a escribir la configuración por defecto de SQL Server sobreescribiendo los cambios de SQLite.
-* **Solución aplicada:**
+- **Problema 1 (Ubicación del archivo):** Al cambiar a SQLite, el ejecutable generaba el archivo `CarGo.db` dentro de la carpeta interna de compilación (`bin/Debug/net9.0/`) y no en la carpeta visible del proyecto `InitializeDB`.
+- **Problema 2 (Sobrescritura por el código generado):** Al ejecutar el debug, la llamada a `CreateDB.Create()` volvía a escribir la configuración por defecto de SQL Server sobreescribiendo los cambios de SQLite.
+- **Solución aplicada:**
   1. Se instaló el paquete NuGet en `InitializeDB`:
      ```powershell
      dotnet add package System.Data.SQLite.Core
      ```
   2. En `hibernate.cfg.xml` y `appsettings.json` se estableció el driver y dialecto de SQLite:
      ```xml
-    <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
-    <property name="connection.driver_class">NHibernate.Driver.SQLite20Driver</property>
-    <property name="connection.connection_string">Data Source=../../../CarGo.db</property>
+     <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
+     <property name="connection.driver_class">NHibernate.Driver.SQLite20Driver</property>
+     <property name="connection.connection_string">Data Source=../../../CarGo.db</property>
      ```
   3. En `Program.cs` (dentro de la región protegida `initializeDatabase`), se modificó la obtención de la cadena para leer de la configuración sin ejecutar la recreación del XML:
      ```csharp
@@ -148,6 +148,7 @@ dotnet test --filter "FullyQualifiedName~PagoUseCaseTests"
 1. **Invariantes de Dominio**: Todas las operaciones comprueban permisos y estados antes de alterar datos (`ModelException`).
 2. **Protección HARIA**: Las regiones `PROTECTED REGION` conservan las modificaciones hechas en `Program.cs` e infraestructura ante posibles regeneraciones del modelo TDM.
 
+---
 
 ## 8. Reservas, pagos y mensajes (interfaz web)
 
@@ -247,6 +248,38 @@ dotnet test
 La solución `CarGo.sln` no incluye `CarGo.Web`, por eso se compila aparte. Las pruebas de reservas y pagos están en
 `ViajeServiceReservaTests` y `PagoUseCaseTests`.
 
+---
+
+## 10. Viajes, vehículos y navegación (interfaz web)
+
+### 10.1. Pantallas y navegación principal
+
+| Pantalla / Elemento | Ruta / Ubicación | Quién la ve | Qué hace |
+|---|---|---|---|
+| Barra inferior (`cargo-dock`) | `_Layout.cshtml` | Cualquier usuario con sesión | Acceso directo a **Inicio**, **Viajes**, **Mensajes**, menú de **Perfil** y botón central `+` |
+| Botón central `+` | `/Viaje/Create` | Cualquier usuario con sesión | Acceso directo en un clic a la pantalla de **Crear viaje** (según el flujo del prototipo UI/UX) |
+| Listado y búsqueda de viajes | `/Viaje` | Cualquier usuario con sesión | Listado con filtrado multicriterio combinado (`EjecutarBusquedaAsync`) |
+| Publicar / editar viaje | `/Viaje/Create`, `/Viaje/Edit/{id}` | Cualquier usuario con sesión | Formulario de creación y edición con origen, destino, fecha/hora, plazas, precio y preferencias |
+| Seguimiento y geolocalización | `/Viaje/Details/{id}` | Cualquier usuario con sesión | Vista tipo móvil con mapa interactivo (**Leaflet.js** + **OpenStreetMap**), ruta trazada, horas estimadas de llegada y envío de GPS en tiempo real |
+| Gestión de vehículos | `/Vehiculo` y `/Vehiculo/Details/{id}` | Cualquier usuario con sesión | CRUD completo de vehículos (`MarcaModelo`, `Matricula`, `InformacionAdicional` y propietario asignado) |
+
+La lógica de búsqueda y las acciones manuales del viaje se implementan en `Controllers/manual/ViajeController.Manual.cs`, `ViewModels/ViajeBuscarViewModel.cs` y las vistas `Views/Viaje/` y `Views/Vehiculo/`.
+
+### 10.2. Reglas de negocio y filtros en Viajes
+
+| Operación / Filtro | Reglas y comportamiento |
+|---|---|
+| `EjecutarBusquedaAsync` | Combina intersección de filtros activos: origen/destino (`ReadFilterByOrigenDestinoAsync`), rango de fechas y plazas mínimas (`ReadFilterByFechaYPlazasAsync`), rango de precios (`ReadFilterByPrecioAsync`), mascotas y equipaje (`ReadFilterByPreferenciasYEstadoAsync`), disponibilidad futura (`ReadFilterViajesDisponiblesAsync`) y conductores verificados (`ReadFilterByConductorVerificadoAsync`). |
+| `gestionarPlazas` | Actualiza el total de plazas ofertadas del viaje validando que no sea inferior al número de pasajeros ya confirmados. |
+| `geolocalizarTrayecto` | Solo el conductor del viaje y únicamente cuando el viaje está en estado `EnCurso`. Valida coordenadas numéricas (latitud $[-90, 90]$, longitud $[-180, 180]$) y registra la posición actual junto con `FechaUltimaPosicion`. |
+
+### 10.3. Vista de geolocalización y mapa interactivo (`Views/Viaje/Details.cshtml`)
+
+- **Diseño adaptado al prototipo:** Paleta corporativa de CarGo (verde oliva `#9ab14c` para las tarjetas inferiores de llegada estimada a origen/destino y morado `#3d2138` para bordes, insignias y controles).
+- **Mapa sin API Key:** Renderizado con **Leaflet.js** y teselas gratuitas de **OpenStreetMap** (`tile.openstreetmap.org`). Si las coordenadas de origen o destino están sin definir (`[0, 0]`), realiza geocodificación automática mediante Nominatim a partir del nombre de la ciudad.
+- **Actualización GPS desde navegador:** El panel inferior desplegable permite capturar la ubicación actual del dispositivo mediante la API `navigator.geolocation` o introducir latitud y longitud manualmente para enviarlas al endpoint `GeolocalizarTrayecto`.
+
+---
 
 ## Arrancar la aplicación web (CarGo.Web)
 

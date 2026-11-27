@@ -37,9 +37,17 @@ public partial class VehiculoController : Controller
     /*PROTECTED REGION END*/
     public async Task<IActionResult> Index()
     {
-    /*PROTECTED REGION ID(VehiculoController_Index_GET_body) START*/
-        var entities = await _vehiculoService.ReadAllAsync();
-        return View(entities.Select(VehiculoAssembler.ToViewModel).ToList());
+    /*PROTECTED REGION ID(VehiculoController_Index_GET_body) ENABLED START*/
+        IEnumerable<Vehiculo> vehiculos = await _vehiculoService.ReadAllAsync();
+
+        // Solo el Admin ve todos los vehículos; el resto, únicamente los suyos.
+        if (!User.IsInRole("Admin"))
+        {
+            int.TryParse(User.Identity?.Name, out var usuarioId);
+            vehiculos = vehiculos.Where(v => v.Propietario?.Id == usuarioId);
+        }
+
+        return View(vehiculos.Select(VehiculoAssembler.ToViewModel).ToList());
     /*PROTECTED REGION END*/
     }
 
